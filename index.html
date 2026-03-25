@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <title>DealsBazaar | India's Mega Affiliate Store - Amazon, Flipkart, Meesho Deals</title>
+  <title>DealsBazaar | India's Mega Affiliate Store - Kishan Verma</title>
   <!-- Google Fonts + Font Awesome -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -18,7 +18,12 @@
       font-family: 'Inter', sans-serif;
       background: #f0f2f5;
       color: #1a1e2b;
-      overflow-x: hidden;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    body.dark {
+      background: #0f172a;
+      color: #e2e8f0;
     }
 
     /* Custom Scrollbar */
@@ -33,9 +38,6 @@
     ::-webkit-scrollbar-thumb {
       background: #ff6a35;
       border-radius: 10px;
-    }
-    ::-webkit-scrollbar-thumb:hover {
-      background: #e55a2b;
     }
 
     /* Sticky Header */
@@ -52,6 +54,11 @@
       justify-content: space-between;
       flex-wrap: wrap;
       gap: 1rem;
+      transition: all 0.3s;
+    }
+    body.dark .sticky-header {
+      background: rgba(15, 23, 42, 0.96);
+      border-bottom: 1px solid #334155;
     }
     .logo h1 {
       font-size: 1.8rem;
@@ -68,6 +75,9 @@
       color: #5a6874;
       display: block;
     }
+    body.dark .logo span {
+      color: #94a3b8;
+    }
     .search-bar {
       flex: 1;
       max-width: 500px;
@@ -79,6 +89,10 @@
       overflow: hidden;
       transition: all 0.2s;
     }
+    body.dark .search-bar {
+      background: #1e293b;
+      border-color: #334155;
+    }
     .search-bar:focus-within {
       border-color: #ff6a35;
       box-shadow: 0 0 0 3px rgba(255,106,53,0.2);
@@ -89,6 +103,8 @@
       border: none;
       outline: none;
       font-size: 0.9rem;
+      background: transparent;
+      color: inherit;
     }
     .search-bar button {
       background: #ff6a35;
@@ -99,13 +115,11 @@
       font-weight: 600;
       transition: 0.2s;
     }
-    .search-bar button:hover {
-      background: #e55a2b;
-    }
     .nav-icons {
       display: flex;
       gap: 1.5rem;
       align-items: center;
+      position: relative;
     }
     .nav-icons i {
       font-size: 1.4rem;
@@ -113,8 +127,34 @@
       cursor: pointer;
       transition: 0.2s;
     }
+    body.dark .nav-icons i {
+      color: #cbd5e1;
+    }
     .nav-icons i:hover {
       color: #ff6a35;
+      transform: scale(1.05);
+    }
+    .cart-count, .wishlist-count {
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      background: #ff3b6f;
+      color: white;
+      font-size: 0.7rem;
+      border-radius: 50%;
+      width: 18px;
+      height: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+    }
+    .theme-toggle {
+      background: none;
+      border: none;
+      font-size: 1.3rem;
+      cursor: pointer;
+      color: inherit;
     }
 
     /* Container */
@@ -136,15 +176,16 @@
       align-items: center;
       flex-wrap: wrap;
       gap: 2rem;
+      animation: fadeInUp 0.6s ease;
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
     }
     .hero-text h2 {
       font-size: 2.2rem;
       font-weight: 800;
       margin-bottom: 0.5rem;
-    }
-    .hero-text p {
-      opacity: 0.9;
-      margin-bottom: 1rem;
     }
     .hero-badge {
       background: #ff6a35;
@@ -153,6 +194,12 @@
       border-radius: 40px;
       font-weight: 600;
       font-size: 0.8rem;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
     }
     .hero-stats {
       background: rgba(255,255,255,0.1);
@@ -171,6 +218,9 @@
       border-bottom: 2px solid #e4e9f0;
       padding-bottom: 0.8rem;
     }
+    body.dark .categories {
+      border-color: #334155;
+    }
     .cat-btn {
       background: transparent;
       border: none;
@@ -182,13 +232,17 @@
       transition: 0.2s;
       font-size: 0.9rem;
     }
+    body.dark .cat-btn {
+      color: #94a3b8;
+    }
     .cat-btn.active, .cat-btn:hover {
       background: #ff6a35;
       color: white;
       box-shadow: 0 4px 12px rgba(255,106,53,0.3);
+      transform: translateY(-2px);
     }
 
-    /* Flash Sale Banner with Countdown */
+    /* Flash Sale Banner */
     .flash-sale {
       background: linear-gradient(95deg, #fff4e8, #ffe6d5);
       border-radius: 1.2rem;
@@ -200,6 +254,15 @@
       gap: 1rem;
       margin-bottom: 2rem;
       border-left: 6px solid #ff6a35;
+      animation: slideInLeft 0.6s ease;
+    }
+    body.dark .flash-sale {
+      background: #1e293b;
+      border-left-color: #ff6a35;
+    }
+    @keyframes slideInLeft {
+      from { opacity: 0; transform: translateX(-30px); }
+      to { opacity: 1; transform: translateX(0); }
     }
     .flash-text {
       display: flex;
@@ -221,6 +284,37 @@
       font-weight: 800;
       letter-spacing: 2px;
     }
+    body.dark .countdown {
+      background: #0f172a;
+    }
+
+    /* Filters & Sort Bar */
+    .filters-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin: 1rem 0;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .filter-group {
+      display: flex;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+    }
+    .filter-select {
+      background: white;
+      border: 1px solid #e2e8f0;
+      padding: 0.5rem 1rem;
+      border-radius: 40px;
+      font-size: 0.85rem;
+      cursor: pointer;
+    }
+    body.dark .filter-select {
+      background: #1e293b;
+      border-color: #334155;
+      color: #e2e8f0;
+    }
 
     /* Product Grid */
     .products-grid {
@@ -233,14 +327,26 @@
       background: white;
       border-radius: 1.2rem;
       overflow: hidden;
-      transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+      transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
       box-shadow: 0 8px 20px rgba(0,0,0,0.05);
       position: relative;
       cursor: pointer;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: cardReveal 0.5s forwards;
+    }
+    @keyframes cardReveal {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    body.dark .product-card {
+      background: #1e293b;
     }
     .product-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 20px 30px -12px rgba(0,0,0,0.15);
+      transform: translateY(-8px);
+      box-shadow: 0 20px 30px -12px rgba(0,0,0,0.2);
     }
     .product-img {
       background: #f8fafc;
@@ -250,6 +356,16 @@
       justify-content: center;
       font-size: 5rem;
       position: relative;
+      overflow: hidden;
+    }
+    body.dark .product-img {
+      background: #0f172a;
+    }
+    .product-img span {
+      transition: transform 0.3s;
+    }
+    .product-card:hover .product-img span {
+      transform: scale(1.1);
     }
     .discount-tag {
       position: absolute;
@@ -262,6 +378,38 @@
       font-size: 0.7rem;
       font-weight: 700;
       z-index: 2;
+    }
+    .platform-badge {
+      position: absolute;
+      bottom: 12px;
+      right: 12px;
+      background: rgba(0,0,0,0.7);
+      padding: 0.2rem 0.6rem;
+      border-radius: 20px;
+      font-size: 0.7rem;
+      color: white;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .wishlist-btn {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: white;
+      border: none;
+      border-radius: 50%;
+      width: 32px;
+      height: 32px;
+      cursor: pointer;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: 0.2s;
+    }
+    body.dark .wishlist-btn {
+      background: #334155;
     }
     .product-info {
       padding: 1.2rem;
@@ -313,7 +461,64 @@
       transform: scale(0.98);
     }
 
-    /* Trust Badges */
+    /* Recently Viewed Section */
+    .recent-section {
+      margin: 2rem 0;
+      display: none;
+    }
+    .recent-carousel {
+      display: flex;
+      gap: 1rem;
+      overflow-x: auto;
+      padding: 0.5rem 0;
+    }
+    .recent-card {
+      min-width: 180px;
+      background: white;
+      border-radius: 1rem;
+      padding: 0.8rem;
+      text-align: center;
+      cursor: pointer;
+    }
+    body.dark .recent-card {
+      background: #1e293b;
+    }
+
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.7);
+      z-index: 2000;
+      justify-content: center;
+      align-items: center;
+    }
+    .modal-content {
+      background: white;
+      max-width: 800px;
+      width: 90%;
+      max-height: 90%;
+      overflow-y: auto;
+      border-radius: 1rem;
+      padding: 1.5rem;
+      position: relative;
+    }
+    body.dark .modal-content {
+      background: #1e293b;
+    }
+    .close-modal {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    /* Trust Section */
     .trust-section {
       display: flex;
       flex-wrap: wrap;
@@ -325,6 +530,9 @@
       margin: 2rem 0;
       box-shadow: 0 4px 12px rgba(0,0,0,0.02);
     }
+    body.dark .trust-section {
+      background: #1e293b;
+    }
     .trust-item {
       display: flex;
       align-items: center;
@@ -332,6 +540,9 @@
       font-size: 0.85rem;
       font-weight: 500;
       color: #2c3e50;
+    }
+    body.dark .trust-item {
+      color: #cbd5e1;
     }
 
     /* Footer */
@@ -365,6 +576,7 @@
       border-left: 4px solid #ff6a35;
       animation: slideIn 0.3s ease;
     }
+
     @keyframes slideIn {
       from { transform: translateX(100%); opacity: 0; }
       to { transform: translateX(0); opacity: 1; }
@@ -385,24 +597,23 @@
 <div class="sticky-header">
   <div class="logo">
     <h1>DealsBazaar <i class="fas fa-bolt" style="color: #ff6a35;"></i></h1>
-    <span>Amazon · Flipkart · Meesho | Best Prices</span>
+    <span>by Kishan Verma | Amazon · Flipkart · Meesho</span>
   </div>
   <div class="search-bar">
     <input type="text" placeholder="Search millions of products..." id="searchInput">
     <button id="searchBtn"><i class="fas fa-search"></i></button>
   </div>
   <div class="nav-icons">
-    <i class="far fa-heart"></i>
-    <i class="far fa-bell"></i>
-    <i class="fas fa-user-circle"></i>
+    <i class="far fa-heart" id="wishlistIcon"></i>
+    <i class="fas fa-shopping-cart" id="cartIcon"></i>
+    <button class="theme-toggle" id="themeToggle"><i class="fas fa-moon"></i></button>
   </div>
 </div>
 
 <div class="container">
-  <!-- Hero -->
   <div class="hero">
     <div class="hero-text">
-      <h2>Mega Savings Carnival</h2>
+      <h2>Mega Savings Carnival 2026</h2>
       <p>Up to 80% off + extra bank offers</p>
       <span class="hero-badge">🔥 Limited Period</span>
     </div>
@@ -412,7 +623,6 @@
     </div>
   </div>
 
-  <!-- Flash Sale -->
   <div class="flash-sale">
     <div class="flash-text">
       <i class="fas fa-bolt"></i>
@@ -422,7 +632,6 @@
     <div><i class="fas fa-tag"></i> Extra 10% off on prepaid orders</div>
   </div>
 
-  <!-- Category Tabs -->
   <div class="categories" id="categoryTabs">
     <button class="cat-btn active" data-cat="all">All Deals</button>
     <button class="cat-btn" data-cat="electronics">Electronics</button>
@@ -431,10 +640,37 @@
     <button class="cat-btn" data-cat="mobiles">Mobiles</button>
   </div>
 
-  <!-- Products Grid -->
+  <div class="filters-bar">
+    <div class="filter-group">
+      <select id="sortSelect" class="filter-select">
+        <option value="default">Sort: Featured</option>
+        <option value="price_asc">Price: Low to High</option>
+        <option value="price_desc">Price: High to Low</option>
+        <option value="rating">Rating: High to Low</option>
+      </select>
+      <select id="priceFilter" class="filter-select">
+        <option value="all">All Prices</option>
+        <option value="0-1000">Under ₹1000</option>
+        <option value="1000-5000">₹1000 - ₹5000</option>
+        <option value="5000-20000">₹5000 - ₹20000</option>
+        <option value="20000+">Above ₹20000</option>
+      </select>
+      <select id="ratingFilter" class="filter-select">
+        <option value="0">All Ratings</option>
+        <option value="4">4★ & above</option>
+        <option value="3">3★ & above</option>
+      </select>
+    </div>
+    <button id="loadMoreBtn" style="background:#ff6a35; border:none; padding:0.5rem 1.2rem; border-radius:40px; color:white; cursor:pointer;">Load More</button>
+  </div>
+
   <div class="products-grid" id="productsGrid"></div>
 
-  <!-- Trust Section -->
+  <div class="recent-section" id="recentSection">
+    <h3>🕒 Recently Viewed</h3>
+    <div class="recent-carousel" id="recentCarousel"></div>
+  </div>
+
   <div class="trust-section">
     <div class="trust-item"><i class="fas fa-shield-alt"></i> 100% Secure Transactions</div>
     <div class="trust-item"><i class="fas fa-exchange-alt"></i> Easy Returns (7 Days)</div>
@@ -446,53 +682,168 @@
 <footer>
   <p><i class="fas fa-store"></i> DealsBazaar — Your one-stop affiliate store for Amazon, Flipkart, Meesho & more</p>
   <p style="margin-top: 0.8rem; font-size: 0.75rem;">As an affiliate partner, we earn from qualifying purchases. Prices may vary.</p>
-  <p style="margin-top: 1rem;">© 2025 DealsBazaar | Designed to beat the best</p>
+  <p style="margin-top: 1rem;">© 2026 Kishan Verma | DealsBazaar | Designed to beat the best</p>
 </footer>
 
 <div id="toast-container"></div>
 
+<!-- Cart Modal -->
+<div id="cartModal" class="modal">
+  <div class="modal-content">
+    <span class="close-modal">&times;</span>
+    <h3>Your Cart</h3>
+    <div id="cartItems"></div>
+    <button id="clearCartBtn" style="background:#ff6a35; border:none; padding:0.5rem 1rem; border-radius:40px; margin-top:1rem;">Clear Cart</button>
+  </div>
+</div>
+
+<!-- Quick View Modal -->
+<div id="quickViewModal" class="modal">
+  <div class="modal-content">
+    <span class="close-modal">&times;</span>
+    <div id="quickViewContent"></div>
+  </div>
+</div>
+
 <script>
-  // Product Database (simulating Amazon/Flipkart level deals)
+  // Product Database
   const products = [
-    { id: 1, name: "iPhone 15 Pro", category: "mobiles", price: 74999, oldPrice: 89999, discount: "16%", rating: 4.8, img: "📱", affiliate: "https://affiliate.example.com/iphone15pro", platform: "Amazon" },
-    { id: 2, name: "Samsung Galaxy S24", category: "mobiles", price: 64999, oldPrice: 79999, discount: "19%", rating: 4.7, img: "📱", affiliate: "https://affiliate.example.com/samsungs24", platform: "Flipkart" },
-    { id: 3, name: "Noise ColorFit Pro 5", category: "electronics", price: 1999, oldPrice: 4999, discount: "60%", rating: 4.5, img: "⌚", affiliate: "https://affiliate.example.com/noisewatch", platform: "Meesho" },
-    { id: 4, name: "boAt Nirvana Earbuds", category: "electronics", price: 2499, oldPrice: 6999, discount: "64%", rating: 4.6, img: "🎧", affiliate: "https://affiliate.example.com/boatnirvana", platform: "Amazon" },
-    { id: 5, name: "Men's Cotton Shirt", category: "fashion", price: 499, oldPrice: 1499, discount: "67%", rating: 4.3, img: "👕", affiliate: "https://affiliate.example.com/shirt", platform: "Meesho" },
-    { id: 6, name: "Women's Kurta Set", category: "fashion", price: 799, oldPrice: 2499, discount: "68%", rating: 4.4, img: "👗", affiliate: "https://affiliate.example.com/kurta", platform: "Flipkart" },
-    { id: 7, name: "Non-Stick Cookware Set", category: "home", price: 1299, oldPrice: 3999, discount: "67%", rating: 4.5, img: "🍳", affiliate: "https://affiliate.example.com/cookware", platform: "Amazon" },
-    { id: 8, name: "LED Bulb (10W) Pack of 4", category: "home", price: 299, oldPrice: 999, discount: "70%", rating: 4.2, img: "💡", affiliate: "https://affiliate.example.com/bulb", platform: "Meesho" },
-    { id: 9, name: "Gaming Laptop RTX 4060", category: "electronics", price: 84999, oldPrice: 119999, discount: "29%", rating: 4.9, img: "💻", affiliate: "https://affiliate.example.com/gaminglaptop", platform: "Flipkart" },
-    { id: 10, name: "Smart LED TV 43\" 4K", category: "electronics", price: 23999, oldPrice: 44999, discount: "47%", rating: 4.7, img: "📺", affiliate: "https://affiliate.example.com/smarttv", platform: "Amazon" },
-    { id: 11, name: "Men's Running Shoes", category: "fashion", price: 899, oldPrice: 2999, discount: "70%", rating: 4.5, img: "👟", affiliate: "https://affiliate.example.com/shoes", platform: "Meesho" },
-    { id: 12, name: "OnePlus Nord CE 4", category: "mobiles", price: 24999, oldPrice: 31999, discount: "22%", rating: 4.6, img: "📱", affiliate: "https://affiliate.example.com/oneplusnord", platform: "Amazon" }
+    { id: 1, name: "iPhone 15 Pro", category: "mobiles", price: 74999, oldPrice: 89999, discount: "16%", rating: 4.8, img: "📱", affiliate: "https://affiliate.example.com/iphone15pro", platform: "Amazon", brand: "Apple" },
+    { id: 2, name: "Samsung Galaxy S24", category: "mobiles", price: 64999, oldPrice: 79999, discount: "19%", rating: 4.7, img: "📱", affiliate: "https://affiliate.example.com/samsungs24", platform: "Flipkart", brand: "Samsung" },
+    { id: 3, name: "Noise ColorFit Pro 5", category: "electronics", price: 1999, oldPrice: 4999, discount: "60%", rating: 4.5, img: "⌚", affiliate: "https://affiliate.example.com/noisewatch", platform: "Meesho", brand: "Noise" },
+    { id: 4, name: "boAt Nirvana Earbuds", category: "electronics", price: 2499, oldPrice: 6999, discount: "64%", rating: 4.6, img: "🎧", affiliate: "https://affiliate.example.com/boatnirvana", platform: "Amazon", brand: "boAt" },
+    { id: 5, name: "Men's Cotton Shirt", category: "fashion", price: 499, oldPrice: 1499, discount: "67%", rating: 4.3, img: "👕", affiliate: "https://affiliate.example.com/shirt", platform: "Meesho", brand: "Roadster" },
+    { id: 6, name: "Women's Kurta Set", category: "fashion", price: 799, oldPrice: 2499, discount: "68%", rating: 4.4, img: "👗", affiliate: "https://affiliate.example.com/kurta", platform: "Flipkart", brand: "Biba" },
+    { id: 7, name: "Non-Stick Cookware Set", category: "home", price: 1299, oldPrice: 3999, discount: "67%", rating: 4.5, img: "🍳", affiliate: "https://affiliate.example.com/cookware", platform: "Amazon", brand: "Prestige" },
+    { id: 8, name: "LED Bulb Pack of 4", category: "home", price: 299, oldPrice: 999, discount: "70%", rating: 4.2, img: "💡", affiliate: "https://affiliate.example.com/bulb", platform: "Meesho", brand: "Philips" },
+    { id: 9, name: "Gaming Laptop RTX 4060", category: "electronics", price: 84999, oldPrice: 119999, discount: "29%", rating: 4.9, img: "💻", affiliate: "https://affiliate.example.com/gaminglaptop", platform: "Flipkart", brand: "ASUS" },
+    { id: 10, name: "Smart LED TV 43\" 4K", category: "electronics", price: 23999, oldPrice: 44999, discount: "47%", rating: 4.7, img: "📺", affiliate: "https://affiliate.example.com/smarttv", platform: "Amazon", brand: "Samsung" },
+    { id: 11, name: "Men's Running Shoes", category: "fashion", price: 899, oldPrice: 2999, discount: "70%", rating: 4.5, img: "👟", affiliate: "https://affiliate.example.com/shoes", platform: "Meesho", brand: "Puma" },
+    { id: 12, name: "OnePlus Nord CE 4", category: "mobiles", price: 24999, oldPrice: 31999, discount: "22%", rating: 4.6, img: "📱", affiliate: "https://affiliate.example.com/oneplusnord", platform: "Amazon", brand: "OnePlus" }
   ];
 
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+  let recentlyViewed = JSON.parse(localStorage.getItem("recentlyViewed")) || [];
   let activeCategory = "all";
   let searchQuery = "";
+  let priceRange = "all";
+  let minRating = 0;
+  let sortBy = "default";
+  let currentPage = 0;
+  const itemsPerPage = 6;
 
-  function renderProducts() {
-    let filtered = products;
-    if (activeCategory !== "all") {
-      filtered = filtered.filter(p => p.category === activeCategory);
+  function showToast(message) {
+    const container = document.getElementById("toast-container");
+    const toast = document.createElement("div");
+    toast.className = "toast";
+    toast.innerHTML = `<i class="fas fa-info-circle"></i> ${message}`;
+    container.appendChild(toast);
+    setTimeout(() => toast.remove(), 3000);
+  }
+
+  function updateCartCount() {
+    const cartIcon = document.getElementById("cartIcon");
+    let countSpan = cartIcon.querySelector(".cart-count");
+    if (cart.length) {
+      if (!countSpan) {
+        countSpan = document.createElement("span");
+        countSpan.className = "cart-count";
+        cartIcon.appendChild(countSpan);
+      }
+      countSpan.innerText = cart.length;
+    } else if (countSpan) countSpan.remove();
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }
+
+  function addToCart(product) {
+    if (!cart.find(i => i.id === product.id)) {
+      cart.push(product);
+      showToast(`${product.name} added to cart!`);
+      updateCartCount();
+    } else showToast(`${product.name} already in cart`);
+  }
+
+  function removeFromCart(id) {
+    cart = cart.filter(i => i.id !== id);
+    updateCartCount();
+    renderCartModal();
+    showToast("Item removed from cart");
+  }
+
+  function toggleWishlist(product) {
+    if (wishlist.find(i => i.id === product.id)) {
+      wishlist = wishlist.filter(i => i.id !== product.id);
+      showToast(`${product.name} removed from wishlist`);
+    } else {
+      wishlist.push(product);
+      showToast(`${product.name} added to wishlist`);
     }
-    if (searchQuery.trim() !== "") {
-      filtered = filtered.filter(p => p.name.toLowerCase().includes(searchQuery.toLowerCase()));
-    }
+    localStorage.setItem("wishlist", JSON.stringify(wishlist));
+    renderProducts();
+  }
 
-    const grid = document.getElementById("productsGrid");
-    if (!grid) return;
+  function addRecentlyViewed(product) {
+    recentlyViewed = recentlyViewed.filter(i => i.id !== product.id);
+    recentlyViewed.unshift(product);
+    if (recentlyViewed.length > 5) recentlyViewed.pop();
+    localStorage.setItem("recentlyViewed", JSON.stringify(recentlyViewed));
+    renderRecentlyViewed();
+  }
 
-    if (filtered.length === 0) {
-      grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:3rem;">No products found. Try another search!</div>`;
+  function renderRecentlyViewed() {
+    const section = document.getElementById("recentSection");
+    const carousel = document.getElementById("recentCarousel");
+    if (recentlyViewed.length === 0) {
+      section.style.display = "none";
       return;
     }
+    section.style.display = "block";
+    carousel.innerHTML = recentlyViewed.map(p => `
+      <div class="recent-card" onclick="quickView(${p.id})">
+        <div style="font-size:2rem;">${p.img}</div>
+        <div style="font-weight:600;">${p.name}</div>
+        <div>₹${p.price}</div>
+      </div>
+    `).join("");
+  }
 
-    grid.innerHTML = filtered.map(product => `
-      <div class="product-card" data-id="${product.id}">
+  function filterAndSort() {
+    let filtered = products.filter(p => {
+      if (activeCategory !== "all" && p.category !== activeCategory) return false;
+      if (searchQuery && !p.name.toLowerCase().includes(searchQuery.toLowerCase())) return false;
+      if (priceRange !== "all") {
+        const [min, max] = priceRange.split("-").map(v => v === "20000+" ? Infinity : parseInt(v));
+        if (p.price < min || (max && p.price > max)) return false;
+      }
+      if (minRating > 0 && p.rating < minRating) return false;
+      return true;
+    });
+    if (sortBy === "price_asc") filtered.sort((a,b) => a.price - b.price);
+    if (sortBy === "price_desc") filtered.sort((a,b) => b.price - a.price);
+    if (sortBy === "rating") filtered.sort((a,b) => b.rating - a.rating);
+    return filtered;
+  }
+
+  function renderProducts() {
+    const filtered = filterAndSort();
+    const start = 0;
+    const end = (currentPage + 1) * itemsPerPage;
+    const paginated = filtered.slice(start, end);
+    const grid = document.getElementById("productsGrid");
+    if (paginated.length === 0) {
+      grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:3rem;">No products found.</div>`;
+      return;
+    }
+    grid.innerHTML = paginated.map((product, idx) => `
+      <div class="product-card" data-id="${product.id}" style="animation-delay: ${idx * 0.05}s">
         <div class="product-img">
           <span style="font-size:4rem;">${product.img}</span>
           <div class="discount-tag">${product.discount} OFF</div>
+          <div class="platform-badge"><i class="fab fa-${product.platform === 'Amazon' ? 'amazon' : product.platform === 'Flipkart' ? 'flipkart' : 'microsoft'}"></i> ${product.platform}</div>
+          <button class="wishlist-btn" data-id="${product.id}">
+            <i class="fa-${wishlist.some(w => w.id === product.id) ? "solid" : "regular"} fa-heart"></i>
+          </button>
         </div>
         <div class="product-info">
           <div class="product-title">${product.name}</div>
@@ -500,107 +851,129 @@
             <span class="current-price">₹${product.price.toLocaleString()}</span>
             <span class="old-price">₹${product.oldPrice.toLocaleString()}</span>
           </div>
-          <div class="rating">
-            ${'★'.repeat(Math.floor(product.rating))}${product.rating % 1 ? '½' : ''} (${product.rating})
-          </div>
-          <div style="font-size:0.7rem; color:#ff6a35; margin-bottom: 0.3rem;"><i class="fab fa-amazon"></i> ${product.platform}</div>
-          <button class="buy-btn" data-affiliate="${product.affiliate}" data-name="${product.name}">
+          <div class="rating">${'★'.repeat(Math.floor(product.rating))}${product.rating % 1 ? '½' : ''} (${product.rating})</div>
+          <button class="buy-btn" data-affiliate="${product.affiliate}" data-name="${product.name}" data-id="${product.id}">
             <i class="fas fa-shopping-cart"></i> Buy Now
           </button>
         </div>
       </div>
     `).join("");
-
-    // Attach event listeners to new buy buttons
     document.querySelectorAll(".buy-btn").forEach(btn => {
-      btn.removeEventListener("click", handleBuyClick);
-      btn.addEventListener("click", handleBuyClick);
+      btn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const id = parseInt(btn.dataset.id);
+        const product = products.find(p => p.id === id);
+        addToCart(product);
+        setTimeout(() => window.location.href = btn.dataset.affiliate, 500);
+      });
+    });
+    document.querySelectorAll(".wishlist-btn").forEach(btn => {
+      btn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const id = parseInt(btn.dataset.id);
+        const product = products.find(p => p.id === id);
+        toggleWishlist(product);
+      });
+    });
+    document.querySelectorAll(".product-card").forEach(card => {
+      card.addEventListener("click", (e) => {
+        if (e.target.classList.contains("buy-btn") || e.target.classList.contains("wishlist-btn")) return;
+        const id = parseInt(card.dataset.id);
+        const product = products.find(p => p.id === id);
+        addRecentlyViewed(product);
+        quickView(id);
+      });
+    });
+    const loadMoreBtn = document.getElementById("loadMoreBtn");
+    if (filtered.length <= end) loadMoreBtn.style.display = "none";
+    else loadMoreBtn.style.display = "block";
+  }
+
+  function quickView(id) {
+    const product = products.find(p => p.id === id);
+    const modal = document.getElementById("quickViewModal");
+    const content = document.getElementById("quickViewContent");
+    content.innerHTML = `
+      <div style="display:flex; gap:1.5rem; flex-wrap:wrap;">
+        <div style="flex:1; text-align:center; font-size:5rem;">${product.img}</div>
+        <div style="flex:2;">
+          <h2>${product.name}</h2>
+          <div class="price"><span class="current-price">₹${product.price}</span> <span class="old-price">₹${product.oldPrice}</span></div>
+          <div class="rating">${'★'.repeat(Math.floor(product.rating))}${product.rating % 1 ? '½' : ''} (${product.rating})</div>
+          <p><strong>Seller:</strong> ${product.platform} | Brand: ${product.brand}</p>
+          <p><strong>Delivery:</strong> Free Shipping | 2-3 days</p>
+          <p><strong>Payment:</strong> EMI, UPI, Cards, NetBanking</p>
+          <button class="buy-btn" data-affiliate="${product.affiliate}" data-id="${product.id}" style="margin-top:1rem;">Buy Now</button>
+        </div>
+      </div>
+    `;
+    modal.style.display = "flex";
+    const buyBtn = content.querySelector(".buy-btn");
+    buyBtn.addEventListener("click", () => {
+      addToCart(product);
+      setTimeout(() => window.location.href = buyBtn.dataset.affiliate, 500);
     });
   }
 
-  // Toast notification
-  function showToast(message) {
-    const container = document.getElementById("toast-container");
-    const toast = document.createElement("div");
-    toast.className = "toast";
-    toast.innerHTML = `<i class="fas fa-external-link-alt"></i> ${message}`;
-    container.appendChild(toast);
-    setTimeout(() => {
-      toast.remove();
-    }, 3000);
+  function renderCartModal() {
+    const cartDiv = document.getElementById("cartItems");
+    if (cart.length === 0) cartDiv.innerHTML = "<p>Your cart is empty</p>";
+    else cartDiv.innerHTML = cart.map(item => `
+      <div style="display:flex; justify-content:space-between; margin-bottom:0.5rem;">
+        <span>${item.name}</span>
+        <span>₹${item.price}</span>
+        <button onclick="removeFromCart(${item.id})">Remove</button>
+      </div>
+    `).join("");
   }
 
-  function handleBuyClick(e) {
-    e.stopPropagation();
-    const btn = e.currentTarget;
-    const affiliateUrl = btn.getAttribute("data-affiliate");
-    const productName = btn.getAttribute("data-name");
-    if (!affiliateUrl) return;
+  document.getElementById("loadMoreBtn").addEventListener("click", () => { currentPage++; renderProducts(); });
+  document.getElementById("sortSelect").addEventListener("change", (e) => { sortBy = e.target.value; currentPage = 0; renderProducts(); });
+  document.getElementById("priceFilter").addEventListener("change", (e) => { priceRange = e.target.value; currentPage = 0; renderProducts(); });
+  document.getElementById("ratingFilter").addEventListener("change", (e) => { minRating = parseFloat(e.target.value); currentPage = 0; renderProducts(); });
+  document.getElementById("searchBtn").addEventListener("click", () => { searchQuery = document.getElementById("searchInput").value; currentPage = 0; renderProducts(); });
+  document.getElementById("searchInput").addEventListener("keyup", (e) => { if (e.key === "Enter") { searchQuery = e.target.value; currentPage = 0; renderProducts(); } });
+  document.querySelectorAll(".cat-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll(".cat-btn").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      activeCategory = btn.dataset.cat;
+      currentPage = 0;
+      renderProducts();
+    });
+  });
 
-    showToast(`🛍️ Redirecting to ${productName} on partner store...`);
-    // Simulate redirect after a short delay for toast visibility
-    setTimeout(() => {
-      window.location.href = affiliateUrl;
-    }, 400);
-  }
+  const cartModal = document.getElementById("cartModal");
+  const cartIcon = document.getElementById("cartIcon");
+  cartIcon.addEventListener("click", () => { renderCartModal(); cartModal.style.display = "flex"; });
+  document.querySelectorAll(".close-modal").forEach(btn => btn.addEventListener("click", () => btn.closest(".modal").style.display = "none"));
+  document.getElementById("clearCartBtn").addEventListener("click", () => { cart = []; updateCartCount(); renderCartModal(); showToast("Cart cleared"); });
 
-  // Countdown Timer (2 hours)
+  const themeToggle = document.getElementById("themeToggle");
+  themeToggle.addEventListener("click", () => {
+    document.body.classList.toggle("dark");
+    themeToggle.innerHTML = document.body.classList.contains("dark") ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+  });
+
   let endTime = new Date();
   endTime.setHours(endTime.getHours() + 2);
-  endTime.setMinutes(0, 0, 0);
-
   function updateTimer() {
     const now = new Date().getTime();
     const distance = endTime - now;
-    if (distance <= 0) {
-      document.getElementById("countdownTimer").innerHTML = "00:00:00";
-      return;
-    }
-    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    if (distance <= 0) { document.getElementById("countdownTimer").innerHTML = "00:00:00"; return; }
+    const hours = Math.floor(distance / 3600000);
+    const minutes = Math.floor((distance % 3600000) / 60000);
+    const seconds = Math.floor((distance % 60000) / 1000);
     document.getElementById("countdownTimer").innerHTML = `${hours.toString().padStart(2,'0')}:${minutes.toString().padStart(2,'0')}:${seconds.toString().padStart(2,'0')}`;
   }
   setInterval(updateTimer, 1000);
   updateTimer();
 
-  // Category filter
-  document.querySelectorAll(".cat-btn").forEach(btn => {
-    btn.addEventListener("click", () => {
-      document.querySelectorAll(".cat-btn").forEach(b => b.classList.remove("active"));
-      btn.classList.add("active");
-      activeCategory = btn.getAttribute("data-cat");
-      renderProducts();
-    });
-  });
-
-  // Search functionality
-  const searchInput = document.getElementById("searchInput");
-  const searchBtn = document.getElementById("searchBtn");
-  function performSearch() {
-    searchQuery = searchInput.value;
-    renderProducts();
-  }
-  searchBtn.addEventListener("click", performSearch);
-  searchInput.addEventListener("keyup", (e) => {
-    if (e.key === "Enter") performSearch();
-  });
-
-  // Initial render
   renderProducts();
-
-  // Optional: Add animation on load
-  window.addEventListener("load", () => {
-    document.querySelectorAll(".product-card").forEach((card, idx) => {
-      card.style.opacity = "0";
-      card.style.transform = "translateY(20px)";
-      setTimeout(() => {
-        card.style.transition = "all 0.4s ease";
-        card.style.opacity = "1";
-        card.style.transform = "translateY(0)";
-      }, idx * 80);
-    });
-  });
+  updateCartCount();
+  renderRecentlyViewed();
+  window.quickView = quickView;
+  window.removeFromCart = removeFromCart;
 </script>
 </body>
 </html>

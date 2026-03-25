@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>DealsBazaar | India's Mega Affiliate Store - Amazon, Flipkart, Meesho Deals</title>
+  <!-- Google Fonts + Font Awesome -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f0f2f5;
+      color: #1a1e2b;
+      overflow-x: hidden;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #e9ecef;
+      border-radius: 10px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #ff6a35;
+      border-radius: 10px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #e55a2b;
+    }
+
+    /* Sticky Header */
+    .sticky-header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+      padding: 0.8rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .logo h1 {
+      font-size: 1.8rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #ff6a35, #ff3b6f);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      letter-spacing: -0.5px;
+    }
+    .logo span {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: #5a6874;
+      display: block;
+    }
+    .search-bar {
+      flex: 1;
+      max-width: 500px;
+      display: flex;
+      background: white;
+      border-radius: 60px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      border: 1px solid #e2e8f0;
+      overflow: hidden;
+      transition: all 0.2s;
+    }
+    .search-bar:focus-within {
+      border-color: #ff6a35;
+      box-shadow: 0 0 0 3px rgba(255,106,53,0.2);
+    }
+    .search-bar input {
+      flex: 1;
+      padding: 0.9rem 1.2rem;
+      border: none;
+      outline: none;
+      font-size: 0.9rem;
+    }
+    .search-bar button {
+      background: #ff6a35;
+      border: none;
+      padding: 0 1.5rem;
+      color: white;
+      cursor: pointer;
+      font-weight: 600;
+      transition: 0.2s;
+    }
+    .search-bar button:hover {
+      background: #e55a2b;
+    }
+    .nav-icons {
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+    }
+    .nav-icons i {
+      font-size: 1.4rem;
+      color: #2d3e50;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .nav-icons i:hover {
+      color: #ff6a35;
+    }
+
+    /* Container */
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* Hero Banner */
+    .hero {
+      background: linear-gradient(120deg, #1e2b3c, #0f2027);
+      border-radius: 2rem;
+      margin: 1.5rem 0 2rem;
+      padding: 2.5rem;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+    .hero-text h2 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+    }
+    .hero-text p {
+      opacity: 0.9;
+      margin-bottom: 1rem;
+    }
+    .hero-badge {
+      background: #ff6a35;
+      display: inline-block;
+      padding: 0.4rem 1.2rem;
+      border-radius: 40px;
+      font-weight: 600;
+      font-size: 0.8rem;
+    }
+    .hero-stats {
+      background: rgba(255,255,255,0.1);
+      padding: 1rem 2rem;
+      border-radius: 1.5rem;
+      text-align: center;
+      backdrop-filter: blur(4px);
+    }
+
+    /* Category Tabs */
+    .categories {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin: 2rem 0 1.5rem;
+      border-bottom: 2px solid #e4e9f0;
+      padding-bottom: 0.8rem;
+    }
+    .cat-btn {
+      background: transparent;
+      border: none;
+      padding: 0.6rem 1.5rem;
+      font-weight: 600;
+      color: #5a6874;
+      cursor: pointer;
+      border-radius: 40px;
+      transition: 0.2s;
+      font-size: 0.9rem;
+    }
+    .cat-btn.active, .cat-btn:hover {
+      background: #ff6a35;
+      color: white;
+      box-shadow: 0 4px 12px rgba(255,106,53,0.3);
+    }
+
+    /* Flash Sale Banner with Countdown */
+    .flash-sale {
+      background: linear-gradient(95deg, #fff4e8, #ffe6d5);
+      border-radius: 1.2rem;
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      border-left: 6px solid #ff6a35;
+    }
+    .flash-text {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+    }
+    .flash-text i {
+      font-size: 1.8rem;
+      color: #ff6a35;
+    }
+    .countdown {
+      background: #1e2b3c;
+      padding: 0.5rem 1.2rem;
+      border-radius: 50px;
+      color: white;
+      font-family: monospace;
+      font-size: 1.6rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+    }
+
+    /* Product Grid */
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.8rem;
+      margin: 2rem 0;
+    }
+    .product-card {
+      background: white;
+      border-radius: 1.2rem;
+      overflow: hidden;
+      transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+      position: relative;
+      cursor: pointer;
+    }
+    .product-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 30px -12px rgba(0,0,0,0.15);
+    }
+    .product-img {
+      background: #f8fafc;
+      height: 220px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 5rem;
+      position: relative;
+    }
+    .discount-tag {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background: #ff3b6f;
+      color: white;
+      padding: 0.2rem 0.7rem;
+      border-radius: 30px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      z-index: 2;
+    }
+    .product-info {
+      padding: 1.2rem;
+    }
+    .product-title {
+      font-weight: 700;
+      font-size: 1.1rem;
+      margin-bottom: 0.4rem;
+    }
+    .price {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      margin: 0.5rem 0;
+    }
+    .current-price {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: #ff6a35;
+    }
+    .old-price {
+      font-size: 0.8rem;
+      text-decoration: line-through;
+      color: #8e9aaf;
+    }
+    .rating {
+      color: #fbbf24;
+      margin: 0.4rem 0;
+      font-size: 0.8rem;
+    }
+    .buy-btn {
+      width: 100%;
+      background: #ff6a35;
+      border: none;
+      padding: 0.7rem;
+      border-radius: 50px;
+      color: white;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.2s;
+      margin-top: 0.8rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .buy-btn:hover {
+      background: #e55a2b;
+      transform: scale(0.98);
+    }
+
+    /* Trust Badges */
+    .trust-section {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 1rem;
+      background: white;
+      border-radius: 1.2rem;
+      padding: 1.5rem 2rem;
+      margin: 2rem 0;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+    }
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: #2c3e50;
+    }
+
+    /* Footer */
+    footer {
+      background: #0f2027;
+      color: #cfdfe8;
+      padding: 2rem;
+      border-radius: 1.5rem 1.5rem 0 0;
+      margin-top: 3rem;
+      text-align: center;
+    }
+
+    /* Toast Notifications */
+    #toast-container {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 2000;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .toast {
+      background: #1e2b3c;
+      color: white;
+      padding: 12px 24px;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      border-left: 4px solid #ff6a35;
+      animation: slideIn 0.3s ease;
+    }
+    @keyframes slideIn {
+      from { transform: translateX(100%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .container { padding: 0 1rem; }
+      .sticky-header { padding: 0.8rem 1rem; flex-direction: column; }
+      .search-bar { max-width: 100%; }
+      .hero { flex-direction: column; text-align: center; }
+      .countdown { font-size: 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="sticky-header">
+  <div class="logo">
+    <h1>DealsBazaar <i class="fas fa-bolt" style="color: #ff6a35;"></i></h1>
+    <span>Amazon · Flipkart · Meesho | Best Prices</span>
+  </div>
+  <div class="search-bar">
+    <input type="text" placeholder="Search millions of products..." id="searchInput">
+    <button id="searchBtn"><i class="fas fa-search"></i></button>
+  </div>
+  <div class="nav-icons">
+    <i class="far fa-heart"></i>
+    <i class="far fa-bell"></i>
+    <i class="fas fa-user-circle"></i>
+  </div>
+</div>
+
+<div class="container">
+  <!-- Hero -->
+  <div class="hero">
+    <div class="hero-text">
+      <h2>Mega Savings Carnival</h2>
+      <p>Up to 80% off + extra bank offers</p>
+      <span class="hero-badge">🔥 Limited Period</span>
+    </div>
+    <div class="hero-stats">
+      <div><i class="fas fa-shopping-cart"></i> 50,000+ deals</div>
+      <div><i class="fas fa-truck"></i> Free shipping</div>
+    </div>
+  </div>
+
+  <!-- Flash Sale -->
+  <div class="flash-sale">
+    <div class="flash-text">
+      <i class="fas fa-bolt"></i>
+      <span><strong>FLASH SALE</strong> ends in:</span>
+    </div>
+    <div class="countdown" id="countdownTimer">02:00:00</div>
+    <div><i class="fas fa-tag"></i> Extra 10% off on prepaid orders</div>
+  </div>
+
+  <!-- Category Tabs -->
+  <div class="categories" id="categoryTabs">
+    <button class="cat-btn active" data-cat="all">All Deals</button>
+    <button class="cat-btn" data-cat="electronics">Electronics</button>
+    <button class="cat-btn" data-cat="fashion">Fashion</button>
+    <button class="cat-btn" data-cat="home">Home & Kitchen</button>
+    <button class="cat-btn" data-cat="mobiles">Mobiles</button>
+  </div>
+
+  <!-- Products Grid -->
+  <div class="products-grid" id="productsGrid"></div>
+
+  <!-- Trust Section -->
+  <div class="trust-section">
+    <div class="trust-item"><i class="fas fa-shield-alt"></i> 100% Secure Transactions</div>
+    <div class="trust-item"><i class="fas fa-exchange-alt"></i> Easy Returns (7 Days)</div>
+    <div class="trust-item"><i class="fas fa-rupee-sign"></i> Price Match Guarantee</div>
+    <div class="trust-item"><i class="fas fa-headset"></i> 24/7 Support</div>
+  </div>
+</div>
+
+<footer>
+  <p><i class="fas fa-store"></i> DealsBazaar — Your one-stop affiliate store for Amazon, Flipkart, Meesho & more</p>
+  <p style="margin-top: 0.8rem; font-size: 0.75rem;">As an affiliate partner, we earn from qualifying purchases. Prices may vary.</p>
+  <p style="margin-top: 1rem;">© 2025 DealsBazaar | Designed to beat the best</p>
+</footer>
+
+<div id="toast-container"></div>
+
+<script>
+  // Product Database (simulating Amazon/Flipkart level deals)
+  const products = [
+    { id: 1, name: "iPhone 15 Pro", category: "mobiles", price: 74999, oldPrice: 89999, discount: "16%", rating: 4.8, img: "📱", affiliate: "https://affiliate.example.com/iphone15pro", platform: "Amazon" },
+    { id: 2, name: "Samsung Galaxy S24", category: "mobiles", price: 64999, oldPrice: 79999, discount: "19%", rating: 4.7, img: "📱", affiliate: "https://affiliate.example.com/samsungs24", platform: "Flipkart" },
+    { id: 3, name: "Noise ColorFit Pro 5", category: "electronics", price: 1999, oldPrice: 4999, discount: "60%", rating: 4.5, img: "⌚", affiliate: "https://affiliate.example.com/noisewatch", platform: "Meesho" },
+    { id: 4, name: "boAt Nirvana Earbuds", category: "electronics", price: 2499, oldPrice: 6999, discount: "64%", rating: 4.6, img: "🎧", affiliate: "https://affiliate.example.com/boatnirvana", platform: "Amazon" },
+    { id: 5, name: "Men's Cotton Shirt", category: "fashion", price: 499, oldPrice: 1499, discount: "67%", rating: 4.3, img: "👕", affiliate: "https://affiliate.example.com/shirt", platform: "Meesho" },
+    { id: 6, name: "Women's Kurta Set", category: "fashion", price: 799, oldPrice: 2499, discount: "68%", rating: 4.4, img: "👗", affiliate: "https://affiliate.example.com/kurta", platform: "Flipkart" },
+    { id: 7, name: "Non-Stick Cookware Set", category: "home", price: 1299, oldPrice: 3999, discount: "67%", rating: 4.5, img: "🍳", affiliate: "https://affiliate.example.com/cookware", platform: "Amazon" },
+    { id: 8, name: "LED Bulb (10W) Pack of 4", category: "home", price: 299, oldPrice: 999, discount: "70%", rating: 4.2, img: "💡", affiliate: "https://affiliate.example.com/bulb", platform: "Meesho" },
+    { id: 9, name: "Gaming Laptop RTX 4060", category: "electronics", price: 84999, oldPrice: 119999, discount: "29%", rating: 4.9, img: "💻", affiliate: "https://affiliate.example.com/gaminglaptop", platform: "Flipkart" },
+    { id: 10, name: "Smart LED TV 43\" 4K", category: "electronics", price: 23999, oldPrice: 44999, discount: "47%", rating: 4.7, img: "📺", affiliate: "https://affiliate.example.com/smarttv", platform: "Amazon" },
+    { id: 11, name: "Men's Running Shoes", category: "fashion", price: 899, oldPrice: 2999, discount: "70%", rating: 4.5, img: "👟", affiliate: "https://affiliate.example.com/shoes", platform: "Meesho" },
+    { id: 12, name: "OnePlus Nord CE 4", category: "mobiles", price: 24999, oldPrice: 31999, discount: "22%", rating: 4.6, img: "📱", affiliate: "https://affiliate.example.com/oneplusnord", platform: "Amazon" }
+  ];
+
+  let activeCategory = "all";
+  let searchQuery = "";
+
+  function renderProducts() {
+    let filtered = products;
+    if (activeCategory !== "all") {
+      filtered = filtered.filter(p => p.category === activeCategory);
+    }
+    if (searchQuery.trim() !== "") {
+      filtered = filtered.filter(p => p.name.toLowerCase().includes(searchQuery.toLowerCase()));
+    }
+
+    const grid = document.getElementById("productsGrid");
+    if (!grid) return;
+
+    if (filtered.length === 0) {
+      grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:3rem;">No products found. Try another search!</div>`;
+      return;
+    }
+
+    grid.innerHTML = filtered.map(product => `
+      <div class="product-card" data-id="${product.id}">
+        <div class="product-img">
+          <span style="font-size:4rem;">${product.img}</span>
+          <div class="discount-tag">${product.discount} OFF</div>
+        </div>
+        <div class="product-info">
+          <div class="product-title">${product.name}</div>
+          <div class="price">
+            <span class="current-price">₹${product.price.toLocaleString()}</span>
+            <span class="old-price">₹${product.oldPrice.toLocaleString()}</span>
+          </div>
+          <div class="rating">
+            ${'★'.repeat(Math.floor(product.rating))}${product.rating % 1 ? '½' : ''} (${product.rating})
+          </div>
+          <div style="font-size:0.7rem; color:#ff6a35; margin-bottom: 0.3rem;"><i class="fab fa-amazon"></i> ${product.platform}</div>
+          <button class="buy-btn" data-affiliate="${product.affiliate}" data-name="${product.name}">
+            <i class="fas fa-shopping-cart"></i> Buy Now
+          </button>
+        </div>
+      </div>
+    `).join("");
+
+    // Attach event listeners to new buy buttons
+    document.querySelectorAll(".buy-btn").forEach(btn => {
+      btn.removeEventListener("click", handleBuyClick);
+      btn.addEventListener("click", handleBuyClick);
+    });
+  }
+
+  // Toast notification
+  function showToast(message) {
+    const container = document.getElementById("toast-container");
+    const toast = document.createElement("div");
+    toast.className = "toast";
+    toast.innerHTML = `<i class="fas fa-external-link-alt"></i> ${message}`;
+    container.appendChild(toast);
+    setTimeout(() => {
+      toast.remove();
+    }, 3000);
+  }
+
+  function handleBuyClick(e) {
+    e.stopPropagation();
+    const btn = e.currentTarget;
+    const affiliateUrl = btn.getAttribute("data-affiliate");
+    const productName = btn.getAttribute("data-name");
+    if (!affiliateUrl) return;
+
+    showToast(`🛍️ Redirecting to ${productName} on partner store...`);
+    // Simulate redirect after a short delay for toast visibility
+    setTimeout(() => {
+      window.location.href = affiliateUrl;
+    }, 400);
+  }
+
+  // Countdown Timer (2 hours)
+  let endTime = new Date();
+  endTime.setHours(endTime.getHours() + 2);
+  endTime.setMinutes(0, 0, 0);
+
+  function updateTimer() {
+    const now = new Date().getTime();
+    const distance = endTime - now;
+    if (distance <= 0) {
+      document.getElementById("countdownTimer").innerHTML = "00:00:00";
+      return;
+    }
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    document.getElementById("countdownTimer").innerHTML = `${hours.toString().padStart(2,'0')}:${minutes.toString().padStart(2,'0')}:${seconds.toString().padStart(2,'0')}`;
+  }
+  setInterval(updateTimer, 1000);
+  updateTimer();
+
+  // Category filter
+  document.querySelectorAll(".cat-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll(".cat-btn").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      activeCategory = btn.getAttribute("data-cat");
+      renderProducts();
+    });
+  });
+
+  // Search functionality
+  const searchInput = document.getElementById("searchInput");
+  const searchBtn = document.getElementById("searchBtn");
+  function performSearch() {
+    searchQuery = searchInput.value;
+    renderProducts();
+  }
+  searchBtn.addEventListener("click", performSearch);
+  searchInput.addEventListener("keyup", (e) => {
+    if (e.key === "Enter") performSearch();
+  });
+
+  // Initial render
+  renderProducts();
+
+  // Optional: Add animation on load
+  window.addEventListener("load", () => {
+    document.querySelectorAll(".product-card").forEach((card, idx) => {
+      card.style.opacity = "0";
+      card.style.transform = "translateY(20px)";
+      setTimeout(() => {
+        card.style.transition = "all 0.4s ease";
+        card.style.opacity = "1";
+        card.style.transform = "translateY(0)";
+      }, idx * 80);
+    });
+  });
+</script>
+</body>
+</html>

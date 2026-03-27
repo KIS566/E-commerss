@@ -1,1232 +1,663 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <title>DealsBazaar | Panda Login • India's Mega Affiliate Store</title>
-  <!-- Google Fonts + Font Awesome -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <title>Classic Pharmacy | Trusted Care Since 1995</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+        }
 
-    body {
-      font-family: 'Inter', sans-serif;
-      background: #f0f2f5;
-      color: #1a1e2b;
-      transition: background 0.3s, color 0.3s;
-    }
+        body {
+            background: #eef3f7;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
 
-    body.dark {
-      background: #0f172a;
-      color: #e2e8f0;
-    }
+        /* unified card style — fully responsive */
+        .screen-container, .login-container, .language-container, .pharma-app, 
+        .medicine-order-container, .organ-selection, .second-home, .add-address-panel {
+            background: #ffffff;
+            border-radius: 28px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05), 0 2px 6px rgba(0, 0, 0, 0.02);
+            border: 1px solid #e2edf2;
+            transition: all 0.2s ease;
+            width: 100%;
+        }
 
-    /* Custom Scrollbar */
-    ::-webkit-scrollbar {
-      width: 8px;
-      height: 8px;
-    }
-    ::-webkit-scrollbar-track {
-      background: #e9ecef;
-      border-radius: 10px;
-    }
-    ::-webkit-scrollbar-thumb {
-      background: #ff6a35;
-      border-radius: 10px;
-    }
+        .screen-container {
+            max-width: 920px;
+            margin: 0 auto;
+            width: 100%;
+        }
 
-    /* Sticky Header */
-    .sticky-header {
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      background: rgba(255, 255, 255, 0.96);
-      backdrop-filter: blur(8px);
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-      padding: 0.8rem 2rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 1rem;
-      transition: all 0.3s;
-    }
-    body.dark .sticky-header {
-      background: rgba(15, 23, 42, 0.96);
-      border-bottom: 1px solid #334155;
-    }
-    .logo h1 {
-      font-size: 1.8rem;
-      font-weight: 800;
-      background: linear-gradient(135deg, #ff6a35, #ff3b6f);
-      background-clip: text;
-      -webkit-background-clip: text;
-      color: transparent;
-      letter-spacing: -0.5px;
-    }
-    .logo span {
-      font-size: 0.8rem;
-      font-weight: 500;
-      color: #5a6874;
-      display: block;
-    }
-    body.dark .logo span {
-      color: #94a3b8;
-    }
-    .search-bar {
-      flex: 1;
-      max-width: 500px;
-      display: flex;
-      background: white;
-      border-radius: 60px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-      border: 1px solid #e2e8f0;
-      overflow: hidden;
-      transition: all 0.2s;
-    }
-    body.dark .search-bar {
-      background: #1e293b;
-      border-color: #334155;
-    }
-    .search-bar:focus-within {
-      border-color: #ff6a35;
-      box-shadow: 0 0 0 3px rgba(255,106,53,0.2);
-    }
-    .search-bar input {
-      flex: 1;
-      padding: 0.9rem 1.2rem;
-      border: none;
-      outline: none;
-      font-size: 0.9rem;
-      background: transparent;
-      color: inherit;
-    }
-    .search-bar button {
-      background: #ff6a35;
-      border: none;
-      padding: 0 1.5rem;
-      color: white;
-      cursor: pointer;
-      font-weight: 600;
-      transition: 0.2s;
-    }
-    .nav-icons {
-      display: flex;
-      gap: 1.5rem;
-      align-items: center;
-      position: relative;
-    }
-    .nav-icons i {
-      font-size: 1.4rem;
-      color: #2d3e50;
-      cursor: pointer;
-      transition: 0.2s;
-    }
-    body.dark .nav-icons i {
-      color: #cbd5e1;
-    }
-    .nav-icons i:hover {
-      color: #ff6a35;
-      transform: scale(1.05);
-    }
-    .cart-count, .wishlist-count {
-      position: absolute;
-      top: -8px;
-      right: -8px;
-      background: #ff3b6f;
-      color: white;
-      font-size: 0.7rem;
-      border-radius: 50%;
-      width: 18px;
-      height: 18px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: bold;
-    }
-    .theme-toggle {
-      background: none;
-      border: none;
-      font-size: 1.3rem;
-      cursor: pointer;
-      color: inherit;
-    }
-    /* User greeting & logout */
-    .user-greeting {
-      font-size: 0.85rem;
-      font-weight: 500;
-      background: rgba(255,106,53,0.15);
-      padding: 0.3rem 0.8rem;
-      border-radius: 40px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      cursor: pointer;
-    }
-    .user-greeting i {
-      font-size: 1rem;
-    }
+        /* classic header refinement */
+        .pharma-brand {
+            font-size: clamp(26px, 6vw, 34px);
+            font-weight: 800;
+            color: #1a5d7a;
+            text-align: center;
+            margin-bottom: 12px;
+            letter-spacing: -0.4px;
+            border-bottom: 3px solid #ff8c42;
+            display: inline-block;
+            width: auto;
+            padding-bottom: 10px;
+        }
 
-    /* Container */
-    .container {
-      max-width: 1400px;
-      margin: 0 auto;
-      padding: 0 2rem;
-    }
+        .login-title, .language-title {
+            font-size: clamp(18px, 5vw, 22px);
+            font-weight: 600;
+            color: #2c5a6e;
+            text-align: center;
+            margin-bottom: 28px;
+        }
 
-    /* Hero Banner */
-    .hero {
-      background: linear-gradient(120deg, #1e2b3c, #0f2027);
-      border-radius: 2rem;
-      margin: 1.5rem 0 2rem;
-      padding: 2.5rem;
-      color: white;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 2rem;
-      animation: fadeInUp 0.6s ease;
-    }
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .hero-text h2 {
-      font-size: 2.2rem;
-      font-weight: 800;
-      margin-bottom: 0.5rem;
-    }
-    .hero-badge {
-      background: #ff6a35;
-      display: inline-block;
-      padding: 0.4rem 1.2rem;
-      border-radius: 40px;
-      font-weight: 600;
-      font-size: 0.8rem;
-      animation: pulse 2s infinite;
-    }
-    @keyframes pulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.05); }
-      100% { transform: scale(1); }
-    }
-    .hero-stats {
-      background: rgba(255,255,255,0.1);
-      padding: 1rem 2rem;
-      border-radius: 1.5rem;
-      text-align: center;
-      backdrop-filter: blur(4px);
-    }
+        /* modern but classic inputs */
+        .input-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
 
-    /* Category Tabs */
-    .categories {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-      margin: 2rem 0 1.5rem;
-      border-bottom: 2px solid #e4e9f0;
-      padding-bottom: 0.8rem;
-    }
-    body.dark .categories {
-      border-color: #334155;
-    }
-    .cat-btn {
-      background: transparent;
-      border: none;
-      padding: 0.6rem 1.5rem;
-      font-weight: 600;
-      color: #5a6874;
-      cursor: pointer;
-      border-radius: 40px;
-      transition: 0.2s;
-      font-size: 0.9rem;
-    }
-    body.dark .cat-btn {
-      color: #94a3b8;
-    }
-    .cat-btn.active, .cat-btn:hover {
-      background: #ff6a35;
-      color: white;
-      box-shadow: 0 4px 12px rgba(255,106,53,0.3);
-      transform: translateY(-2px);
-    }
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #2c5a6e;
+            font-weight: 600;
+            font-size: 13px;
+            letter-spacing: 0.2px;
+        }
 
-    /* Flash Sale Banner */
-    .flash-sale {
-      background: linear-gradient(95deg, #fff4e8, #ffe6d5);
-      border-radius: 1.2rem;
-      padding: 1rem 2rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 1rem;
-      margin-bottom: 2rem;
-      border-left: 6px solid #ff6a35;
-      animation: slideInLeft 0.6s ease;
-    }
-    body.dark .flash-sale {
-      background: #1e293b;
-      border-left-color: #ff6a35;
-    }
-    @keyframes slideInLeft {
-      from { opacity: 0; transform: translateX(-30px); }
-      to { opacity: 1; transform: translateX(0); }
-    }
-    .flash-text {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-weight: 700;
-    }
-    .flash-text i {
-      font-size: 1.8rem;
-      color: #ff6a35;
-    }
-    .countdown {
-      background: #1e2b3c;
-      padding: 0.5rem 1.2rem;
-      border-radius: 50px;
-      color: white;
-      font-family: monospace;
-      font-size: 1.6rem;
-      font-weight: 800;
-      letter-spacing: 2px;
-    }
-    body.dark .countdown {
-      background: #0f172a;
-    }
+        .input-group input {
+            width: 100%;
+            padding: 14px 16px;
+            background: #fff;
+            border: 1.5px solid #e0eaf0;
+            border-radius: 18px;
+            color: #1e2f3c;
+            font-size: 15px;
+            transition: 0.2s;
+            outline: none;
+        }
 
-    /* Filters & Sort Bar */
-    .filters-bar {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-      margin: 1rem 0;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .filter-group {
-      display: flex;
-      gap: 0.8rem;
-      flex-wrap: wrap;
-    }
-    .filter-select {
-      background: white;
-      border: 1px solid #e2e8f0;
-      padding: 0.5rem 1rem;
-      border-radius: 40px;
-      font-size: 0.85rem;
-      cursor: pointer;
-    }
-    body.dark .filter-select {
-      background: #1e293b;
-      border-color: #334155;
-      color: #e2e8f0;
-    }
+        .input-group input:focus {
+            border-color: #ff8c42;
+            box-shadow: 0 0 0 3px rgba(255, 140, 66, 0.12);
+        }
 
-    /* Product Grid */
-    .products-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 1.8rem;
-      margin: 2rem 0;
-    }
-    .product-card {
-      background: white;
-      border-radius: 1.2rem;
-      overflow: hidden;
-      transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.05);
-      position: relative;
-      cursor: pointer;
-      opacity: 0;
-      transform: translateY(20px);
-      animation: cardReveal 0.5s forwards;
-    }
-    @keyframes cardReveal {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-    body.dark .product-card {
-      background: #1e293b;
-    }
-    .product-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 20px 30px -12px rgba(0,0,0,0.2);
-    }
-    .product-img {
-      background: #f8fafc;
-      height: 220px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 5rem;
-      position: relative;
-      overflow: hidden;
-    }
-    body.dark .product-img {
-      background: #0f172a;
-    }
-    .product-img span {
-      transition: transform 0.3s;
-    }
-    .product-card:hover .product-img span {
-      transform: scale(1.1);
-    }
-    .discount-tag {
-      position: absolute;
-      top: 12px;
-      left: 12px;
-      background: #ff3b6f;
-      color: white;
-      padding: 0.2rem 0.7rem;
-      border-radius: 30px;
-      font-size: 0.7rem;
-      font-weight: 700;
-      z-index: 2;
-    }
-    .platform-badge {
-      position: absolute;
-      bottom: 12px;
-      right: 12px;
-      background: rgba(0,0,0,0.7);
-      padding: 0.2rem 0.6rem;
-      border-radius: 20px;
-      font-size: 0.7rem;
-      color: white;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
-    .wishlist-btn {
-      position: absolute;
-      top: 12px;
-      right: 12px;
-      background: white;
-      border: none;
-      border-radius: 50%;
-      width: 32px;
-      height: 32px;
-      cursor: pointer;
-      z-index: 2;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: 0.2s;
-    }
-    body.dark .wishlist-btn {
-      background: #334155;
-    }
-    .product-info {
-      padding: 1.2rem;
-    }
-    .product-title {
-      font-weight: 700;
-      font-size: 1.1rem;
-      margin-bottom: 0.4rem;
-    }
-    .price {
-      display: flex;
-      align-items: baseline;
-      gap: 8px;
-      margin: 0.5rem 0;
-    }
-    .current-price {
-      font-size: 1.4rem;
-      font-weight: 800;
-      color: #ff6a35;
-    }
-    .old-price {
-      font-size: 0.8rem;
-      text-decoration: line-through;
-      color: #8e9aaf;
-    }
-    .rating {
-      color: #fbbf24;
-      margin: 0.4rem 0;
-      font-size: 0.8rem;
-    }
-    .buy-btn {
-      width: 100%;
-      background: #ff6a35;
-      border: none;
-      padding: 0.7rem;
-      border-radius: 50px;
-      color: white;
-      font-weight: 700;
-      cursor: pointer;
-      transition: 0.2s;
-      margin-top: 0.8rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-    }
-    .buy-btn:hover {
-      background: #e55a2b;
-      transform: scale(0.98);
-    }
+        /* buttons unified */
+        button, .login-btn, .scan-btn, .predict-btn, .voice-input-btn, .place-order-btn, 
+        .add-address-btn, .address-btn, .back-btn, .feature-box, .language-btn, .second-home-feature {
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
 
-    /* Recently Viewed Section */
-    .recent-section {
-      margin: 2rem 0;
-      display: none;
-    }
-    .recent-carousel {
-      display: flex;
-      gap: 1rem;
-      overflow-x: auto;
-      padding: 0.5rem 0;
-    }
-    .recent-card {
-      min-width: 180px;
-      background: white;
-      border-radius: 1rem;
-      padding: 0.8rem;
-      text-align: center;
-      cursor: pointer;
-    }
-    body.dark .recent-card {
-      background: #1e293b;
-    }
+        .login-btn {
+            width: 100%;
+            padding: 14px;
+            background: #ff8c42;
+            border: none;
+            border-radius: 40px;
+            font-weight: 700;
+            font-size: 16px;
+            color: white;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+        }
 
-    /* Modal base */
-    .modal {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.8);
-      z-index: 2000;
-      justify-content: center;
-      align-items: center;
-    }
-    .modal-content {
-      background: white;
-      max-width: 850px;
-      width: 90%;
-      max-height: 90%;
-      overflow-y: auto;
-      border-radius: 1.5rem;
-      padding: 1.5rem;
-      position: relative;
-      box-shadow: 0 25px 40px rgba(0,0,0,0.3);
-    }
-    body.dark .modal-content {
-      background: #1e293b;
-    }
-    .close-modal {
-      position: absolute;
-      top: 1rem;
-      right: 1rem;
-      font-size: 1.8rem;
-      cursor: pointer;
-      z-index: 10;
-      color: #ff6a35;
-    }
+        .login-btn:hover {
+            background: #e6762b;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px -8px rgba(255, 140, 66, 0.4);
+        }
 
-    /* ========= PANDA LOGIN STYLES (embedded inside modal) ========= */
-    .panda-login-wrapper {
-      font-family: 'Poppins', 'Inter', sans-serif;
-      position: relative;
-      width: 100%;
-      min-height: 520px;
-      background: #f4c531;
-      border-radius: 1.5rem;
-      overflow: hidden;
-      padding: 1.2rem;
-    }
-    body.dark .panda-login-wrapper {
-      background: #e0a82b;
-    }
-    .panda-inner {
-      position: relative;
-      height: 480px;
-      margin: 0 auto;
-      max-width: 500px;
-      background: #f4c531;
-      border-radius: 1rem;
-    }
-    /* Panda elements (relative to .panda-inner) */
-    .panda-inner .panda-face {
-      height: 7.5em;
-      width: 8.4em;
-      background-color: #ffffff;
-      border: 0.18em solid #2e0d30;
-      border-radius: 7.5em 7.5em 5.62em 5.62em;
-      position: absolute;
-      top: 2em;
-      margin: auto;
-      left: 0;
-      right: 0;
-    }
-    .panda-inner .ear-l,
-    .panda-inner .ear-r {
-      background-color: #3f3554;
-      height: 2.5em;
-      width: 2.81em;
-      border: 0.18em solid #2e0d30;
-      border-radius: 2.5em 2.5em 0 0;
-      top: 1.75em;
-      position: absolute;
-    }
-    .panda-inner .ear-l { transform: rotate(-38deg); left: 10.75em; }
-    .panda-inner .ear-r { transform: rotate(38deg); right: 10.75em; }
-    .panda-inner .blush-l,
-    .panda-inner .blush-r {
-      background-color: #ff8bb1;
-      height: 1em;
-      width: 1.37em;
-      border-radius: 50%;
-      position: absolute;
-      top: 4em;
-    }
-    .panda-inner .blush-l { transform: rotate(25deg); left: 1em; }
-    .panda-inner .blush-r { transform: rotate(-25deg); right: 1em; }
-    .panda-inner .eye-l,
-    .panda-inner .eye-r {
-      background-color: #3f3554;
-      height: 2.18em;
-      width: 2em;
-      border-radius: 2em;
-      position: absolute;
-      top: 2.18em;
-    }
-    .panda-inner .eye-l { left: 1.37em; transform: rotate(-20deg); }
-    .panda-inner .eye-r { right: 1.37em; transform: rotate(20deg); }
-    .panda-inner .eyeball-l,
-    .panda-inner .eyeball-r {
-      height: 0.6em;
-      width: 0.6em;
-      background-color: #ffffff;
-      border-radius: 50%;
-      position: absolute;
-      left: 0.6em;
-      top: 0.6em;
-      transition: 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-    .panda-inner .nose {
-      height: 1em;
-      width: 1em;
-      background-color: #3f3554;
-      position: absolute;
-      top: 4.37em;
-      margin: auto;
-      left: 0;
-      right: 0;
-      border-radius: 1.2em 0 0 0.25em;
-      transform: rotate(45deg);
-    }
-    .nose:before {
-      content: "";
-      position: absolute;
-      background-color: #3f3554;
-      height: 0.6em;
-      width: 0.1em;
-      transform: rotate(-45deg);
-      top: 0.75em;
-      left: 1em;
-    }
-    .panda-inner .mouth,
-    .panda-inner .mouth:before {
-      height: 0.75em;
-      width: 0.93em;
-      background-color: transparent;
-      position: absolute;
-      border-radius: 50%;
-      box-shadow: 0 0.18em #3f3554;
-    }
-    .panda-inner .mouth { top: 5.31em; left: 3.12em; }
-    .mouth:before { content: ""; position: absolute; left: 0.87em; }
-    .panda-inner .hand-l,
-    .panda-inner .hand-r {
-      background-color: #3f3554;
-      height: 2.81em;
-      width: 2.5em;
-      border: 0.18em solid #2e0d30;
-      border-radius: 0.6em 0.6em 2.18em 2.18em;
-      transition: 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
-      position: absolute;
-      top: 8.4em;
-    }
-    .panda-inner .hand-l { left: 7.5em; }
-    .panda-inner .hand-r { right: 7.5em; }
-    /* login form inside panda */
-    .panda-login-form {
-      position: absolute;
-      bottom: 1rem;
-      left: 0;
-      right: 0;
-      background: white;
-      width: 85%;
-      margin: 0 auto;
-      border-radius: 2rem;
-      padding: 1rem 1.5rem;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-    }
-    body.dark .panda-login-form {
-      background: #2d3e50;
-    }
-    .panda-login-form label {
-      font-weight: 600;
-      color: #2e0d30;
-      display: block;
-      margin-top: 0.5rem;
-    }
-    body.dark .panda-login-form label { color: #f1f5f9; }
-    .panda-login-form input {
-      width: 100%;
-      border: none;
-      border-bottom: 2px solid #f4c531;
-      background: transparent;
-      padding: 0.5rem 0;
-      outline: none;
-      font-size: 0.9rem;
-    }
-    .panda-login-form button {
-      width: 100%;
-      background: #ff6a35;
-      border: none;
-      padding: 0.7rem;
-      border-radius: 40px;
-      font-weight: bold;
-      color: white;
-      margin-top: 1rem;
-      cursor: pointer;
-      transition: 0.2s;
-    }
-    .panda-login-form button:hover { background: #e55a2b; }
+        /* feature grid — fully fluid */
+        .feature-boxes, .second-home-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 18px;
+            margin: 28px 0;
+        }
 
-    /* Trust Section */
-    .trust-section {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      gap: 1rem;
-      background: white;
-      border-radius: 1.2rem;
-      padding: 1.5rem 2rem;
-      margin: 2rem 0;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.02);
-    }
-    body.dark .trust-section { background: #1e293b; }
-    .trust-item { display: flex; align-items: center; gap: 12px; font-size: 0.85rem; font-weight: 500; }
-    footer {
-      background: #0f2027;
-      color: #cfdfe8;
-      padding: 2rem;
-      border-radius: 1.5rem 1.5rem 0 0;
-      margin-top: 3rem;
-      text-align: center;
-    }
-    #toast-container {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      z-index: 2000;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-    .toast {
-      background: #1e2b3c;
-      color: white;
-      padding: 12px 24px;
-      border-radius: 50px;
-      font-size: 0.9rem;
-      font-weight: 500;
-      border-left: 4px solid #ff6a35;
-      animation: slideIn 0.3s ease;
-    }
-    @keyframes slideIn {
-      from { transform: translateX(100%); opacity: 0; }
-      to { transform: translateX(0); opacity: 1; }
-    }
-    /* Advanced Animations */
-    @keyframes shimmer {
-      0% { background-position: -1000px 0; }
-      100% { background-position: 1000px 0; }
-    }
-    @keyframes bounce-smooth {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-8px); }
-    }
-    @keyframes glow {
-      0%, 100% { box-shadow: 0 0 5px rgba(255,106,53,0.3); }
-      50% { box-shadow: 0 0 20px rgba(255,106,53,0.6); }
-    }
-    
-    /* Glassmorphism effect */
-    .glass-effect {
-      background: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-    }
-    
-    /* Modern buttons */
-    button {
-      position: relative;
-      overflow: hidden;
-    }
-    button::before {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 0;
-      height: 0;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.5);
-      transform: translate(-50%, -50%);
-      transition: width 0.6s, height 0.6s;
-    }
-    button:active::before {
-      width: 300px;
-      height: 300px;
-    }
-    
-    /* Product card advanced effects */
-    .product-card {
-      position: relative;
-      overflow: hidden;
-    }
-    .product-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-      transition: left 0.5s;
-      z-index: 1;
-    }
-    .product-card:hover::before {
-      left: 100%;
-    }
-    
-    /* Enhanced shadows */
-    .product-card {
-      box-shadow: 0 8px 20px rgba(0,0,0,0.08), 0 4px 12px rgba(255,106,53,0.1);
-    }
-    .product-card:hover {
-      box-shadow: 0 20px 40px rgba(0,0,0,0.15), 0 8px 20px rgba(255,106,53,0.2);
-    }
-    
-    /* Floating elements */
-    @keyframes float {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-10px); }
-    }
-    .floating {
-      animation: float 3s ease-in-out infinite;
-    }
-    
-    /* Loading skeleton */
-    .skeleton {
-      background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-      background-size: 200% 100%;
-      animation: shimmer 2s infinite;
-    }
-    
-    @media (max-width: 768px) {
-      .container { padding: 0 1rem; }
-      .sticky-header { padding: 0.8rem 1rem; flex-direction: column; }
-      .search-bar { max-width: 100%; }
-      .hero { flex-direction: column; text-align: center; }
-      .countdown { font-size: 1.2rem; }
-      .panda-inner { transform: scale(0.9); }
-    }
-  </style>
+        .feature-box, .second-home-feature {
+            background: #fefefe;
+            border: 1px solid #eef3f8;
+            border-radius: 24px;
+            padding: 18px 10px;
+            text-align: center;
+            transition: all 0.25s;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+            backdrop-filter: blur(2px);
+        }
+
+        .feature-box:hover, .second-home-feature:hover {
+            background: #fff8f0;
+            border-color: #ffcd9e;
+            transform: translateY(-4px);
+            box-shadow: 0 16px 24px -12px rgba(0, 0, 0, 0.12);
+        }
+
+        .feature-icon, .second-home-icon {
+            font-size: 38px;
+            margin-bottom: 12px;
+            color: #ff8c42;
+        }
+
+        .feature-title {
+            font-weight: 600;
+            font-size: 14px;
+            color: #2c5a6e;
+        }
+
+        /* AI sections clean & classic */
+        .ai-assistant, .ai-disease-predictor {
+            background: #fefaf5;
+            border-radius: 28px;
+            padding: 22px;
+            margin-bottom: 24px;
+            border: 1px solid #ffedd9;
+        }
+
+        .ai-header, .disease-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 18px;
+            border-bottom: 2px solid #ffe1c0;
+            padding-bottom: 12px;
+        }
+
+        .ai-title, .disease-title {
+            font-size: 20px;
+            font-weight: 800;
+            color: #ff8c42;
+        }
+
+        .ai-chat-container {
+            max-height: 260px;
+            overflow-y: auto;
+            margin-bottom: 18px;
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 14px;
+            border: 1px solid #eef2f5;
+        }
+
+        .ai-message {
+            padding: 12px 18px;
+            border-radius: 20px;
+            max-width: 85%;
+            word-wrap: break-word;
+            font-size: 14px;
+            line-height: 1.45;
+            margin-bottom: 12px;
+        }
+
+        .user-message {
+            background: #ff8c42;
+            color: white;
+            margin-left: auto;
+            border-radius: 24px 24px 8px 24px;
+        }
+
+        .bot-message {
+            background: #f0f4f8;
+            color: #1e3b4c;
+            margin-right: auto;
+            border-radius: 24px 24px 24px 8px;
+        }
+
+        .ai-input-container {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .ai-input {
+            flex: 1;
+            padding: 14px 18px;
+            background: #ffffff;
+            border: 1.5px solid #e0eaf0;
+            border-radius: 48px;
+            font-size: 14px;
+        }
+
+        .ai-submit-btn {
+            background: #ff8c42;
+            border: none;
+            border-radius: 48px;
+            padding: 0 24px;
+            font-weight: 700;
+            color: white;
+        }
+
+        /* medicine cards responsive */
+        .medicine-item {
+            background: #ffffff;
+            border: 1px solid #ecf3f8;
+            border-radius: 24px;
+            padding: 18px;
+            margin-bottom: 14px;
+        }
+
+        .medicine-name {
+            font-weight: 800;
+            font-size: 17px;
+            color: #1a5d7a;
+        }
+
+        .quantity-btn {
+            width: 38px;
+            height: 38px;
+            border-radius: 40px;
+            background: #ff8c42;
+            border: none;
+            font-weight: bold;
+            color: white;
+            font-size: 18px;
+            transition: 0.1s;
+        }
+
+        .order-summary {
+            background: #f9fdfe;
+            border-radius: 24px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 1px solid #e2edf2;
+        }
+
+        .address-item {
+            background: #ffffff;
+            border: 1px solid #e8f0f5;
+            border-radius: 20px;
+            padding: 16px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .address-item.selected {
+            border: 2px solid #ff8c42;
+            background: #fffbf5;
+        }
+
+        /* modal elegant */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(3px);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: #ffffff;
+            border-radius: 32px;
+            width: 90%;
+            max-width: 520px;
+            padding: 28px;
+            box-shadow: 0 32px 48px -20px rgba(0, 0, 0, 0.3);
+            border-top: 6px solid #ff8c42;
+        }
+
+        .close-btn {
+            float: right;
+            font-size: 28px;
+            font-weight: 500;
+            cursor: pointer;
+            color: #9aaebf;
+            transition: 0.1s;
+        }
+
+        .close-btn:hover {
+            color: #ff8c42;
+        }
+
+        .back-btn {
+            background: #eef3f7;
+            border: 1px solid #d9e6ef;
+            border-radius: 40px;
+            padding: 10px 20px;
+            margin-bottom: 20px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+            color: #2c5a6e;
+        }
+
+        .place-order-btn {
+            background: #ff8c42;
+            border: none;
+            border-radius: 44px;
+            padding: 14px;
+            width: 100%;
+            font-weight: 700;
+            font-size: 16px;
+        }
+
+        .cart-indicator {
+            position: absolute;
+            top: -6px;
+            right: -6px;
+            background: #ff8c42;
+            border-radius: 40px;
+            width: 24px;
+            height: 24px;
+            font-size: 12px;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+
+        .organ-btn {
+            padding: 18px;
+            margin-bottom: 14px;
+            border: none;
+            border-radius: 60px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            transition: 0.2s;
+            color: white;
+            cursor: pointer;
+        }
+
+        .upload-prescription-btn {
+            width: 100%;
+            background: #2c5a6e;
+            border: none;
+            border-radius: 48px;
+            padding: 14px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 24px;
+        }
+
+        .voice-input-btn, .predict-btn {
+            background: #ffffff;
+            border: 1.5px solid #ff8c42;
+            border-radius: 40px;
+            padding: 10px 20px;
+            font-weight: 600;
+            color: #ff8c42;
+        }
+
+        /* responsive touch adjustments */
+        @media (max-width: 640px) {
+            body {
+                padding: 12px;
+            }
+            .feature-boxes {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+            }
+            .feature-box, .second-home-feature {
+                padding: 14px 6px;
+            }
+            .feature-icon {
+                font-size: 32px;
+            }
+            .ai-chat-container {
+                max-height: 220px;
+            }
+            .ai-input-container {
+                flex-direction: column;
+            }
+            .ai-submit-btn {
+                padding: 12px;
+            }
+            .modal-content {
+                padding: 20px;
+            }
+        }
+
+        .subtext {
+            color: #6f8ea0;
+            font-size: 12px;
+        }
+
+        .symptom-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #e2edf2;
+        }
+
+        .accuracy-meter {
+            height: 6px;
+            background: #e2edf2;
+            border-radius: 4px;
+            margin-top: 6px;
+        }
+
+        .accuracy-fill {
+            height: 100%;
+            background: #ff8c42;
+            border-radius: 4px;
+        }
+
+        hr {
+            margin: 16px 0;
+            border: 0;
+            height: 1px;
+            background: #e2edf2;
+        }
+        
+        .app-header {
+            position: relative;
+        }
+        #addressList .address-btn {
+            background: #ff8c42;
+            border: none;
+            border-radius: 30px;
+            padding: 6px 16px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+    </style>
 </head>
 <body>
 
-<div class="sticky-header">
-  <div class="logo"><h1>DealsBazaar <i class="fas fa-bolt"></i></h1><span>by Kishan Verma | Amazon · Flipkart · Meesho</span></div>
-  <div class="search-bar"><input type="text" placeholder="Search millions of products..." id="searchInput"><button id="searchBtn"><i class="fas fa-search"></i></button></div>
-  <div class="nav-icons">
-    <i class="far fa-heart" id="wishlistIcon"></i>
-    <i class="fas fa-shopping-cart" id="cartIcon"></i>
-    <button class="theme-toggle" id="themeToggle"><i class="fas fa-moon"></i></button>
-    <div id="userActionArea" style="display: flex; align-items: center;"></div>
-  </div>
-</div>
-
-<div class="container" id="mainStoreContainer">
-  <div class="hero"><div class="hero-text"><h2>Mega Savings Carnival 2026</h2><p>Up to 80% off + extra bank offers</p><span class="hero-badge">🔥 Limited Period</span></div><div class="hero-stats"><div><i class="fas fa-shopping-cart"></i> 50,000+ deals</div><div><i class="fas fa-truck"></i> Free shipping</div></div></div>
-  <div class="flash-sale"><div class="flash-text"><i class="fas fa-bolt"></i><span><strong>FLASH SALE</strong> ends in:</span></div><div class="countdown" id="countdownTimer">02:00:00</div><div><i class="fas fa-tag"></i> Extra 10% off on prepaid orders</div></div>
-  <div class="categories" id="categoryTabs"><button class="cat-btn active" data-cat="all">All Deals</button><button class="cat-btn" data-cat="electronics">Electronics</button><button class="cat-btn" data-cat="fashion">Fashion</button><button class="cat-btn" data-cat="home">Home & Kitchen</button><button class="cat-btn" data-cat="mobiles">Mobiles</button></div>
-  <div class="filters-bar"><div class="filter-group"><select id="sortSelect" class="filter-select"><option value="default">Sort: Featured</option><option value="price_asc">Price: Low to High</option><option value="price_desc">Price: High to Low</option><option value="rating">Rating: High to Low</option></select><select id="priceFilter" class="filter-select"><option value="all">All Prices</option><option value="0-1000">Under ₹1000</option><option value="1000-5000">₹1000 - ₹5000</option><option value="5000-20000">₹5000 - ₹20000</option><option value="20000+">Above ₹20000</option></select><select id="ratingFilter" class="filter-select"><option value="0">All Ratings</option><option value="4">4★ & above</option><option value="3">3★ & above</option></select><select id="brandFilter" class="filter-select"><option value="all">All Brands</option><option value="Apple">Apple</option><option value="Samsung">Samsung</option><option value="Noise">Noise</option><option value="boAt">boAt</option><option value="Roadster">Roadster</option><option value="Biba">Biba</option><option value="Prestige">Prestige</option><option value="Philips">Philips</option><option value="ASUS">ASUS</option><option value="OnePlus">OnePlus</option><option value="Puma">Puma</option></select></div><button id="loadMoreBtn" style="background:#ff6a35; border:none; padding:0.5rem 1.2rem; border-radius:40px; color:white; cursor:pointer;">Load More</button></div>
-  <div class="products-grid" id="productsGrid"></div>
-  <div class="recent-section" id="recentSection"><h3>🕒 Recently Viewed</h3><div class="recent-carousel" id="recentCarousel"></div></div>
-  <div class="trust-section"><div class="trust-item"><i class="fas fa-shield-alt"></i> 100% Secure Transactions</div><div class="trust-item"><i class="fas fa-exchange-alt"></i> Easy Returns (7 Days)</div><div class="trust-item"><i class="fas fa-rupee-sign"></i> Price Match Guarantee</div><div class="trust-item"><i class="fas fa-headset"></i> 24/7 Support</div></div>
-</div>
-<footer><p><i class="fas fa-store"></i> DealsBazaar — Your one-stop affiliate store for Amazon, Flipkart, Meesho & more</p><p style="margin-top: 0.8rem; font-size: 0.75rem;">As an affiliate partner, we earn from qualifying purchases. Prices may vary.</p><p style="margin-top: 1rem;">© 2026 Kishan Verma | DealsBazaar | Designed to beat the best</p></footer>
-<div id="toast-container"></div>
-
-<!-- Cart Modal -->
-<div id="cartModal" class="modal"><div class="modal-content"><span class="close-modal">&times;</span><h3>Your Cart</h3><div id="cartItems"></div><button id="clearCartBtn" style="background:#ff6a35; border:none; padding:0.5rem 1rem; border-radius:40px; margin-top:1rem;">Clear Cart</button></div></div>
-<!-- Quick View Modal -->
-<div id="quickViewModal" class="modal"><div class="modal-content"><span class="close-modal">&times;</span><div id="quickViewContent"></div></div></div>
-
-<!-- PANDA LOGIN MODAL (required gateway) -->
-<div id="loginModal" class="modal">
-  <div class="modal-content" style="max-width: 550px; padding: 0.5rem; overflow: hidden;">
-    <span class="close-modal" id="closeLoginModal">&times;</span>
-    <div class="panda-login-wrapper">
-      <div class="panda-inner" id="pandaInner">
-        <div class="ear-l"></div><div class="ear-r"></div>
-        <div class="panda-face"><div class="blush-l"></div><div class="blush-r"></div><div class="eye-l"><div class="eyeball-l"></div></div><div class="eye-r"><div class="eyeball-r"></div></div><div class="nose"></div><div class="mouth"></div></div>
-        <div class="hand-l"></div><div class="hand-r"></div>
-        <div class="panda-login-form">
-          <label>Username</label><input type="text" id="loginUsername" placeholder="panda lover">
-          <label>Password</label><input type="password" id="loginPassword" placeholder="••••••">
-          <button id="pandaLoginBtn">🐼 Login to DealsBazaar</button>
-        </div>
-      </div>
+<!-- LOGIN SCREEN -->
+<div id="loginScreen" class="screen-container login-container" style="padding: 32px;">
+    <div style="text-align: center;">
+        <div class="pharma-brand">CLASSIC PHARMACY</div>
+        <div style="font-size: 13px; color: #6f8ea0; margin-top: 6px;">Trusted Healthcare Since 1995</div>
     </div>
-  </div>
+    <div class="login-title">Customer Login / Register</div>
+    <div class="input-group"><label><i class="fas fa-envelope"></i> Email Address</label><input type="email" id="loginEmail" placeholder="Enter your email"></div>
+    <div class="input-group"><label><i class="fas fa-lock"></i> Password</label><input type="password" id="loginPassword" placeholder="Min. 6 characters" minlength="6"></div>
+    <button class="login-btn" onclick="loginOrRegister()"><i class="fas fa-sign-in-alt"></i> Login / Register</button>
+    <div class="subtext" style="text-align:center; margin-top:24px;">⏰ Same Day Delivery • 100% Genuine Medicines</div>
 </div>
+
+<!-- OTP SCREEN -->
+<div id="otpScreen" class="screen-container login-container" style="padding: 32px; display: none;">
+    <div class="pharma-brand">CLASSIC PHARMACY</div>
+    <div class="login-title">Verify OTP</div>
+    <div class="input-group"><label>Enter 6-digit OTP</label><input type="text" id="otp" placeholder="123456" maxlength="6"></div>
+    <button class="login-btn" onclick="validateOTP()">Verify & Continue</button>
+    <button class="login-btn" style="margin-top:12px; background:#eef3f7; color:#2c5a6e; border:1px solid #cbdbe2;" onclick="resendOTP()">Resend OTP</button>
+</div>
+
+<!-- LANGUAGE SCREEN -->
+<div id="languageScreen" class="screen-container language-container" style="padding: 32px; display: none;">
+    <div class="language-title">Select Your Language</div>
+    <div style="display: flex; gap: 12px; flex-wrap: wrap; justify-content: center;">
+        <button class="language-btn" style="background:#2c5a6e; border:none; padding:12px 20px; border-radius:48px; color:white;" onclick="selectLanguage('hi')">हिंदी</button>
+        <button class="language-btn" style="background:#2c5a6e; border:none; padding:12px 20px; border-radius:48px; color:white;" onclick="selectLanguage('en')">English</button>
+        <button class="language-btn" style="background:#2c5a6e; border:none; padding:12px 20px; border-radius:48px; color:white;" onclick="selectLanguage('ta')">தமிழ்</button>
+        <button class="language-btn" style="background:#2c5a6e; border:none; padding:12px 20px; border-radius:48px; color:white;" onclick="selectLanguage('bn')">বাংলা</button>
+    </div>
+</div>
+
+<!-- MAIN APP SCREEN -->
+<div id="appScreen" class="screen-container pharma-app" style="padding: 24px; display: none;">
+    <div class="app-header" style="position:relative; text-align:center; margin-bottom: 12px;">
+        <h2 id="appTitle" style="color:#1a5d7a; font-size: clamp(22px,6vw,28px); font-weight:800;">CLASSIC PHARMACY</h2>
+        <p id="appSubtitle" style="color:#5a6e7c;">Your neighborhood pharmacy, now online</p>
+        <div id="cartIndicator" class="cart-indicator" style="display: none;">0</div>
+    </div>
+    <button class="upload-prescription-btn" onclick="openPrescriptionScanner()"><i class="fas fa-camera"></i> Upload / Scan Prescription</button>
+    
+    <!-- AI Disease Predictor -->
+    <div class="ai-disease-predictor">
+        <div class="disease-header"><i class="fas fa-stethoscope" style="font-size:26px; color:#ff8c42;"></i><div class="disease-title" id="diseaseTitle">Symptom Checker</div></div>
+        <div class="disease-message-box"><div class="disease-message" id="diseaseMessage">Describe your symptoms for preliminary analysis</div><div class="symptoms-list" id="symptomsList"></div><div id="predictionResult" style="display:none;"><div style="margin:12px 0 6px; font-weight:700;">Possible Conditions:</div><div id="predictionItems"></div></div></div>
+        <div style="display:flex; gap:12px; margin-top:16px; flex-wrap:wrap;"><button class="voice-input-btn" id="voiceInputBtn" onclick="toggleVoiceInput()"><i class="fas fa-microphone"></i> Speak Symptoms</button><button class="predict-btn" id="predictBtn" onclick="predictDisease()" disabled>Check Symptoms</button></div>
+    </div>
+
+    <!-- AI Assistant -->
+    <div class="ai-assistant">
+        <div class="ai-header"><i class="fas fa-robot" style="font-size:26px; color:#ff8c42;"></i><div class="ai-title" id="aiTitle">Medicine Assistant</div></div>
+        <div class="ai-chat-container" id="aiChatContainer"><div class="ai-message bot-message">Hello! Ask me about any medicine - uses, dosage, side effects, or precautions.</div></div>
+        <div class="ai-input-container"><input type="text" class="ai-input" id="aiQuery" placeholder="e.g., Paracetamol uses, Amoxicillin side effects" onkeypress="handleKeyPress(event)"><button class="ai-submit-btn" onclick="askAboutMedicine()">Ask</button></div>
+    </div>
+
+    <!-- Feature Boxes -->
+    <div class="feature-boxes">
+        <div class="feature-box" onclick="openMedicineOrdering()"><div class="feature-icon">💊</div><div class="feature-title">Order Medicines</div></div>
+        <div class="feature-box" onclick="openDoctorChat()"><div class="feature-icon">👨‍⚕️</div><div class="feature-title">Consult Doctor</div></div>
+        <div class="feature-box" onclick="openReminders()"><div class="feature-icon">⏰</div><div class="feature-title">Set Reminder</div></div>
+        <div class="feature-box" onclick="openMedicalLoans()"><div class="feature-icon">💰</div><div class="feature-title">Medical Loans</div></div>
+        <div class="feature-box" onclick="openLabTests()"><div class="feature-icon">🧪</div><div class="feature-title">Book Lab Tests</div></div>
+        <div class="feature-box" onclick="openDeliveryTracking()"><div class="feature-icon">🚚</div><div class="feature-title">Track Order</div></div>
+        <div class="feature-box" onclick="openQRScanner()"><div class="feature-icon">🔍</div><div class="feature-title">Verify Medicine</div></div>
+        <div class="feature-box" onclick="openStudentStudy()"><div class="feature-icon">📚</div><div class="feature-title">Study Resources</div></div>
+        <div class="feature-box" onclick="openFitnessTips()"><div class="feature-icon">💪</div><div class="feature-title">Health Tips</div></div>
+        <div class="feature-box" onclick="openAyurvedicInfo()"><div class="feature-icon">🌿</div><div class="feature-title">Ayurveda</div></div>
+        <div class="feature-box" onclick="openEmergencyOrganHelp()"><div class="feature-icon">🆘</div><div class="feature-title">Organ Donation</div></div>
+        <div class="feature-box" onclick="openSecondHome()"><div class="feature-icon">🏠</div><div class="feature-title">More Services</div></div>
+    </div>
+</div>
+
+<!-- Medicine Ordering Screen -->
+<div id="medicineOrderScreen" class="screen-container medicine-order-container" style="padding: 24px; display: none;">
+    <button class="back-btn" onclick="closeMedicineOrdering()"><i class="fas fa-arrow-left"></i> Back to Home</button>
+    <h2 style="margin:12px 0 20px; color:#1a5d7a;">Order Medicines</h2>
+    <div class="medicine-list">
+        <div class="medicine-item"><div class="medicine-name">Paracetamol 500mg</div><div class="medicine-description" style="font-size:12px; color:#6f8ea0;">For fever & mild pain</div><div class="medicine-controls" style="display:flex; justify-content:space-between; margin-top:12px;"><div><button class="quantity-btn" onclick="updateQuantity('paracetamol', -1)">-</button><span style="margin:0 18px; font-weight:700;" id="paracetamol-qty">0</span><button class="quantity-btn" onclick="updateQuantity('paracetamol', 1)">+</button></div><div style="font-weight:700;">₹25</div></div></div>
+        <div class="medicine-item"><div class="medicine-name">Ibuprofen 400mg</div><div class="medicine-description" style="font-size:12px;">Pain relief & inflammation</div><div class="medicine-controls" style="display:flex; justify-content:space-between; margin-top:12px;"><div><button class="quantity-btn" onclick="updateQuantity('ibuprofen', -1)">-</button><span style="margin:0 18px; font-weight:700;" id="ibuprofen-qty">0</span><button class="quantity-btn" onclick="updateQuantity('ibuprofen', 1)">+</button></div><div>₹35</div></div></div>
+        <div class="medicine-item"><div class="medicine-name">Amoxicillin 250mg</div><div class="medicine-description" style="font-size:12px;">Antibiotic (prescription required)</div><div class="medicine-controls" style="display:flex; justify-content:space-between; margin-top:12px;"><div><button class="quantity-btn" onclick="updateQuantity('amoxicillin', -1)">-</button><span style="margin:0 18px; font-weight:700;" id="amoxicillin-qty">0</span><button class="quantity-btn" onclick="updateQuantity('amoxicillin', 1)">+</button></div><div>₹120</div></div></div>
+        <div class="medicine-item"><div class="medicine-name">Omeprazole 20mg</div><div class="medicine-description" style="font-size:12px;">Acid reflux & heartburn</div><div class="medicine-controls" style="display:flex; justify-content:space-between; margin-top:12px;"><div><button class="quantity-btn" onclick="updateQuantity('omeprazole', -1)">-</button><span style="margin:0 18px; font-weight:700;" id="omeprazole-qty">0</span><button class="quantity-btn" onclick="updateQuantity('omeprazole', 1)">+</button></div><div>₹85</div></div></div>
+    </div>
+    <div class="order-summary"><div class="summary-row" style="display:flex; justify-content:space-between;"><span>Subtotal:</span><span id="subtotal">₹0</span></div><div class="summary-row" style="display:flex; justify-content:space-between;"><span>Delivery Charges:</span><span>₹40</span></div><div class="summary-row" style="display:flex; justify-content:space-between;"><span>Welcome Discount:</span><span>-₹20</span></div><hr><div class="summary-row" style="display:flex; justify-content:space-between; font-weight:800;"><span>Total Amount:</span><span id="total">₹20</span></div></div>
+    <div class="address-section"><h3 style="color:#2c5a6e; font-size:18px; margin-bottom:12px;">Delivery Address</h3><div id="addressList"></div><button class="add-address-btn" style="background:#2c5a6e; color:white; border-radius:40px; padding:12px; width:100%; margin-top:12px;" onclick="openAddAddressForm()"><i class="fas fa-plus"></i> Add New Address</button></div>
+    <button class="place-order-btn" id="placeOrderBtn" disabled>Place Order</button>
+</div>
+
+<div id="addAddressScreen" class="screen-container medicine-order-container" style="padding: 24px; display: none;">
+    <button class="back-btn" onclick="closeAddAddressForm()"><i class="fas fa-arrow-left"></i> Back</button><h2 style="margin:15px 0;">Add New Address</h2>
+    <input type="text" id="fullName" placeholder="Full Name" style="width:100%; margin-bottom:14px; padding:14px; border-radius:24px; border:1px solid #cbdbe2;"><input type="tel" id="mobileNumber" placeholder="Mobile Number" style="width:100%; margin-bottom:14px; padding:14px; border-radius:24px;"><input type="text" id="address" placeholder="Address Line" style="width:100%; margin-bottom:14px; padding:14px; border-radius:24px;"><input type="text" id="landmark" placeholder="Landmark" style="width:100%; margin-bottom:14px; padding:14px; border-radius:24px;"><input type="text" id="pincode" placeholder="Pincode" style="width:100%; margin-bottom:14px; padding:14px; border-radius:24px;"><button class="save-btn" onclick="saveAddress()" style="background:#ff8c42; border:none; border-radius:48px; padding:14px; width:100%; font-weight:700; color:white;">Save Address</button>
+</div>
+
+<!-- Second Home Screen -->
+<div id="secondHomeScreen" class="screen-container second-home" style="padding: 24px; display: none;"><button class="back-btn" onclick="closeSecondHome()"><i class="fas fa-arrow-left"></i> Back</button><h2 style="margin:15px 0;">Additional Services</h2><div class="second-home-features" id="secondHomeFeatures"></div></div>
+
+<!-- Organ Help -->
+<div id="organHelpScreen" class="screen-container organ-selection" style="padding: 24px; display: none;"><button class="back-btn" onclick="closeOrganHelp()">Back</button><h2 style="margin:15px 0;">Organ Donation Support</h2><button class="organ-btn" style="background:#c44536;" onclick="alert('Connecting to blood donation network...')"><i class="fas fa-tint"></i> Blood Donation</button><button class="organ-btn" style="background:#3a6ea5;" onclick="alert('Liver transplant assistance...')"><i class="fas fa-liver"></i> Liver Donation</button><button class="organ-btn" style="background:#6b4c9b;" onclick="alert('Kidney transplant registry...')"><i class="fas fa-kidneys"></i> Kidney Donation</button></div>
+
+<!-- Modals -->
+<div id="doctorChatModal" class="modal"><div class="modal-content"><span class="close-btn" onclick="closeModal('doctorChatModal')">&times;</span><h3>Doctor Consultation</h3><div id="doctorChatMessages" style="height:220px; overflow-y:auto; background:#f9fbfd; padding:12px; border-radius:20px; margin:12px 0;"><div class="bot-message" style="margin:5px;">Hello! I'm Dr. Assistant. How can I help you?</div></div><div style="display:flex; gap:8px;"><input type="text" id="doctorQuery" style="flex:1; padding:12px; border-radius:40px; border:1px solid #cbdbe2;" placeholder="Describe your health concern..."><button onclick="askDoctor()" style="background:#ff8c42; border:none; border-radius:40px; padding:0 24px; color:white;">Send</button></div></div></div>
+<div id="remindersModal" class="modal"><div class="modal-content"><span class="close-btn" onclick="closeModal('remindersModal')">&times;</span><h3>Medicine Reminders</h3><div id="remindersList" style="margin:16px 0;"></div><div style="display:flex; gap:8px; flex-wrap:wrap;"><input type="text" id="reminderMedicine" placeholder="Medicine name" style="flex:1; padding:10px; border-radius:40px;"><input type="time" id="reminderTime" style="padding:10px; border-radius:40px;"><button onclick="addReminder()" style="background:#ff8c42; border:none; border-radius:40px; padding:10px 20px;">Set</button></div></div></div>
+<div id="loansModal" class="modal"><div class="modal-content"><span class="close-btn" onclick="closeModal('loansModal')">&times;</span><h3>Medical Loan Assistance</h3><p>Up to ₹5,00,000 | Interest from 10.99%</p><input type="number" id="loanAmount" placeholder="Loan Amount" style="padding:10px; width:100%; margin:10px 0; border-radius:40px;"><select id="loanTenure" style="padding:10px; border-radius:40px;"><option>12 Months</option><option>24 Months</option><option>36 Months</option></select><button onclick="calculateEMI()" style="background:#ff8c42; border-radius:40px; padding:12px; width:100%; margin-top:12px;">Calculate EMI</button><p id="emiResult" style="margin-top:12px;"></p></div></div>
+<div id="qrScannerModal" class="modal"><div class="modal-content"><span class="close-btn" onclick="closeModal('qrScannerModal')">&times;</span><h3>Verify Medicine QR Code</h3><div id="qr-reader" style="width:100%;"></div><div id="qrResult" style="margin-top:15px;"></div></div></div>
+<div id="prescriptionScannerModal" class="modal"><div class="modal-content"><span class="close-btn" onclick="closeModal('prescriptionScannerModal')">&times;</span><h3>Upload Prescription</h3><div id="prescriptionScanner" style="width:100%;"></div><div id="prescriptionResult"></div><button onclick="simulatePrescriptionScan()" style="background:#ff8c42; border-radius:40px; padding:10px; margin-top:12px;">Simulate Scan</button></div></div>
+<div id="studyModal" class="modal"><div class="modal-content"><span class="close-btn" onclick="closeModal('studyModal')">&times;</span><h3>Medical Study Resources</h3><ul style="margin-left:20px;"><li>Pharmacology Reference</li><li>Drug Interaction Database</li><li>Clinical Guidelines</li></ul></div></div>
+<div id="fitnessModal" class="modal"><div class="modal-content"><span class="close-btn" onclick="closeModal('fitnessModal')">&times;</span><h3>Daily Health Tips</h3><ul><li>30 minutes walking daily</li><li>Stay hydrated</li><li>Balanced nutrition</li></ul></div></div>
+<div id="ayurvedicModal" class="modal"><div class="modal-content"><span class="close-btn" onclick="closeModal('ayurvedicModal')">&times;</span><h3>Ayurvedic Remedies</h3><ul><li>Ashwagandha - Stress relief</li><li>Turmeric - Anti-inflammatory</li></ul></div></div>
+<div id="labTestsModal" class="modal"><div class="modal-content"><span class="close-btn" onclick="closeModal('labTestsModal')">&times;</span><h3>Book Lab Tests</h3><div><label><input type="checkbox" id="test1"> Complete Blood Count - ₹299</label></div><div><label><input type="checkbox" id="test2"> Lipid Profile - ₹399</label></div><div><label><input type="checkbox" id="test3"> Thyroid Panel - ₹499</label></div><button onclick="bookTests()" style="background:#ff8c42; border-radius:40px; padding:12px; width:100%; margin-top:12px;">Book Selected Tests</button></div></div>
+<div id="trackingModal" class="modal"><div class="modal-content"><span class="close-btn" onclick="closeModal('trackingModal')">&times;</span><h3>Track Delivery</h3><input type="text" id="trackOrderId" placeholder="Order ID" style="padding:12px; border-radius:40px; width:100%; margin:10px 0;"><button onclick="trackOrder()" style="background:#ff8c42; border-radius:40px; padding:12px;">Track Order</button><div id="trackingResult" class="subtext" style="margin-top:12px;"></div></div></div>
 
 <script>
-  // ======================= PRODUCT DATABASE =======================
-  const products = [
-    { id: 1, name: "iPhone 15 Pro", category: "mobiles", price: 74999, oldPrice: 89999, discount: "16%", rating: 4.8, img: "📱", affiliate: "https://affiliate.example.com/iphone15pro", platform: "Amazon", brand: "Apple" },
-    { id: 2, name: "Samsung Galaxy S24", category: "mobiles", price: 64999, oldPrice: 79999, discount: "19%", rating: 4.7, img: "📱", affiliate: "https://affiliate.example.com/samsungs24", platform: "Flipkart", brand: "Samsung" },
-    { id: 3, name: "Noise ColorFit Pro 5", category: "electronics", price: 1999, oldPrice: 4999, discount: "60%", rating: 4.5, img: "⌚", affiliate: "https://affiliate.example.com/noisewatch", platform: "Meesho", brand: "Noise" },
-    { id: 4, name: "boAt Nirvana Earbuds", category: "electronics", price: 2499, oldPrice: 6999, discount: "64%", rating: 4.6, img: "🎧", affiliate: "https://affiliate.example.com/boatnirvana", platform: "Amazon", brand: "boAt" },
-    { id: 5, name: "Men's Cotton Shirt", category: "fashion", price: 499, oldPrice: 1499, discount: "67%", rating: 4.3, img: "👕", affiliate: "https://affiliate.example.com/shirt", platform: "Meesho", brand: "Roadster" },
-    { id: 6, name: "Women's Kurta Set", category: "fashion", price: 799, oldPrice: 2499, discount: "68%", rating: 4.4, img: "👗", affiliate: "https://affiliate.example.com/kurta", platform: "Flipkart", brand: "Biba" },
-    { id: 7, name: "Non-Stick Cookware Set", category: "home", price: 1299, oldPrice: 3999, discount: "67%", rating: 4.5, img: "🍳", affiliate: "https://affiliate.example.com/cookware", platform: "Amazon", brand: "Prestige" },
-    { id: 8, name: "LED Bulb Pack of 4", category: "home", price: 299, oldPrice: 999, discount: "70%", rating: 4.2, img: "💡", affiliate: "https://affiliate.example.com/bulb", platform: "Meesho", brand: "Philips" },
-    { id: 9, name: "Gaming Laptop RTX 4060", category: "electronics", price: 84999, oldPrice: 119999, discount: "29%", rating: 4.9, img: "💻", affiliate: "https://affiliate.example.com/gaminglaptop", platform: "Flipkart", brand: "ASUS" },
-    { id: 10, name: "Smart LED TV 43\" 4K", category: "electronics", price: 23999, oldPrice: 44999, discount: "47%", rating: 4.7, img: "📺", affiliate: "https://affiliate.example.com/smarttv", platform: "Amazon", brand: "Samsung" },
-    { id: 11, name: "Men's Running Shoes", category: "fashion", price: 899, oldPrice: 2999, discount: "70%", rating: 4.5, img: "👟", affiliate: "https://affiliate.example.com/shoes", platform: "Meesho", brand: "Puma" },
-    { id: 12, name: "OnePlus Nord CE 4", category: "mobiles", price: 24999, oldPrice: 31999, discount: "22%", rating: 4.6, img: "📱", affiliate: "https://affiliate.example.com/oneplusnord", platform: "Amazon", brand: "OnePlus" }
-  ];
-
-  let cart = JSON.parse(localStorage.getItem("cart")) || [];
-  let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
-  let recentlyViewed = JSON.parse(localStorage.getItem("recentlyViewed")) || [];
-  let activeCategory = "all", searchQuery = "", priceRange = "all", minRating = 0, sortBy = "default", currentPage = 0, selectedBrand = "all";
-  const itemsPerPage = 6;
-  let loggedInUser = localStorage.getItem("dealsUser") || null;
-
-  function showToast(msg) { const container = document.getElementById("toast-container"); const toast = document.createElement("div"); toast.className = "toast"; toast.innerHTML = `<i class="fas fa-info-circle"></i> ${msg}`; container.appendChild(toast); setTimeout(() => toast.remove(), 3000); }
-  function updateCartCount() { const cartIcon = document.getElementById("cartIcon"); let countSpan = cartIcon.querySelector(".cart-count"); if (cart.length) { if (!countSpan) { countSpan = document.createElement("span"); countSpan.className = "cart-count"; cartIcon.appendChild(countSpan); } countSpan.innerText = cart.length; } else if (countSpan) countSpan.remove(); localStorage.setItem("cart", JSON.stringify(cart)); }
-  function addToCart(product) { if (!cart.find(i => i.id === product.id)) { cart.push(product); showToast(`${product.name} added to cart!`); updateCartCount(); } else showToast(`${product.name} already in cart`); }
-  function removeFromCart(id) { cart = cart.filter(i => i.id !== id); updateCartCount(); renderCartModal(); showToast("Item removed from cart"); }
-  function toggleWishlist(product) { if (wishlist.find(i => i.id === product.id)) { wishlist = wishlist.filter(i => i.id !== product.id); showToast(`${product.name} removed from wishlist`); } else { wishlist.push(product); showToast(`${product.name} added to wishlist`); } localStorage.setItem("wishlist", JSON.stringify(wishlist)); renderProducts(); }
-  function addRecentlyViewed(product) { recentlyViewed = recentlyViewed.filter(i => i.id !== product.id); recentlyViewed.unshift(product); if (recentlyViewed.length > 5) recentlyViewed.pop(); localStorage.setItem("recentlyViewed", JSON.stringify(recentlyViewed)); renderRecentlyViewed(); }
-  function renderRecentlyViewed() { const section = document.getElementById("recentSection"); const carousel = document.getElementById("recentCarousel"); if (recentlyViewed.length === 0) { section.style.display = "none"; return; } section.style.display = "block"; carousel.innerHTML = recentlyViewed.map(p => `<div class="recent-card" onclick="quickView(${p.id})"><div style="font-size:2rem;">${p.img}</div><div style="font-weight:600;">${p.name}</div><div>₹${p.price}</div></div>`).join(""); }
-  function filterAndSort() { 
-    let filtered = products.filter(p => { 
-      if (activeCategory !== "all" && p.category !== activeCategory) return false; 
-      if (searchQuery && !p.name.toLowerCase().includes(searchQuery.toLowerCase())) return false; 
-      if (priceRange !== "all") { 
-        const [min, max] = priceRange.split("-").map(v => v === "20000+" ? Infinity : parseInt(v)); 
-        if (p.price < min || (max && p.price > max)) return false; 
-      } 
-      if (minRating > 0 && p.rating < minRating) return false;
-      if (selectedBrand && selectedBrand !== "all" && p.brand !== selectedBrand) return false;
-      return true; 
-    }); 
-    if (sortBy === "price_asc") filtered.sort((a,b) => a.price - b.price); 
-    if (sortBy === "price_desc") filtered.sort((a,b) => b.price - a.price); 
-    if (sortBy === "rating") filtered.sort((a,b) => b.rating - a.rating); 
-    return filtered; 
-  }
-  function renderProducts() { 
-    const filtered = filterAndSort(); 
-    const end = (currentPage + 1) * itemsPerPage; 
-    const paginated = filtered.slice(0, end); 
-    const grid = document.getElementById("productsGrid"); 
-    if (paginated.length === 0) { 
-      grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:3rem;">No products found.</div>`; 
-      return; 
-    } 
-    grid.innerHTML = paginated.map((product, idx) => `<div class="product-card" data-id="${product.id}" style="animation-delay: ${idx * 0.05}s">
-      <div class="product-img">
-        <span style="font-size:4rem;">${product.img}</span>
-        <div class="discount-tag">${product.discount} OFF</div>
-        <div class="platform-badge"><i class="fab fa-${product.platform === 'Amazon' ? 'amazon' : product.platform === 'Flipkart' ? 'flipkart' : 'microsoft'}"></i> ${product.platform}</div>
-        <button class="wishlist-btn" data-id="${product.id}"><i class="fa-${wishlist.some(w => w.id === product.id) ? "solid" : "regular"} fa-heart"></i></button>
-      </div>
-      <div class="product-info">
-        <div class="product-title">${product.name}</div>
-        <div class="price">
-          <span class="current-price">₹${product.price.toLocaleString()}</span>
-          <span class="old-price">₹${product.oldPrice.toLocaleString()}</span>
-        </div>
-        <div class="rating">${'★'.repeat(Math.floor(product.rating))}${product.rating % 1 ? '½' : ''} (${product.rating})</div>
-        <div style="display:flex; gap:8px; margin:0.6rem 0; flex-wrap:wrap;">
-          <button onclick="window.shareProduct(${JSON.stringify(product).replace(/"/g, '&quot;')})" style="flex:1; font-size:0.7rem; padding:0.4rem; background:#4caf50; color:white; border:none; border-radius:20px; cursor:pointer;">📤 Share</button>
-          <button onclick="window.addToCompare(${JSON.stringify(product).replace(/"/g, '&quot;')})" style="flex:1; font-size:0.7rem; padding:0.4rem; background:#2196F3; color:white; border:none; border-radius:20px; cursor:pointer;">⚖️ Compare</button>
-        </div>
-        <div style="display:flex; gap:6px; margin:0.5rem 0;">
-          <button class="buy-btn" data-affiliate="${product.affiliate}" data-name="${product.name}" data-id="${product.id}" style="flex:1;"><i class="fas fa-shopping-cart"></i> Buy Now</button>
-          <button onclick="window.setPriceAlert(${product.id}, ${Math.round(product.price * 0.85)})" style="flex:0.5; padding:0.7rem; background:#ff9800; color:white; border:none; border-radius:50px; cursor:pointer; font-weight:600;">⏰</button>
-        </div>
-      </div>
-    </div>`).join(""); 
-    attachProductEvents(); 
-    const loadMoreBtn = document.getElementById("loadMoreBtn"); 
-    if (filtered.length <= end) loadMoreBtn.style.display = "none"; 
-    else loadMoreBtn.style.display = "block"; 
-  }
-  function attachProductEvents() { document.querySelectorAll(".buy-btn").forEach(btn => btn.addEventListener("click", (e) => { e.stopPropagation(); const id = parseInt(btn.dataset.id); const product = products.find(p => p.id === id); addToCart(product); setTimeout(() => window.location.href = btn.dataset.affiliate, 500); })); document.querySelectorAll(".wishlist-btn").forEach(btn => btn.addEventListener("click", (e) => { e.stopPropagation(); const id = parseInt(btn.dataset.id); const product = products.find(p => p.id === id); toggleWishlist(product); })); document.querySelectorAll(".product-card").forEach(card => card.addEventListener("click", (e) => { if (e.target.classList.contains("buy-btn") || e.target.classList.contains("wishlist-btn")) return; const id = parseInt(card.dataset.id); const product = products.find(p => p.id === id); addRecentlyViewed(product); quickView(id); })); }
-  function quickView(id) { 
-    const product = products.find(p => p.id === id); 
-    const modal = document.getElementById("quickViewModal"); 
-    const content = document.getElementById("quickViewContent"); 
-    const reviews = productReviews[id] || [];
-    const avgRating = reviews.length > 0 ? (reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length).toFixed(1) : product.rating;
+    // Full classic pharmacy with responsive CSS (fixed layout)
+    let currentLanguage = 'en';
+    let cart = { paracetamol:0, ibuprofen:0, amoxicillin:0, omeprazole:0 };
+    let addresses = [{ name:"Rajesh Kumar", mobile:"9876543210", address:"Sector 12, Main Road", landmark:"Near City Hospital", pincode:"110001", selected:true }];
+    let currentOTP = null;
+    let symptoms = [];
+    let recognition;
+    let isListening = false;
     
-    content.innerHTML = `
-      <div style="display:flex; gap:1.5rem; flex-wrap:wrap;">
-        <div style="flex:1; text-align:center; font-size:5rem;">${product.img}</div>
-        <div style="flex:2;">
-          <h2>${product.name}</h2>
-          <div class="price">
-            <span class="current-price">₹${product.price}</span> 
-            <span class="old-price">₹${product.oldPrice}</span>
-            <span style="color:#4caf50; font-weight:600; margin-left:8px;">Save ₹${product.oldPrice - product.price}</span>
-          </div>
-          <div class="rating">${'★'.repeat(Math.floor(avgRating))}${avgRating % 1 ? '½' : ''} (${avgRating} avg from ${reviews.length} reviews)</div>
-          <p><strong>📦 Seller:</strong> ${product.platform}</p>
-          <p><strong>🏷️ Brand:</strong> ${product.brand}</p>
-          <p><strong>🚚 Delivery:</strong> Free Shipping | 2-3 days</p>
-          <p><strong>✅ Stock:</strong> <span style="color:#4caf50;">In Stock</span></p>
-          
-          <div style="margin:1rem 0; display:flex; gap:8px;">
-            <button class="buy-btn" data-affiliate="${product.affiliate}" data-id="${product.id}" style="margin-top:0; flex:1;">Buy Now</button>
-            <button onclick="window.addToCompare(${JSON.stringify(product).replace(/"/g, '&quot;')})" style="flex:1; background:#2196F3; border:none; padding:0.7rem; border-radius:50px; color:white; font-weight:700; cursor:pointer;">⚖️ Compare</button>
-            <button onclick="toggleWishlist(${JSON.stringify(product).replace(/"/g, '&quot;')})" style="flex:0.5; background:#ff3b6f; border:none; padding:0.7rem; border-radius:50%; color:white; cursor:pointer; font-size:1.2rem;">❤️</button>
-          </div>
-          
-          <div style="margin-top:1.5rem; background:#f5f5f5; padding:1rem; border-radius:8px;">
-            <h4>Customer Reviews (${reviews.length})</h4>
-            ${reviews.length > 0 ? reviews.slice(0, 3).map(r => `
-              <div style="margin:8px 0; padding:8px; background:white; border-radius:6px;">
-                <div>${'★'.repeat(r.rating)}</div>
-                <small><strong>${r.user}</strong> - ${r.date}</small>
-                <p>${r.comment}</p>
-              </div>
-            `).join("") : '<p style="color:#999;">No reviews yet. Be first to review!</p>'}
-            <input type="text" id="reviewComment" placeholder="Share your review..." style="width:100%; padding:0.5rem; margin-top:0.5rem; border:1px solid #ddd; border-radius:6px;">
-            <button onclick="window.addReview(${id}, 5, document.getElementById('reviewComment').value)" style="width:100%; background:#ff6a35; border:none; padding:0.5rem; border-radius:6px; color:white; margin-top:0.5rem; cursor:pointer;">Post Review</button>
-          </div>
-        </div>
-      </div>
-    `; 
-    modal.style.display = "flex"; 
-    const buyBtn = content.querySelector(".buy-btn"); 
-    if (buyBtn) {
-      buyBtn.addEventListener("click", () => { 
-        addToCart(product); 
-        updateLoyaltyPoints(Math.floor(product.price / 100));
-        setTimeout(() => window.location.href = buyBtn.dataset.affiliate, 500); 
-      }); 
-    }
-  }
-  function renderCartModal() { 
-    const cartDiv = document.getElementById("cartItems");
-    if (cart.length === 0) {
-      cartDiv.innerHTML = "<p>Your cart is empty</p>";
-      return;
-    }
-    const subtotal = cart.reduce((sum, item) => sum + item.price, 0);
-    const discountAmount = appliedCoupon ? subtotal * appliedCoupon.discount : 0;
-    const total = subtotal - discountAmount;
-    const savings = cart.reduce((sum, item) => sum + (item.oldPrice - item.price), 0) + discountAmount;
-    cartDiv.innerHTML = `
-      <div style="margin-bottom:1rem;">
-        ${cart.map(item => `<div style="display:flex; justify-content:space-between; margin-bottom:0.8rem; padding:0.8rem; background:#f5f5f5; border-radius:8px;">
-          <div><strong>${item.name}</strong><br><small>₹${item.price}</small></div>
-          <button onclick="removeFromCart(${item.id})" style="background:#ff6a35; color:white; border:none; padding:0.4rem 0.8rem; border-radius:6px; cursor:pointer;">Remove</button>
-        </div>`).join("")}
-      </div>
-      <div style="border-top:2px solid #ddd; padding:1rem 0;">
-        <div style="display:flex; justify-content:space-between; margin:8px 0;"><span>Subtotal:</span><strong>₹${subtotal}</strong></div>
-        <div style="display:flex; justify-content:space-between; margin:8px 0; color:#4caf50;"><span>Savings:</span><strong>-₹${Math.round(savings)}</strong></div>
-        ${appliedCoupon ? `<div style="display:flex; justify-content:space-between; margin:8px 0; color:#ff6a35;"><span>${appliedCoupon.code} (${(appliedCoupon.discount*100)}%):</span><strong>-₹${Math.round(discountAmount)}</strong></div>` : ''}
-        <input type="text" id="couponInput" placeholder="Enter coupon code" style="width:100%; padding:0.5rem; margin:0.5rem 0; border:1px solid #ddd; border-radius:6px;">
-        <button onclick="window.applyCoupon(document.getElementById('couponInput').value)" style="width:100%; background:#4caf50; color:white; border:none; padding:0.6rem; border-radius:6px; cursor:pointer; margin-bottom:0.5rem;">Apply Coupon</button>
-        <div style="display:flex; justify-content:space-between; margin:12px 0; font-size:1.2rem; font-weight:bold;"><span>Total:</span><span style="color:#ff6a35;">₹${Math.round(total)}</span></div>
-      </div>
-    `;
-  }
-  
-  // PANDA ANIMATIONS (login modal)
-  function initPandaEyesAndHands() { const usernameField = document.getElementById("loginUsername"); const passwordField = document.getElementById("loginPassword"); const eyeL = document.querySelector("#pandaInner .eyeball-l"); const eyeR = document.querySelector("#pandaInner .eyeball-r"); const handL = document.querySelector("#pandaInner .hand-l"); const handR = document.querySelector("#pandaInner .hand-r"); if (!usernameField || !passwordField) return; const resetEyes = () => { if(eyeL) eyeL.style.cssText = `left:0.6em; top:0.6em;`; if(eyeR) eyeR.style.cssText = `right:0.6em; top:0.6em;`; }; const resetHands = () => { if(handL) handL.style.cssText = `height:2.81em; top:8.4em; left:7.5em; transform:rotate(0deg)`; if(handR) handR.style.cssText = `height:2.81em; top:8.4em; right:7.5em; transform:rotate(0deg)`; }; usernameField.addEventListener("focus", () => { if(eyeL && eyeR) { eyeL.style.cssText = `left:0.75em; top:1.12em;`; eyeR.style.cssText = `right:0.75em; top:1.12em;`; } resetHands(); }); passwordField.addEventListener("focus", () => { if(handL && handR) { handL.style.cssText = `height:6.56em; top:3.87em; left:11.75em; transform:rotate(-155deg);`; handR.style.cssText = `height:6.56em; top:3.87em; right:11.75em; transform:rotate(155deg);`; } }); document.addEventListener("click", (e) => { if (e.target !== usernameField && e.target !== passwordField && document.getElementById("loginModal").style.display === "flex") { resetEyes(); resetHands(); } }); }
-  
-  // LOGIN LOGIC
-  function updateAuthUI() { const container = document.getElementById("userActionArea"); if (loggedInUser) { container.innerHTML = `<div class="user-greeting" id="logoutBtn"><i class="fas fa-user-check"></i> Hello, ${loggedInUser} <i class="fas fa-sign-out-alt"></i></div>`; document.getElementById("logoutBtn")?.addEventListener("click", () => { localStorage.removeItem("dealsUser"); loggedInUser = null; updateAuthUI(); showToast("Logged out. Please login again."); document.getElementById("loginModal").style.display = "flex"; }); } else { container.innerHTML = `<div class="user-greeting" id="showLoginBtn"><i class="fas fa-panda"></i> Login / Signup</div>`; document.getElementById("showLoginBtn")?.addEventListener("click", () => { document.getElementById("loginModal").style.display = "flex"; }); } }
-  function handleLogin(username, password) { if (username.trim() !== "" && password.trim() !== "") { loggedInUser = username; localStorage.setItem("dealsUser", username); updateAuthUI(); showToast(`🎉 Welcome ${username}, happy shopping!`); document.getElementById("loginModal").style.display = "none"; renderProducts(); return true; } else { showToast("🐼 Please enter username & password"); return false; } }
-  
-  // EVENT LISTENERS
-  document.getElementById("loadMoreBtn")?.addEventListener("click", () => { currentPage++; renderProducts(); });
-  document.getElementById("sortSelect")?.addEventListener("change", (e) => { sortBy = e.target.value; currentPage = 0; renderProducts(); });
-  document.getElementById("priceFilter")?.addEventListener("change", (e) => { priceRange = e.target.value; currentPage = 0; renderProducts(); });
-  document.getElementById("ratingFilter")?.addEventListener("change", (e) => { minRating = parseFloat(e.target.value); currentPage = 0; renderProducts(); });
-  document.getElementById("brandFilter")?.addEventListener("change", (e) => { selectedBrand = e.target.value; currentPage = 0; renderProducts(); });
-  document.getElementById("searchBtn")?.addEventListener("click", () => { searchQuery = document.getElementById("searchInput").value; currentPage = 0; renderProducts(); });
-  document.getElementById("searchInput")?.addEventListener("keyup", (e) => { if (e.key === "Enter") { searchQuery = e.target.value; currentPage = 0; renderProducts(); } });
-  document.querySelectorAll(".cat-btn").forEach(btn => btn.addEventListener("click", () => { document.querySelectorAll(".cat-btn").forEach(b => b.classList.remove("active")); btn.classList.add("active"); activeCategory = btn.dataset.cat; currentPage = 0; renderProducts(); }));
-  document.getElementById("cartIcon")?.addEventListener("click", () => { renderCartModal(); document.getElementById("cartModal").style.display = "flex"; });
-  document.getElementById("clearCartBtn")?.addEventListener("click", () => { cart = []; updateCartCount(); renderCartModal(); showToast("Cart cleared"); });
-  document.querySelectorAll(".close-modal").forEach(btn => btn.addEventListener("click", function() { this.closest(".modal").style.display = "none"; }));
-  const themeToggle = document.getElementById("themeToggle"); themeToggle?.addEventListener("click", () => { document.body.classList.toggle("dark"); themeToggle.innerHTML = document.body.classList.contains("dark") ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>'; });
-  document.getElementById("pandaLoginBtn")?.addEventListener("click", (e) => { e.preventDefault(); const un = document.getElementById("loginUsername").value; const pw = document.getElementById("loginPassword").value; handleLogin(un, pw); });
-  document.getElementById("closeLoginModal")?.addEventListener("click", () => { if (!loggedInUser) showToast("Please login to access all deals!"); else document.getElementById("loginModal").style.display = "none"; });
-  
-  // Timer countdown
-  let endTime = new Date(); endTime.setHours(endTime.getHours() + 2);
-  function updateTimer() { const now = new Date().getTime(); const distance = endTime - now; if (distance <= 0) { document.getElementById("countdownTimer").innerHTML = "00:00:00"; return; } const hours = Math.floor(distance / 3600000); const minutes = Math.floor((distance % 3600000) / 60000); const seconds = Math.floor((distance % 60000) / 1000); document.getElementById("countdownTimer").innerHTML = `${hours.toString().padStart(2,'0')}:${minutes.toString().padStart(2,'0')}:${seconds.toString().padStart(2,'0')}`; }
-  setInterval(updateTimer, 1000); updateTimer();
-  
-  // ============ ADVANCED FEATURES ============
-  // 1. PRODUCT COMPARISON
-  let compareList = JSON.parse(localStorage.getItem("compareList")) || [];
-  function addToCompare(product) {
-    if (compareList.find(p => p.id === product.id)) {
-      compareList = compareList.filter(p => p.id !== product.id);
-      showToast(`${product.name} removed from comparison`);
-    } else {
-      compareList.push(product);
-      showToast(`${product.name} added to comparison (${compareList.length} items)`);
-    }
-    localStorage.setItem("compareList", JSON.stringify(compareList));
-  }
-
-  // 2. ADVANCED SEARCH with autocomplete
-  function setupAdvancedSearch() {
-    const searchInput = document.getElementById("searchInput");
-    if (!searchInput) return;
-    searchInput.addEventListener("input", function() {
-      let suggestions = products.filter(p => p.name.toLowerCase().includes(this.value.toLowerCase())).slice(0, 5);
-      let suggestionList = document.getElementById("searchSuggestions");
-      if (!suggestionList) {
-        suggestionList = document.createElement("div");
-        suggestionList.id = "searchSuggestions";
-        suggestionList.style.cssText = `position:absolute; background:white; border:1px solid #ddd; border-radius:8px; max-height:200px; overflow-y:auto; width:100%; z-index:100;`;
-        searchInput.parentElement.style.position = "relative";
-        searchInput.parentElement.appendChild(suggestionList);
-      }
-      if (this.value.trim() === "") {
-        suggestionList.innerHTML = "";
-        return;
-      }
-      suggestionList.innerHTML = suggestions.map(p => `<div style="padding:8px 12px; cursor:pointer; border-bottom:1px solid #f0f0f0;" onclick="document.getElementById('searchInput').value='${p.name}'; document.getElementById('searchBtn').click(); document.getElementById('searchSuggestions').innerHTML='';">${p.name} <span style="color:#ff6a35;font-weight:600;">₹${p.price}</span></div>`).join("");
-    });
-  }
-
-  // 3. SOCIAL SHARING
-  function shareProduct(product) {
-    const shareText = `Check out ${product.name} at only ₹${product.price}! Get ${product.discount} off on DealsBazaar! 🔥`;
-    const encodedText = encodeURIComponent(shareText);
-    const links = {
-      whatsapp: `https://api.whatsapp.com/send?text=${encodedText}`,
-      telegram: `https://t.me/share/url?url=dealsbazaar.com&text=${encodedText}`,
-      twitter: `https://twitter.com/intent/tweet?text=${encodedText}`
-    };
-    showToast("Share options: WhatsApp | Telegram | Twitter (Copy link ready!)");
-  }
-
-  // 4. PRODUCT REVIEWS & RATINGS
-  let productReviews = JSON.parse(localStorage.getItem("productReviews")) || {};
-  function addReview(productId, rating, comment) {
-    if (!productReviews[productId]) productReviews[productId] = [];
-    productReviews[productId].push({ rating, comment, date: new Date().toLocaleDateString(), user: loggedInUser || "Guest" });
-    localStorage.setItem("productReviews", JSON.stringify(productReviews));
-    showToast("✅ Review added successfully!");
-  }
-
-  // 5. ADVANCED ANALYTICS & TRACKING
-  let userAnalytics = {
-    sessionStart: new Date(),
-    productsViewed: [],
-    actionsLog: [],
-    timeSpent: 0
-  };
-  function trackAction(action, productId = null) {
-    userAnalytics.actionsLog.push({ action, productId, timestamp: new Date() });
-    if (productId && !userAnalytics.productsViewed.includes(productId)) {
-      userAnalytics.productsViewed.push(productId);
-    }
-  }
-
-  // 6. DYNAMIC PRICING ALERTS
-  let priceAlerts = JSON.parse(localStorage.getItem("priceAlerts")) || {};
-  function setPriceAlert(productId, targetPrice) {
-    priceAlerts[productId] = targetPrice;
-    localStorage.setItem("priceAlerts", JSON.stringify(priceAlerts));
-    showToast(`⏰ Price alert set! You'll be notified when ${products.find(p => p.id === productId).name} drops below ₹${targetPrice}`);
-  }
-
-  // 7. KEYBOARD SHORTCUTS
-  document.addEventListener("keydown", (e) => {
-    if (e.ctrlKey || e.metaKey) {
-      if (e.key === '/') { document.getElementById("searchInput")?.focus(); e.preventDefault(); }
-      if (e.key === 'k') { document.getElementById("searchInput")?.focus(); e.preventDefault(); }
-    }
-    if (e.key === 'Escape') { document.getElementById("loginModal").style.display = "none"; }
-  });
-
-  // 8. LOYALTY POINTS SYSTEM
-  let loyaltyPoints = localStorage.getItem("loyaltyPoints") || 0;
-  function updateLoyaltyPoints(amount) {
-    loyaltyPoints = parseInt(loyaltyPoints) + amount;
-    localStorage.setItem("loyaltyPoints", loyaltyPoints);
-    showToast(`⭐ +${amount} loyalty points! Total: ${loyaltyPoints}`);
-  }
-
-  // 9. ENHANCED CART with coupon support
-  let appliedCoupon = null;
-  function applyCoupon(code) {
-    const coupons = {
-      "SAVE10": 0.10,
-      "SAVE20": 0.20,
-      "DEALS50": 0.50
-    };
-    if (coupons[code]) {
-      appliedCoupon = { code, discount: coupons[code] };
-      showToast(`🎉 Coupon ${code} applied! ${(coupons[code] * 100)}% discount`);
-      renderCartModal();
-    } else {
-      showToast("❌ Invalid coupon code");
-    }
-  }
-
-  // 10. NOTIFICATION PREFERENCES
-  let notificationPrefs = JSON.parse(localStorage.getItem("notificationPrefs")) || {
-    stockAlerts: true,
-    priceDrops: true,
-    newArrivals: true,
-    recommendations: false
-  };
-
-  window.quickView = quickView; window.removeFromCart = removeFromCart;
-  window.addToCompare = addToCompare; window.shareProduct = shareProduct;
-  window.addReview = addReview; window.setPriceAlert = setPriceAlert;
-  window.applyCoupon = applyCoupon; window.trackAction = trackAction;
-  
-  updateAuthUI(); renderProducts(); updateCartCount(); renderRecentlyViewed(); setupAdvancedSearch();
-  if (!loggedInUser) { document.getElementById("loginModal").style.display = "flex"; }
-  initPandaEyesAndHands();
-  showToast("💡 Pro Tip: Press Ctrl+/ to search instantly!");
+    const translations = { en: { appTitle:"CLASSIC PHARMACY", appSubtitle:"Your neighborhood pharmacy", aiTitle:"Medicine Assistant", aiMessage:"Hello! Ask me about any medicine.", aiPlaceholder:"e.g., Paracetamol uses...", diseaseTitle:"Symptom Checker", diseaseMessage:"Describe your symptoms..." }, hi: { appTitle:"क्लासिक फार्मेसी", appSubtitle:"आपकी निकटवर्ती फार्मेसी", aiTitle:"दवा सहायक", aiMessage:"नमस्ते! कोई भी दवा के बारे में पूछें।", aiPlaceholder:"जैसे, पैरासिटामोल उपयोग...", diseaseTitle:"लक्षण जांच", diseaseMessage:"अपने लक्षण बताएं..." }, ta: { appTitle:"கிளாசிக் மருந்தகம்", appSubtitle:"உங்கள் அக்கம் பக்க மருந்தகம்", aiTitle:"மருந்து உதவியாளர்", aiMessage:"வணக்கம்! மருந்து பற்றி கேளுங்கள்.", aiPlaceholder:"எ.கா: பாராசிட்டமால் பயன்கள்", diseaseTitle:"அறிகுறி சரிபார்ப்பு", diseaseMessage:"உங்கள் அறிகுறிகளை விவரிக்கவும்" }, bn: { appTitle:"ক্লাসিক ফার্মেসি", appSubtitle:"আপনার প্রতিবেশী ফার্মেসি", aiTitle:"ঔষধ সহায়ক", aiMessage:"হ্যালো! যেকোনো ওষুধ সম্পর্কে জিজ্ঞাসা করুন।", aiPlaceholder:"যেমন: প্যারাসিটামল ব্যবহার", diseaseTitle:"লক্ষণ পরীক্ষক", diseaseMessage:"আপনার লক্ষণগুলি বর্ণনা করুন" } };
+    
+    const medicineKnowledge = { paracetamol:{ en:{ uses:"Used for fever and mild to moderate pain.", sideEffects:"Nausea, rash (rare).", precautions:"Do not exceed 4g per day." }, hi:{ uses:"बुखार और हल्के दर्द के लिए।", sideEffects:"मतली, दाने।", precautions:"दिन में 4 ग्राम से अधिक न लें।" } }, ibuprofen:{ en:{ uses:"Pain, inflammation, fever.", sideEffects:"Stomach upset, heartburn.", precautions:"Take with food." }, hi:{ uses:"दर्द, सूजन, बुखार।", sideEffects:"पेट खराब।", precautions:"भोजन के साथ लें।" } } };
+    const diseaseData = { fever:["Common Cold","Viral Fever","Flu"], headache:["Tension Headache","Migraine"], cough:["Bronchitis","Cough & Cold"], fatigue:["Anemia","Stress","Sleep Deficiency"] };
+    
+    function updateLanguage(lang) { currentLanguage = lang; let t = translations[lang]||translations.en; document.getElementById('appTitle').innerText = t.appTitle; document.getElementById('appSubtitle').innerText = t.appSubtitle; document.getElementById('aiTitle').innerText = t.aiTitle; document.getElementById('aiChatContainer').innerHTML = `<div class="ai-message bot-message">${t.aiMessage}</div>`; document.getElementById('aiQuery').placeholder = t.aiPlaceholder; document.getElementById('diseaseTitle').innerText = t.diseaseTitle; document.getElementById('diseaseMessage').innerText = t.diseaseMessage; }
+    function selectLanguage(lang) { updateLanguage(lang); localStorage.setItem('lang', lang); document.getElementById('languageScreen').style.display = 'none'; document.getElementById('appScreen').style.display = 'block'; updateCartIndicator(); }
+    let registeredUsers = JSON.parse(localStorage.getItem('users')) || {};
+    function loginOrRegister() { let email = document.getElementById('loginEmail').value.trim(); let pwd = document.getElementById('loginPassword').value; if(!email || !pwd || pwd.length<6) { alert("Please enter valid email and password (min 6 characters)"); return; } if(!registeredUsers[email]) registeredUsers[email] = { password:pwd }; else if(registeredUsers[email].password !== pwd) { alert("Incorrect password"); return; } localStorage.setItem('users', JSON.stringify(registeredUsers)); currentOTP = Math.floor(100000 + Math.random() * 900000).toString(); alert(`Demo OTP: ${currentOTP}`); document.getElementById('loginScreen').style.display = 'none'; document.getElementById('otpScreen').style.display = 'block'; }
+    function validateOTP() { let entered = document.getElementById('otp').value; if(entered === currentOTP || entered === "123456") { document.getElementById('otpScreen').style.display = 'none'; document.getElementById('languageScreen').style.display = 'block'; } else alert("Invalid OTP"); }
+    function resendOTP() { currentOTP = Math.floor(100000 + Math.random() * 900000).toString(); alert(`New OTP: ${currentOTP}`); }
+    function updateQuantity(med, delta) { if(cart[med]+delta>=0) { cart[med]+=delta; if(document.getElementById(`${med}-qty`)) document.getElementById(`${med}-qty`).innerText = cart[med]; updateCartSummary(); updateCartIndicator(); } }
+    function updateCartSummary() { let subtotal = Object.keys(cart).reduce((s,k)=>s+cart[k]*(k==='paracetamol'?25:k==='ibuprofen'?35:k==='amoxicillin'?120:85),0); let total = subtotal+40-20; if(document.getElementById('subtotal')) document.getElementById('subtotal').innerText = `₹${subtotal}`; if(document.getElementById('total')) document.getElementById('total').innerText = `₹${total}`; let items = Object.values(cart).reduce((a,b)=>a+b,0); let btn = document.getElementById('placeOrderBtn'); if(btn) btn.disabled = items===0 || !addresses.some(a=>a.selected); }
+    function updateCartIndicator() { let totalItems = Object.values(cart).reduce((a,b)=>a+b,0); let ind = document.getElementById('cartIndicator'); if(ind) { if(totalItems>0) { ind.style.display = 'flex'; ind.innerText = totalItems; } else ind.style.display = 'none'; } }
+    function loadAddresses() { let container = document.getElementById('addressList'); if(container) container.innerHTML = ''; addresses.forEach((addr,i)=>{ let div = document.createElement('div'); div.className = `address-item ${addr.selected?'selected':''}`; div.innerHTML = `<div><strong>${addr.name}</strong><br>${addr.address}, ${addr.landmark}, ${addr.pincode}<br>📞 ${addr.mobile}</div><div style="margin-top:8px;"><button class="address-btn" style="background:#ff8c42; border:none; padding:6px 14px; border-radius:30px; color:white;" onclick="selectAddress(${i})">Select</button> <button style="background:#eef2f5; border:none; padding:6px 14px; border-radius:30px;" onclick="deleteAddress(${i})">Delete</button></div>`; container.appendChild(div); }); }
+    function selectAddress(idx) { addresses.forEach((a,i)=>a.selected = (i===idx)); loadAddresses(); updateCartSummary(); }
+    function deleteAddress(idx) { if(addresses.length>1) { addresses.splice(idx,1); addresses[0].selected=true; loadAddresses(); updateCartSummary(); } else alert("At least one address required"); }
+    function saveAddress() { let name=document.getElementById('fullName').value, mob=document.getElementById('mobileNumber').value, addr=document.getElementById('address').value, land=document.getElementById('landmark').value, pin=document.getElementById('pincode').value; if(name && mob && addr && pin) { addresses.forEach(a=>a.selected=false); addresses.push({name,mobile:mob,address:addr,landmark:land,pincode:pin,selected:true}); closeAddAddressForm(); loadAddresses(); updateCartSummary(); } else alert("Please fill all fields"); }
+    function placeOrder() { let totalItems = Object.values(cart).reduce((a,b)=>a+b,0); if(totalItems===0) alert("Add medicines to cart"); else { alert("Order placed successfully! Delivery within 2-3 hours."); for(let m in cart) cart[m]=0; updateCartSummary(); closeMedicineOrdering(); } }
+    function openMedicineOrdering() { document.getElementById('appScreen').style.display = 'none'; document.getElementById('medicineOrderScreen').style.display = 'block'; loadAddresses(); updateCartSummary(); }
+    function closeMedicineOrdering() { document.getElementById('medicineOrderScreen').style.display = 'none'; document.getElementById('appScreen').style.display = 'block'; }
+    function openAddAddressForm() { document.getElementById('medicineOrderScreen').style.display = 'none'; document.getElementById('addAddressScreen').style.display = 'block'; }
+    function closeAddAddressForm() { document.getElementById('addAddressScreen').style.display = 'none'; document.getElementById('medicineOrderScreen').style.display = 'block'; }
+    function openDoctorChat() { document.getElementById('doctorChatModal').style.display = 'flex'; }
+    function askDoctor() { let q = document.getElementById('doctorQuery').value; if(!q) return; let chatDiv = document.getElementById('doctorChatMessages'); chatDiv.innerHTML += `<div class="user-message" style="margin:5px; text-align:right; background:#ff8c42; color:white; padding:8px 14px; border-radius:20px;">${q}</div>`; document.getElementById('doctorQuery').value = ''; setTimeout(()=>{ let resp = q.includes("fever")?"Take paracetamol and rest. Drink plenty of fluids.":q.includes("cold")?"Warm water with honey, take rest.":"Please consult a doctor for proper diagnosis."; chatDiv.innerHTML += `<div class="bot-message" style="margin:5px; background:#eef2f5; padding:8px 14px; border-radius:20px;">${resp}</div>`; chatDiv.scrollTop = chatDiv.scrollHeight; }, 500); }
+    let reminders = JSON.parse(localStorage.getItem('reminders')) || [];
+    function openReminders() { displayReminders(); document.getElementById('remindersModal').style.display = 'flex'; }
+    function displayReminders() { let container = document.getElementById('remindersList'); container.innerHTML = reminders.map((r,i)=>`<div style="background:#f9fbfd; padding:10px; margin:6px 0; border-radius:40px;">${r.medicine} at ${r.time} <button onclick="deleteReminder(${i})" style="float:right; background:#e2e8f0; border:none; border-radius:40px; padding:2px 12px;">Delete</button></div>`).join(''); }
+    function addReminder() { let med = document.getElementById('reminderMedicine').value, time = document.getElementById('reminderTime').value; if(med && time) { reminders.push({medicine:med,time}); localStorage.setItem('reminders',JSON.stringify(reminders)); displayReminders(); alert("Reminder added!"); } }
+    function deleteReminder(i) { reminders.splice(i,1); localStorage.setItem('reminders',JSON.stringify(reminders)); displayReminders(); }
+    function openMedicalLoans() { document.getElementById('loansModal').style.display = 'flex'; }
+    function calculateEMI() { let amt = parseFloat(document.getElementById('loanAmount').value); let tenure = parseInt(document.getElementById('loanTenure').value); let emi = amt * 0.01 * Math.pow(1.01, tenure) / (Math.pow(1.01, tenure) - 1); document.getElementById('emiResult').innerText = `EMI: ₹${emi.toFixed(2)}/month`; }
+    function openLabTests() { document.getElementById('labTestsModal').style.display = 'flex'; }
+    function bookTests() { let tests = []; if(document.getElementById('test1')?.checked) tests.push("CBC - ₹299"); if(document.getElementById('test2')?.checked) tests.push("Lipid Profile - ₹399"); if(document.getElementById('test3')?.checked) tests.push("Thyroid - ₹499"); if(tests.length) alert(`Tests booked: ${tests.join(", ")}. Technician will visit.`); else alert("Select at least one test"); }
+    function openDeliveryTracking() { document.getElementById('trackingModal').style.display = 'flex'; }
+    function trackOrder() { let oid = document.getElementById('trackOrderId').value; if(oid) document.getElementById('trackingResult').innerHTML = `<p>✅ Order ${oid} is out for delivery. Expected by 8 PM.</p>`; else alert("Enter Order ID"); }
+    let html5QrCode;
+    function openQRScanner() { document.getElementById('qrScannerModal').style.display = 'flex'; setTimeout(()=>{ if(!html5QrCode) html5QrCode = new Html5Qrcode("qr-reader"); html5QrCode.start({ facingMode: "environment" }, { fps:10, qrbox:250 }, (decoded)=>{ document.getElementById('qrResult').innerHTML = `<p style="color:green;">✓ Medicine: ${decoded}<br>✓ Authentic Product</p>`; html5QrCode.stop(); }, (err)=>{}); }, 500); }
+    function openPrescriptionScanner() { document.getElementById('prescriptionScannerModal').style.display = 'flex'; }
+    function simulatePrescriptionScan() { document.getElementById('prescriptionResult').innerHTML = `<p>Prescription Detected:</p><ul><li>Paracetamol 500mg - 10 tablets</li><li>Vitamin C 500mg</li></ul><button onclick="processPrescription()" style="background:#ff8c42; border:none; padding:8px 20px; border-radius:40px;">Add to Cart</button>`; }
+    function processPrescription() { alert("Prescription medicines added to cart!"); closeModal('prescriptionScannerModal'); }
+    function openSecondHome() { let features = ["Order History","Health Records","Nearby Hospitals","Medicine Refill","Elderly Care","Pregnancy Care","Dental Care","Mental Health"]; document.getElementById('secondHomeFeatures').innerHTML = features.map(f=>`<div class="second-home-feature" onclick="alert('${f} service coming soon!')"><div class="second-home-icon">📋</div><div>${f}</div></div>`).join(''); document.getElementById('appScreen').style.display = 'none'; document.getElementById('secondHomeScreen').style.display = 'block'; }
+    function closeSecondHome() { document.getElementById('secondHomeScreen').style.display = 'none'; document.getElementById('appScreen').style.display = 'block'; }
+    function openEmergencyOrganHelp() { document.getElementById('appScreen').style.display = 'none'; document.getElementById('organHelpScreen').style.display = 'block'; }
+    function closeOrganHelp() { document.getElementById('organHelpScreen').style.display = 'none'; document.getElementById('appScreen').style.display = 'block'; }
+    function askAboutMedicine() { let q = document.getElementById('aiQuery').value; if(!q) return; let container = document.getElementById('aiChatContainer'); container.innerHTML += `<div class="ai-message user-message">${q}</div>`; document.getElementById('aiQuery').value = ''; setTimeout(()=>{ let lower = q.toLowerCase(); let found = false; for(let med in medicineKnowledge) { if(lower.includes(med)) { let info = medicineKnowledge[med][currentLanguage]||medicineKnowledge[med].en; container.innerHTML += `<div class="ai-message bot-message"><strong>💊 ${med.toUpperCase()}</strong><br>📌 Uses: ${info.uses}<br>⚠️ Side Effects: ${info.sideEffects}<br>✅ Precautions: ${info.precautions}</div>`; found=true; break; } } if(!found) container.innerHTML += `<div class="ai-message bot-message">ℹ️ I can help with medicine information. Try Paracetamol, Ibuprofen.</div>`; container.scrollTop = container.scrollHeight; }, 800); }
+    function handleKeyPress(e) { if(e.key==='Enter') askAboutMedicine(); }
+    function toggleVoiceInput() { if(!('webkitSpeechRecognition' in window)) alert("Speech not supported"); else { if(!isListening) { recognition = new webkitSpeechRecognition(); recognition.lang = currentLanguage==='hi'?'hi-IN':'en-US'; recognition.continuous=true; recognition.interimResults=true; recognition.onresult = (e)=> document.getElementById('diseaseMessage').innerText = Array.from(e.results).map(r=>r[0].transcript).join(''); recognition.start(); document.getElementById('voiceInputBtn').innerHTML = '<i class="fas fa-stop"></i> Stop'; isListening=true; } else { recognition.stop(); document.getElementById('voiceInputBtn').innerHTML = '<i class="fas fa-microphone"></i> Speak Symptoms'; isListening=false; let text = document.getElementById('diseaseMessage').innerText; if(text && !text.includes("Describe") && text.length>5) { symptoms.push(text); updateSymptomsList(); document.getElementById('predictBtn').disabled = false; } } } }
+    function updateSymptomsList() { let listDiv = document.getElementById('symptomsList'); listDiv.innerHTML = symptoms.map((s,i)=>`<div class="symptom-item"><span>📌 ${s}</span><span class="remove-symptom" onclick="removeSymptom(${i})" style="color:#ff8c42; cursor:pointer;">✖</span></div>`).join(''); }
+    function removeSymptom(i) { symptoms.splice(i,1); updateSymptomsList(); if(symptoms.length===0) document.getElementById('predictBtn').disabled = true; else document.getElementById('predictBtn').disabled = false; }
+    function predictDisease() { let predictions = []; symptoms.forEach(s=>{ let low=s.toLowerCase(); for(let key in diseaseData) if(low.includes(key)) predictions.push(...diseaseData[key]); }); if(predictions.length===0) predictions=["General Fatigue","Seasonal Flu"]; let unique = [...new Set(predictions)]; let resultDiv = document.getElementById('predictionResult'); resultDiv.style.display='block'; let itemsDiv = document.getElementById('predictionItems'); itemsDiv.innerHTML = unique.map(d=>`<div style="margin:8px 0;"><strong>${d}</strong><div class="accuracy-meter"><div class="accuracy-fill" style="width:${Math.floor(Math.random()*50+50)}%"></div></div></div>`).join(''); }
+    function closeModal(id) { let modal = document.getElementById(id); if(modal) modal.style.display = 'none'; if(id==='qrScannerModal' && html5QrCode) html5QrCode.stop(); }
+    window.onclick = function(e) { if(e.target.classList.contains('modal')) e.target.style.display='none'; };
+    function openStudentStudy() { document.getElementById('studyModal').style.display = 'flex'; }
+    function openFitnessTips() { document.getElementById('fitnessModal').style.display = 'flex'; }
+    function openAyurvedicInfo() { document.getElementById('ayurvedicModal').style.display = 'flex'; }
+    document.getElementById('loginScreen').style.display = 'block'; updateLanguage('en'); loadAddresses();
 </script>
 </body>
 </html>

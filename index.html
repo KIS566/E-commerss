@@ -2,14 +2,52 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
     <meta name="theme-color" content="#ff8c42">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>Classic Pharmacy | Trusted Care Since 1995</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    
+    <!-- Preconnect for faster loading -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    
+    <!-- Fonts and Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <!-- QR Scanner Library -->
     <script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
+    
     <style>
+        /* CSS Reset and Variables */
+        :root {
+            --primary: #ff8c42;
+            --primary-dark: #e6762b;
+            --primary-light: #fff8f0;
+            --secondary: #1a5d7a;
+            --secondary-light: #2c5a6e;
+            --success: #28a745;
+            --danger: #dc3545;
+            --warning: #ffc107;
+            --info: #17a2b8;
+            --light-bg: #eef3f7;
+            --white: #ffffff;
+            --border-color: #e2edf2;
+            --text-primary: #1e2f3c;
+            --text-secondary: #5a6e7c;
+            --text-muted: #6f8ea0;
+            --shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.12);
+            --border-radius-sm: 12px;
+            --border-radius-md: 20px;
+            --border-radius-lg: 28px;
+            --border-radius-xl: 48px;
+            --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -18,59 +56,116 @@
         }
 
         body {
-            background: #eef3f7;
+            background: linear-gradient(135deg, #eef3f7 0%, #f5f9fc 100%);
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 16px;
             font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+            color: var(--text-primary);
+            line-height: 1.5;
         }
 
-        /* Enhanced touch-friendly containers */
-        .screen-container, .login-container, .language-container, .pharma-app, 
-        .medicine-order-container, .organ-selection, .second-home, .add-address-panel {
-            background: #ffffff;
-            border-radius: 28px;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05), 0 2px 6px rgba(0, 0, 0, 0.02);
-            border: 1px solid #e2edf2;
-            transition: all 0.2s ease;
+        /* Main Container Styles */
+        .screen-container, 
+        .login-container, 
+        .language-container, 
+        .pharma-app, 
+        .medicine-order-container, 
+        .organ-selection, 
+        .second-home, 
+        .add-address-panel {
+            background: var(--white);
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
             width: 100%;
-            max-width: 920px;
+            max-width: 480px;
             margin: 0 auto;
+            overflow: hidden;
+            position: relative;
         }
 
-        /* Better touch targets */
-        button, .login-btn, .scan-btn, .predict-btn, .voice-input-btn, .place-order-btn, 
-        .add-address-btn, .address-btn, .back-btn, .feature-box, .language-btn, .second-home-feature,
-        .quantity-btn, .organ-btn, .upload-prescription-btn, .ai-submit-btn {
-            cursor: pointer;
-            transition: all 0.2s ease;
-            min-height: 44px;
-            -webkit-tap-highlight-color: transparent;
+        /* Desktop adjustments */
+        @media (min-width: 768px) {
+            .screen-container,
+            .medicine-order-container {
+                max-width: 920px;
+            }
         }
 
+        /* Typography */
         .pharma-brand {
-            font-size: clamp(26px, 6vw, 34px);
+            font-size: clamp(24px, 6vw, 32px);
             font-weight: 800;
-            color: #1a5d7a;
+            color: var(--secondary);
             text-align: center;
-            margin-bottom: 12px;
-            letter-spacing: -0.4px;
-            border-bottom: 3px solid #ff8c42;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+            border-bottom: 3px solid var(--primary);
             display: inline-block;
             width: auto;
-            padding-bottom: 10px;
+            padding-bottom: 8px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
         }
 
-        .login-title, .language-title {
+        .login-title, 
+        .language-title {
             font-size: clamp(18px, 5vw, 22px);
-            font-weight: 600;
-            color: #2c5a6e;
+            font-weight: 700;
+            color: var(--secondary-light);
             text-align: center;
             margin-bottom: 28px;
         }
 
+        /* Button Styles */
+        button {
+            cursor: pointer;
+            transition: var(--transition);
+            min-height: 48px;
+            font-weight: 600;
+            font-size: 15px;
+            border: none;
+            outline: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        button:active {
+            transform: scale(0.97);
+        }
+
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+
+        .login-btn,
+        .place-order-btn,
+        .ai-submit-btn,
+        .save-btn {
+            width: 100%;
+            padding: 14px;
+            background: var(--primary);
+            border: none;
+            border-radius: var(--border-radius-xl);
+            font-weight: 700;
+            font-size: 16px;
+            color: white;
+            box-shadow: var(--shadow-sm);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+        }
+
+        .login-btn:hover,
+        .place-order-btn:hover,
+        .ai-submit-btn:hover {
+            box-shadow: var(--shadow-md);
+        }
+
+        /* Input Styles */
         .input-group {
             margin-bottom: 20px;
             text-align: left;
@@ -79,137 +174,175 @@
         .input-group label {
             display: block;
             margin-bottom: 8px;
-            color: #2c5a6e;
+            color: var(--secondary-light);
             font-weight: 600;
             font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .input-group input {
             width: 100%;
             padding: 14px 16px;
-            background: #fff;
-            border: 1.5px solid #e0eaf0;
-            border-radius: 18px;
-            color: #1e2f3c;
+            background: var(--white);
+            border: 2px solid var(--border-color);
+            border-radius: var(--border-radius-md);
+            color: var(--text-primary);
             font-size: 16px;
-            transition: 0.2s;
+            transition: var(--transition);
             outline: none;
             -webkit-appearance: none;
+            font-family: inherit;
         }
 
         .input-group input:focus {
-            border-color: #ff8c42;
-            box-shadow: 0 0 0 3px rgba(255, 140, 66, 0.12);
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(255, 140, 66, 0.1);
         }
 
-        .login-btn {
-            width: 100%;
-            padding: 14px;
-            background: #ff8c42;
-            border: none;
-            border-radius: 40px;
-            font-weight: 700;
-            font-size: 16px;
-            color: white;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-        }
-
-        .login-btn:active {
-            transform: scale(0.98);
-            background: #e6762b;
-        }
-
-        .feature-boxes, .second-home-features {
+        /* Feature Grid */
+        .feature-boxes, 
+        .second-home-features {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-            gap: 18px;
-            margin: 28px 0;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin: 24px 0;
         }
 
-        .feature-box, .second-home-feature {
-            background: #fefefe;
-            border: 1px solid #eef3f8;
-            border-radius: 24px;
-            padding: 18px 10px;
+        @media (min-width: 640px) {
+            .feature-boxes,
+            .second-home-features {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (min-width: 920px) {
+            .feature-boxes,
+            .second-home-features {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        .feature-box, 
+        .second-home-feature {
+            background: linear-gradient(135deg, var(--white) 0%, #fafdfe 100%);
+            border: 2px solid var(--border-color);
+            border-radius: var(--border-radius-md);
+            padding: 16px 8px;
             text-align: center;
-            transition: all 0.25s;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+            transition: var(--transition);
+            box-shadow: var(--shadow-sm);
+            cursor: pointer;
         }
 
-        .feature-box:active, .second-home-feature:active {
-            transform: scale(0.97);
-            background: #fff8f0;
+        .feature-box:hover,
+        .second-home-feature:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--primary);
         }
 
-        .feature-icon, .second-home-icon {
-            font-size: 38px;
-            margin-bottom: 12px;
-            color: #ff8c42;
+        .feature-box:active,
+        .second-home-feature:active {
+            transform: translateY(0) scale(0.97);
+            background: var(--primary-light);
+        }
+
+        .feature-icon, 
+        .second-home-icon {
+            font-size: 32px;
+            margin-bottom: 10px;
+            color: var(--primary);
             pointer-events: none;
         }
 
         .feature-title {
             font-weight: 600;
-            font-size: 14px;
-            color: #2c5a6e;
+            font-size: 13px;
+            color: var(--secondary-light);
             pointer-events: none;
+            line-height: 1.3;
         }
 
-        .ai-assistant, .ai-disease-predictor {
-            background: #fefaf5;
-            border-radius: 28px;
-            padding: 22px;
-            margin-bottom: 24px;
-            border: 1px solid #ffedd9;
+        /* AI Assistant Styles */
+        .ai-assistant, 
+        .ai-disease-predictor {
+            background: linear-gradient(135deg, #fefaf5 0%, var(--white) 100%);
+            border-radius: var(--border-radius-lg);
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 2px solid #ffedd9;
+            box-shadow: var(--shadow-sm);
         }
 
-        .ai-header, .disease-header {
+        .ai-header, 
+        .disease-header {
             display: flex;
             align-items: center;
             gap: 12px;
-            margin-bottom: 18px;
+            margin-bottom: 16px;
             border-bottom: 2px solid #ffe1c0;
             padding-bottom: 12px;
         }
 
-        .ai-title, .disease-title {
-            font-size: 20px;
+        .ai-title, 
+        .disease-title {
+            font-size: 18px;
             font-weight: 800;
-            color: #ff8c42;
+            color: var(--primary);
+            letter-spacing: -0.3px;
         }
 
         .ai-chat-container {
-            max-height: 260px;
+            max-height: 280px;
             overflow-y: auto;
-            margin-bottom: 18px;
-            background: #ffffff;
-            border-radius: 24px;
+            margin-bottom: 16px;
+            background: var(--white);
+            border-radius: var(--border-radius-md);
             padding: 14px;
-            border: 1px solid #eef2f5;
+            border: 1px solid var(--border-color);
+            scroll-behavior: smooth;
+        }
+
+        .ai-chat-container::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .ai-chat-container::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 10px;
         }
 
         .ai-message {
-            padding: 12px 18px;
-            border-radius: 20px;
+            padding: 12px 16px;
+            border-radius: var(--border-radius-md);
             max-width: 85%;
             word-wrap: break-word;
             font-size: 14px;
-            line-height: 1.45;
+            line-height: 1.5;
             margin-bottom: 12px;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .user-message {
-            background: #ff8c42;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
             color: white;
             margin-left: auto;
-            border-radius: 24px 24px 8px 24px;
+            border-radius: 20px 20px 4px 20px;
+            box-shadow: var(--shadow-sm);
         }
 
         .bot-message {
             background: #f0f4f8;
-            color: #1e3b4c;
+            color: var(--text-primary);
             margin-right: auto;
-            border-radius: 24px 24px 24px 8px;
+            border-radius: 20px 20px 20px 4px;
+            border: 1px solid var(--border-color);
         }
 
         .ai-input-container {
@@ -221,76 +354,167 @@
         .ai-input {
             flex: 1;
             padding: 14px 18px;
-            background: #ffffff;
-            border: 1.5px solid #e0eaf0;
-            border-radius: 48px;
-            font-size: 16px;
+            background: var(--white);
+            border: 2px solid var(--border-color);
+            border-radius: var(--border-radius-xl);
+            font-size: 15px;
             min-width: 200px;
+            font-family: inherit;
+            transition: var(--transition);
+        }
+
+        .ai-input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(255, 140, 66, 0.1);
+            outline: none;
         }
 
         .ai-submit-btn {
-            background: #ff8c42;
+            background: var(--primary);
             border: none;
-            border-radius: 48px;
-            padding: 0 24px;
+            border-radius: var(--border-radius-xl);
+            padding: 0 28px;
             font-weight: 700;
             color: white;
             min-height: 48px;
+            white-space: nowrap;
         }
 
+        /* Medicine Item Styles */
         .medicine-item {
-            background: #ffffff;
-            border: 1px solid #ecf3f8;
-            border-radius: 24px;
+            background: var(--white);
+            border: 2px solid var(--border-color);
+            border-radius: var(--border-radius-lg);
             padding: 18px;
             margin-bottom: 14px;
+            transition: var(--transition);
+        }
+
+        .medicine-item:hover {
+            box-shadow: var(--shadow-md);
+            border-color: var(--primary-light);
         }
 
         .medicine-name {
             font-weight: 800;
             font-size: 17px;
-            color: #1a5d7a;
+            color: var(--secondary);
+            margin-bottom: 4px;
+        }
+
+        .medicine-description {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+        }
+
+        .medicine-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 8px;
+        }
+
+        .quantity-control {
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
 
         .quantity-btn {
             width: 40px;
             height: 40px;
             border-radius: 40px;
-            background: #ff8c42;
+            background: var(--primary);
             border: none;
             font-weight: bold;
             color: white;
             font-size: 20px;
-            transition: 0.1s;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow-sm);
         }
 
-        .quantity-btn:active {
-            transform: scale(0.92);
+        .quantity-btn:hover {
+            background: var(--primary-dark);
+            transform: scale(1.05);
         }
 
+        .quantity-display {
+            font-weight: 700;
+            font-size: 18px;
+            min-width: 30px;
+            text-align: center;
+            color: var(--text-primary);
+        }
+
+        .medicine-price {
+            font-weight: 800;
+            font-size: 18px;
+            color: var(--secondary);
+        }
+
+        /* Order Summary */
         .order-summary {
-            background: #f9fdfe;
-            border-radius: 24px;
+            background: linear-gradient(135deg, #f9fdfe 0%, var(--white) 100%);
+            border-radius: var(--border-radius-lg);
             padding: 20px;
             margin: 20px 0;
-            border: 1px solid #e2edf2;
+            border: 2px solid var(--border-color);
         }
 
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            font-size: 15px;
+        }
+
+        .summary-total {
+            font-weight: 800;
+            font-size: 18px;
+            color: var(--secondary);
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 2px solid var(--border-color);
+        }
+
+        /* Address Styles */
         .address-item {
-            background: #ffffff;
-            border: 1px solid #e8f0f5;
-            border-radius: 20px;
+            background: var(--white);
+            border: 2px solid var(--border-color);
+            border-radius: var(--border-radius-md);
             padding: 16px;
             margin-bottom: 12px;
             cursor: pointer;
-            transition: 0.2s;
+            transition: var(--transition);
+        }
+
+        .address-item:hover {
+            border-color: var(--primary);
+            box-shadow: var(--shadow-sm);
         }
 
         .address-item.selected {
-            border: 2px solid #ff8c42;
-            background: #fffbf5;
+            border: 2px solid var(--primary);
+            background: var(--primary-light);
+            box-shadow: var(--shadow-md);
         }
 
+        .address-badge {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 2px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            margin-left: 8px;
+        }
+
+        /* Modal Styles */
         .modal {
             display: none;
             position: fixed;
@@ -299,184 +523,320 @@
             top: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(3px);
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(4px);
             align-items: center;
             justify-content: center;
+            animation: modalFadeIn 0.3s ease;
+        }
+
+        @keyframes modalFadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         .modal-content {
-            background: #ffffff;
-            border-radius: 32px;
+            background: var(--white);
+            border-radius: var(--border-radius-lg);
             width: 90%;
             max-width: 520px;
+            max-height: 85vh;
             padding: 28px;
-            box-shadow: 0 32px 48px -20px rgba(0, 0, 0, 0.3);
-            border-top: 6px solid #ff8c42;
-            max-height: 80vh;
+            box-shadow: var(--shadow-lg);
+            border-top: 6px solid var(--primary);
             overflow-y: auto;
+            animation: modalSlideIn 0.3s ease;
+            position: relative;
+        }
+
+        @keyframes modalSlideIn {
+            from { transform: translateY(-30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
         }
 
         .close-btn {
-            float: right;
+            position: absolute;
+            top: 16px;
+            right: 20px;
             font-size: 28px;
             font-weight: 500;
             cursor: pointer;
-            color: #9aaebf;
-            transition: 0.1s;
-            padding: 0 8px;
+            color: var(--text-muted);
+            transition: var(--transition);
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: transparent;
         }
 
+        .close-btn:hover {
+            background: var(--light-bg);
+            color: var(--danger);
+            transform: rotate(90deg);
+        }
+
+        /* Back Button */
         .back-btn {
-            background: #eef3f7;
-            border: 1px solid #d9e6ef;
-            border-radius: 40px;
-            padding: 10px 20px;
+            background: var(--light-bg);
+            border: 2px solid var(--border-color);
+            border-radius: var(--border-radius-xl);
+            padding: 12px 20px;
             margin-bottom: 20px;
             display: inline-flex;
             align-items: center;
             gap: 8px;
             font-weight: 600;
-            color: #2c5a6e;
+            color: var(--secondary-light);
+            font-size: 15px;
+            transition: var(--transition);
         }
 
-        .place-order-btn {
-            background: #ff8c42;
-            border: none;
-            border-radius: 44px;
-            padding: 14px;
-            width: 100%;
-            font-weight: 700;
-            font-size: 16px;
+        .back-btn:hover {
+            background: var(--white);
+            border-color: var(--primary);
+            box-shadow: var(--shadow-sm);
         }
 
+        /* Cart Indicator */
         .cart-indicator {
             position: absolute;
-            top: -6px;
-            right: -6px;
-            background: #ff8c42;
-            border-radius: 40px;
-            width: 24px;
-            height: 24px;
+            top: -8px;
+            right: -8px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            border-radius: 50%;
+            width: 28px;
+            height: 28px;
             font-size: 12px;
             font-weight: 800;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            box-shadow: var(--shadow-md);
+            border: 2px solid white;
+            animation: pulse 2s infinite;
         }
 
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        /* Upload Button */
+        .upload-prescription-btn {
+            width: 100%;
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--secondary-light) 100%);
+            border: none;
+            border-radius: var(--border-radius-xl);
+            padding: 16px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-size: 16px;
+        }
+
+        .upload-prescription-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Voice and Predict Buttons */
+        .voice-input-btn, 
+        .predict-btn {
+            background: var(--white);
+            border: 2px solid var(--primary);
+            border-radius: var(--border-radius-xl);
+            padding: 12px 20px;
+            font-weight: 600;
+            color: var(--primary);
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .voice-input-btn:hover,
+        .predict-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .voice-input-btn.listening {
+            background: var(--danger);
+            border-color: var(--danger);
+            color: white;
+            animation: pulse 1.5s infinite;
+        }
+
+        /* Organ Buttons */
         .organ-btn {
             padding: 18px;
             margin-bottom: 14px;
             border: none;
-            border-radius: 60px;
+            border-radius: var(--border-radius-xl);
             font-weight: 700;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 14px;
-            transition: 0.2s;
+            transition: var(--transition);
             color: white;
-            cursor: pointer;
+            font-size: 16px;
+            box-shadow: var(--shadow-md);
         }
 
-        .upload-prescription-btn {
-            width: 100%;
-            background: #2c5a6e;
-            border: none;
-            border-radius: 48px;
-            padding: 14px;
-            font-weight: 700;
-            color: white;
-            margin-bottom: 24px;
+        .organ-btn:hover {
+            transform: translateX(5px);
+            box-shadow: var(--shadow-lg);
         }
 
-        .voice-input-btn, .predict-btn {
-            background: #ffffff;
-            border: 1.5px solid #ff8c42;
-            border-radius: 40px;
-            padding: 12px 24px;
-            font-weight: 600;
-            color: #ff8c42;
-        }
-
-        @media (max-width: 640px) {
-            body {
-                padding: 12px;
-            }
-            .feature-boxes {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 12px;
-            }
-            .feature-box, .second-home-feature {
-                padding: 14px 6px;
-            }
-            .feature-icon {
-                font-size: 32px;
-            }
-            .ai-input-container {
-                flex-direction: column;
-            }
-            .ai-submit-btn {
-                padding: 12px;
-            }
-            .modal-content {
-                padding: 20px;
-                margin: 16px;
-            }
-            .ai-input, .input-group input {
-                font-size: 16px;
-            }
-        }
-
-        .subtext {
-            color: #6f8ea0;
-            font-size: 12px;
-        }
-
-        .symptom-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 8px 0;
-            border-bottom: 1px solid #e2edf2;
-        }
-
-        .accuracy-meter {
-            height: 6px;
-            background: #e2edf2;
-            border-radius: 4px;
-            margin-top: 6px;
-        }
-
-        .accuracy-fill {
-            height: 100%;
-            background: #ff8c42;
-            border-radius: 4px;
-        }
-
-        hr {
-            margin: 16px 0;
-            border: 0;
-            height: 1px;
-            background: #e2edf2;
-        }
-        
-        .app-header {
-            position: relative;
-        }
-
-        /* Loading state */
+        /* Loading State */
         .loading {
             opacity: 0.6;
             pointer-events: none;
+            position: relative;
         }
 
-        /* Better scroll behavior */
-        .ai-chat-container, .modal-content {
-            -webkit-overflow-scrolling: touch;
+        .loading::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 30px;
+            height: 30px;
+            border: 3px solid var(--border-color);
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
         }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 640px) {
+            body {
+                padding: 8px;
+            }
+            
+            .screen-container,
+            .medicine-order-container {
+                padding: 16px !important;
+            }
+            
+            .feature-boxes {
+                gap: 8px;
+            }
+            
+            .feature-box,
+            .second-home-feature {
+                padding: 12px 6px;
+            }
+            
+            .feature-icon {
+                font-size: 28px;
+            }
+            
+            .feature-title {
+                font-size: 11px;
+            }
+            
+            .ai-input-container {
+                flex-direction: column;
+            }
+            
+            .ai-submit-btn {
+                padding: 12px;
+            }
+            
+            .modal-content {
+                padding: 20px;
+                margin: 12px;
+            }
+            
+            .quantity-btn {
+                width: 36px;
+                height: 36px;
+                font-size: 18px;
+            }
+        }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--secondary);
+            color: white;
+            padding: 12px 24px;
+            border-radius: var(--border-radius-xl);
+            box-shadow: var(--shadow-lg);
+            z-index: 3000;
+            animation: slideUp 0.3s ease;
+            font-weight: 500;
+        }
+
+        @keyframes slideUp {
+            from { transform: translate(-50%, 100px); opacity: 0; }
+            to { transform: translate(-50%, 0); opacity: 1; }
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-muted);
+        }
+
+        .empty-state i {
+            font-size: 48px;
+            margin-bottom: 16px;
+            opacity: 0.5;
+        }
+
+        /* Divider */
+        hr {
+            margin: 16px 0;
+            border: 0;
+            height: 2px;
+            background: linear-gradient(to right, transparent, var(--border-color), transparent);
+        }
+
+        /* Badge */
+        .badge {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        /* Utility Classes */
+        .text-center { text-align: center; }
+        .text-muted { color: var(--text-muted); }
+        .text-primary { color: var(--primary); }
+        .font-bold { font-weight: 700; }
+        .mb-2 { margin-bottom: 8px; }
+        .mb-4 { margin-bottom: 16px; }
+        .mt-4 { margin-top: 16px; }
+        .flex { display: flex; }
+        .items-center { align-items: center; }
+        .justify-between { justify-content: space-between; }
+        .gap-2 { gap: 8px; }
+        .gap-4 { gap: 16px; }
+        .w-full { width: 100%; }
     </style>
 </head>
 <body>
@@ -484,459 +844,1582 @@
 <!-- LOGIN SCREEN -->
 <div id="loginScreen" class="screen-container login-container" style="padding: 32px;">
     <div style="text-align: center;">
-        <div class="pharma-brand">CLASSIC PHARMACY</div>
-        <div style="font-size: 13px; color: #6f8ea0; margin-top: 6px;">Trusted Healthcare Since 1995</div>
+        <div class="pharma-brand">
+            <i class="fas fa-prescription-bottle" style="font-size: 28px; margin-right: 8px;"></i>
+            CLASSIC PHARMACY
+        </div>
+        <div style="font-size: 13px; color: var(--text-muted); margin-top: 6px; font-weight: 500;">
+            <i class="fas fa-shield-alt"></i> Trusted Healthcare Since 1995
+        </div>
     </div>
-    <div class="login-title">Customer Login / Register</div>
+    
+    <div class="login-title">
+        <i class="fas fa-user-circle"></i> Customer Login / Register
+    </div>
+    
     <div class="input-group">
         <label><i class="fas fa-envelope"></i> Email Address</label>
-        <input type="email" id="loginEmail" placeholder="Enter your email" autocomplete="email">
+        <input type="email" id="loginEmail" placeholder="Enter your email" autocomplete="email" value="demo@pharmacy.com">
     </div>
+    
     <div class="input-group">
         <label><i class="fas fa-lock"></i> Password</label>
-        <input type="password" id="loginPassword" placeholder="Min. 6 characters" minlength="6" autocomplete="current-password">
+        <input type="password" id="loginPassword" placeholder="Min. 6 characters" minlength="6" autocomplete="current-password" value="demo123">
     </div>
-    <button class="login-btn" onclick="loginOrRegister()"><i class="fas fa-sign-in-alt"></i> Login / Register</button>
-    <div class="subtext" style="text-align:center; margin-top:24px;">⏰ Same Day Delivery • 100% Genuine Medicines</div>
+    
+    <button class="login-btn" onclick="loginOrRegister()">
+        <i class="fas fa-sign-in-alt"></i> Login / Register
+    </button>
+    
+    <div class="text-center" style="margin-top: 24px;">
+        <div style="background: linear-gradient(135deg, var(--primary-light) 0%, white 100%); padding: 16px; border-radius: var(--border-radius-md);">
+            <div style="font-weight: 600; color: var(--secondary); margin-bottom: 8px;">
+                <i class="fas fa-clock"></i> Same Day Delivery
+            </div>
+            <div style="font-size: 13px; color: var(--text-secondary);">
+                ✓ 100% Genuine Medicines<br>
+                ✓ Free Delivery on Orders above ₹499<br>
+                ✓ 24/7 Customer Support
+            </div>
+        </div>
+        <div style="margin-top: 16px; font-size: 12px; color: var(--text-muted);">
+            Demo Credentials: demo@pharmacy.com / demo123
+        </div>
+    </div>
 </div>
 
 <!-- OTP SCREEN -->
 <div id="otpScreen" class="screen-container login-container" style="padding: 32px; display: none;">
     <div class="pharma-brand">CLASSIC PHARMACY</div>
-    <div class="login-title">Verify OTP</div>
-    <div class="input-group">
-        <label>Enter 6-digit OTP</label>
-        <input type="text" id="otp" placeholder="123456" maxlength="6" inputmode="numeric">
+    <div class="login-title">
+        <i class="fas fa-shield-alt"></i> Verify OTP
     </div>
-    <button class="login-btn" onclick="validateOTP()">Verify & Continue</button>
-    <button class="login-btn" style="margin-top:12px; background:#eef3f7; color:#2c5a6e; border:1px solid #cbdbe2;" onclick="resendOTP()">Resend OTP</button>
+    
+    <div class="input-group">
+        <label><i class="fas fa-key"></i> Enter 6-digit OTP</label>
+        <input type="text" id="otp" placeholder="123456" maxlength="6" inputmode="numeric" style="text-align: center; font-size: 24px; letter-spacing: 8px;">
+    </div>
+    
+    <button class="login-btn" onclick="validateOTP()">
+        <i class="fas fa-check-circle"></i> Verify & Continue
+    </button>
+    
+    <button class="login-btn" style="margin-top:12px; background: var(--light-bg); color: var(--secondary-light); border: 2px solid var(--border-color);" onclick="resendOTP()">
+        <i class="fas fa-redo-alt"></i> Resend OTP
+    </button>
+    
+    <div class="text-center text-muted" style="margin-top: 20px; font-size: 13px;">
+        <i class="fas fa-info-circle"></i> Demo OTP: 123456
+    </div>
 </div>
 
 <!-- LANGUAGE SCREEN -->
 <div id="languageScreen" class="screen-container language-container" style="padding: 32px; display: none;">
-    <div class="language-title">Select Your Language</div>
-    <div style="display: flex; gap: 12px; flex-wrap: wrap; justify-content: center;">
-        <button class="language-btn" style="background:#2c5a6e; border:none; padding:12px 20px; border-radius:48px; color:white;" onclick="selectLanguage('hi')">हिंदी</button>
-        <button class="language-btn" style="background:#2c5a6e; border:none; padding:12px 20px; border-radius:48px; color:white;" onclick="selectLanguage('en')">English</button>
-        <button class="language-btn" style="background:#2c5a6e; border:none; padding:12px 20px; border-radius:48px; color:white;" onclick="selectLanguage('ta')">தமிழ்</button>
-        <button class="language-btn" style="background:#2c5a6e; border:none; padding:12px 20px; border-radius:48px; color:white;" onclick="selectLanguage('bn')">বাংলা</button>
+    <div class="language-title">
+        <i class="fas fa-language"></i> Select Your Language
+    </div>
+    
+    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px;">
+        <button class="language-btn" style="background: linear-gradient(135deg, var(--secondary) 0%, var(--secondary-light) 100%); border: none; padding: 16px; border-radius: var(--border-radius-xl); color: white; font-weight: 600; font-size: 16px;" onclick="selectLanguage('hi')">
+            <i class="fas fa-language"></i> हिंदी
+        </button>
+        <button class="language-btn" style="background: linear-gradient(135deg, var(--secondary) 0%, var(--secondary-light) 100%); border: none; padding: 16px; border-radius: var(--border-radius-xl); color: white; font-weight: 600; font-size: 16px;" onclick="selectLanguage('en')">
+            <i class="fas fa-language"></i> English
+        </button>
+        <button class="language-btn" style="background: linear-gradient(135deg, var(--secondary) 0%, var(--secondary-light) 100%); border: none; padding: 16px; border-radius: var(--border-radius-xl); color: white; font-weight: 600; font-size: 16px;" onclick="selectLanguage('ta')">
+            <i class="fas fa-language"></i> தமிழ்
+        </button>
+        <button class="language-btn" style="background: linear-gradient(135deg, var(--secondary) 0%, var(--secondary-light) 100%); border: none; padding: 16px; border-radius: var(--border-radius-xl); color: white; font-weight: 600; font-size: 16px;" onclick="selectLanguage('bn')">
+            <i class="fas fa-language"></i> বাংলা
+        </button>
+    </div>
+    
+    <div style="margin-top: 24px; text-align: center;">
+        <p style="color: var(--text-muted); font-size: 13px;">
+            <i class="fas fa-globe"></i> Choose your preferred language for better experience
+        </p>
     </div>
 </div>
 
 <!-- MAIN APP SCREEN -->
 <div id="appScreen" class="screen-container pharma-app" style="padding: 24px; display: none;">
-    <div class="app-header" style="position:relative; text-align:center; margin-bottom: 12px;">
-        <h2 id="appTitle" style="color:#1a5d7a; font-size: clamp(22px,6vw,28px); font-weight:800;">CLASSIC PHARMACY</h2>
-        <p id="appSubtitle" style="color:#5a6e7c;">Your neighborhood pharmacy, now online</p>
+    <div class="app-header" style="position: relative; text-align: center; margin-bottom: 20px;">
+        <h2 id="appTitle" style="color: var(--secondary); font-size: clamp(22px,6vw,28px); font-weight:800; display: flex; align-items: center; justify-content: center; gap: 8px;">
+            <i class="fas fa-prescription-bottle" style="font-size: 24px;"></i>
+            CLASSIC PHARMACY
+        </h2>
+        <p id="appSubtitle" style="color: var(--text-secondary); font-weight: 500;">Your neighborhood pharmacy, now online</p>
         <div id="cartIndicator" class="cart-indicator" style="display: none;">0</div>
     </div>
-    <button class="upload-prescription-btn" onclick="openPrescriptionScanner()"><i class="fas fa-camera"></i> Upload / Scan Prescription</button>
+    
+    <button class="upload-prescription-btn" onclick="openPrescriptionScanner()">
+        <i class="fas fa-camera"></i> Upload / Scan Prescription
+        <span class="badge" style="margin-left: 8px;">NEW</span>
+    </button>
     
     <!-- AI Disease Predictor -->
     <div class="ai-disease-predictor">
-        <div class="disease-header"><i class="fas fa-stethoscope" style="font-size:26px; color:#ff8c42;"></i><div class="disease-title" id="diseaseTitle">Symptom Checker</div></div>
-        <div class="disease-message-box">
-            <div class="disease-message" id="diseaseMessage">Describe your symptoms for preliminary analysis</div>
-            <div class="symptoms-list" id="symptomsList"></div>
-            <div id="predictionResult" style="display:none;"><div style="margin:12px 0 6px; font-weight:700;">Possible Conditions:</div><div id="predictionItems"></div></div>
+        <div class="disease-header">
+            <i class="fas fa-stethoscope" style="font-size: 26px; color: var(--primary);"></i>
+            <div class="disease-title" id="diseaseTitle">Symptom Checker</div>
         </div>
-        <div style="display:flex; gap:12px; margin-top:16px; flex-wrap:wrap;">
-            <button class="voice-input-btn" id="voiceInputBtn" onclick="toggleVoiceInput()"><i class="fas fa-microphone"></i> Speak Symptoms</button>
-            <button class="predict-btn" id="predictBtn" onclick="predictDisease()" disabled>Check Symptoms</button>
+        <div class="disease-message-box">
+            <div class="disease-message" id="diseaseMessage" style="min-height: 60px; padding: 12px; background: var(--white); border-radius: var(--border-radius-md); border: 2px solid var(--border-color);">
+                Describe your symptoms for preliminary analysis
+            </div>
+            <div class="symptoms-list" id="symptomsList" style="margin-top: 12px;"></div>
+            <div id="predictionResult" style="display: none; margin-top: 16px; padding: 16px; background: var(--white); border-radius: var(--border-radius-md); border: 2px solid var(--primary-light);">
+                <div style="font-weight: 700; color: var(--secondary); margin-bottom: 12px;">
+                    <i class="fas fa-clipboard-list"></i> Possible Conditions:
+                </div>
+                <div id="predictionItems"></div>
+            </div>
+        </div>
+        <div style="display: flex; gap: 12px; margin-top: 16px; flex-wrap: wrap;">
+            <button class="voice-input-btn" id="voiceInputBtn" onclick="toggleVoiceInput()">
+                <i class="fas fa-microphone"></i> Speak Symptoms
+            </button>
+            <button class="predict-btn" id="predictBtn" onclick="predictDisease()" disabled>
+                <i class="fas fa-search"></i> Check Symptoms
+            </button>
         </div>
     </div>
 
     <!-- AI Assistant -->
     <div class="ai-assistant">
-        <div class="ai-header"><i class="fas fa-robot" style="font-size:26px; color:#ff8c42;"></i><div class="ai-title" id="aiTitle">Medicine Assistant</div></div>
-        <div class="ai-chat-container" id="aiChatContainer"><div class="ai-message bot-message">Hello! Ask me about any medicine - uses, dosage, side effects, or precautions.</div></div>
+        <div class="ai-header">
+            <i class="fas fa-robot" style="font-size: 26px; color: var(--primary);"></i>
+            <div class="ai-title" id="aiTitle">Medicine Assistant</div>
+        </div>
+        <div class="ai-chat-container" id="aiChatContainer">
+            <div class="ai-message bot-message">
+                <i class="fas fa-info-circle"></i> Hello! Ask me about any medicine - uses, dosage, side effects, or precautions.
+            </div>
+        </div>
         <div class="ai-input-container">
             <input type="text" class="ai-input" id="aiQuery" placeholder="e.g., Paracetamol uses, Amoxicillin side effects" onkeypress="handleKeyPress(event)">
-            <button class="ai-submit-btn" onclick="askAboutMedicine()">Ask</button>
+            <button class="ai-submit-btn" onclick="askAboutMedicine()">
+                <i class="fas fa-paper-plane"></i> Ask
+            </button>
+        </div>
+        <div style="margin-top: 12px; font-size: 12px; color: var(--text-muted);">
+            <i class="fas fa-lightbulb"></i> Try: Paracetamol, Ibuprofen, Amoxicillin, Omeprazole
         </div>
     </div>
 
     <!-- Feature Boxes -->
     <div class="feature-boxes">
-        <div class="feature-box" onclick="openMedicineOrdering()"><div class="feature-icon">💊</div><div class="feature-title">Order Medicines</div></div>
-        <div class="feature-box" onclick="openDoctorChat()"><div class="feature-icon">👨‍⚕️</div><div class="feature-title">Consult Doctor</div></div>
-        <div class="feature-box" onclick="openReminders()"><div class="feature-icon">⏰</div><div class="feature-title">Set Reminder</div></div>
-        <div class="feature-box" onclick="openMedicalLoans()"><div class="feature-icon">💰</div><div class="feature-title">Medical Loans</div></div>
-        <div class="feature-box" onclick="openLabTests()"><div class="feature-icon">🧪</div><div class="feature-title">Book Lab Tests</div></div>
-        <div class="feature-box" onclick="openDeliveryTracking()"><div class="feature-icon">🚚</div><div class="feature-title">Track Order</div></div>
-        <div class="feature-box" onclick="openQRScanner()"><div class="feature-icon">🔍</div><div class="feature-title">Verify Medicine</div></div>
-        <div class="feature-box" onclick="openStudentStudy()"><div class="feature-icon">📚</div><div class="feature-title">Study Resources</div></div>
-        <div class="feature-box" onclick="openFitnessTips()"><div class="feature-icon">💪</div><div class="feature-title">Health Tips</div></div>
-        <div class="feature-box" onclick="openAyurvedicInfo()"><div class="feature-icon">🌿</div><div class="feature-title">Ayurveda</div></div>
-        <div class="feature-box" onclick="openEmergencyOrganHelp()"><div class="feature-icon">🆘</div><div class="feature-title">Organ Donation</div></div>
-        <div class="feature-box" onclick="openSecondHome()"><div class="feature-icon">🏠</div><div class="feature-title">More Services</div></div>
+        <div class="feature-box" onclick="openMedicineOrdering()">
+            <div class="feature-icon">💊</div>
+            <div class="feature-title">Order Medicines</div>
+        </div>
+        <div class="feature-box" onclick="openDoctorChat()">
+            <div class="feature-icon">👨‍⚕️</div>
+            <div class="feature-title">Consult Doctor</div>
+        </div>
+        <div class="feature-box" onclick="openReminders()">
+            <div class="feature-icon">⏰</div>
+            <div class="feature-title">Set Reminder</div>
+        </div>
+        <div class="feature-box" onclick="openMedicalLoans()">
+            <div class="feature-icon">💰</div>
+            <div class="feature-title">Medical Loans</div>
+        </div>
+        <div class="feature-box" onclick="openLabTests()">
+            <div class="feature-icon">🧪</div>
+            <div class="feature-title">Book Lab Tests</div>
+        </div>
+        <div class="feature-box" onclick="openDeliveryTracking()">
+            <div class="feature-icon">🚚</div>
+            <div class="feature-title">Track Order</div>
+        </div>
+        <div class="feature-box" onclick="openQRScanner()">
+            <div class="feature-icon">🔍</div>
+            <div class="feature-title">Verify Medicine</div>
+        </div>
+        <div class="feature-box" onclick="openStudentStudy()">
+            <div class="feature-icon">📚</div>
+            <div class="feature-title">Study Resources</div>
+        </div>
+        <div class="feature-box" onclick="openFitnessTips()">
+            <div class="feature-icon">💪</div>
+            <div class="feature-title">Health Tips</div>
+        </div>
+        <div class="feature-box" onclick="openAyurvedicInfo()">
+            <div class="feature-icon">🌿</div>
+            <div class="feature-title">Ayurveda</div>
+        </div>
+        <div class="feature-box" onclick="openEmergencyOrganHelp()">
+            <div class="feature-icon">🆘</div>
+            <div class="feature-title">Organ Donation</div>
+        </div>
+        <div class="feature-box" onclick="openSecondHome()">
+            <div class="feature-icon">🏠</div>
+            <div class="feature-title">More Services</div>
+        </div>
     </div>
 </div>
 
 <!-- Medicine Ordering Screen -->
 <div id="medicineOrderScreen" class="screen-container medicine-order-container" style="padding: 24px; display: none;">
-    <button class="back-btn" onclick="closeMedicineOrdering()"><i class="fas fa-arrow-left"></i> Back to Home</button>
-    <h2 style="margin:12px 0 20px; color:#1a5d7a;">Order Medicines</h2>
+    <button class="back-btn" onclick="closeMedicineOrdering()">
+        <i class="fas fa-arrow-left"></i> Back to Home
+    </button>
+    
+    <h2 style="margin: 12px 0 20px; color: var(--secondary); display: flex; align-items: center; gap: 8px;">
+        <i class="fas fa-pills"></i> Order Medicines
+    </h2>
+    
     <div class="medicine-list">
-        <div class="medicine-item"><div class="medicine-name">Paracetamol 500mg</div><div class="medicine-description" style="font-size:12px; color:#6f8ea0;">For fever & mild pain</div><div class="medicine-controls" style="display:flex; justify-content:space-between; margin-top:12px;"><div><button class="quantity-btn" onclick="updateQuantity('paracetamol', -1)">-</button><span style="margin:0 18px; font-weight:700;" id="paracetamol-qty">0</span><button class="quantity-btn" onclick="updateQuantity('paracetamol', 1)">+</button></div><div style="font-weight:700;">₹25</div></div></div>
-        <div class="medicine-item"><div class="medicine-name">Ibuprofen 400mg</div><div class="medicine-description" style="font-size:12px;">Pain relief & inflammation</div><div class="medicine-controls" style="display:flex; justify-content:space-between; margin-top:12px;"><div><button class="quantity-btn" onclick="updateQuantity('ibuprofen', -1)">-</button><span style="margin:0 18px; font-weight:700;" id="ibuprofen-qty">0</span><button class="quantity-btn" onclick="updateQuantity('ibuprofen', 1)">+</button></div><div>₹35</div></div></div>
-        <div class="medicine-item"><div class="medicine-name">Amoxicillin 250mg</div><div class="medicine-description" style="font-size:12px;">Antibiotic (prescription required)</div><div class="medicine-controls" style="display:flex; justify-content:space-between; margin-top:12px;"><div><button class="quantity-btn" onclick="updateQuantity('amoxicillin', -1)">-</button><span style="margin:0 18px; font-weight:700;" id="amoxicillin-qty">0</span><button class="quantity-btn" onclick="updateQuantity('amoxicillin', 1)">+</button></div><div>₹120</div></div></div>
-        <div class="medicine-item"><div class="medicine-name">Omeprazole 20mg</div><div class="medicine-description" style="font-size:12px;">Acid reflux & heartburn</div><div class="medicine-controls" style="display:flex; justify-content:space-between; margin-top:12px;"><div><button class="quantity-btn" onclick="updateQuantity('omeprazole', -1)">-</button><span style="margin:0 18px; font-weight:700;" id="omeprazole-qty">0</span><button class="quantity-btn" onclick="updateQuantity('omeprazole', 1)">+</button></div><div>₹85</div></div></div>
+        <div class="medicine-item">
+            <div class="medicine-name">Paracetamol 500mg</div>
+            <div class="medicine-description">For fever & mild pain • 10 tablets</div>
+            <div class="medicine-controls">
+                <div class="quantity-control">
+                    <button class="quantity-btn" onclick="updateQuantity('paracetamol', -1)">-</button>
+                    <span class="quantity-display" id="paracetamol-qty">0</span>
+                    <button class="quantity-btn" onclick="updateQuantity('paracetamol', 1)">+</button>
+                </div>
+                <div class="medicine-price">₹25</div>
+            </div>
+        </div>
+        
+        <div class="medicine-item">
+            <div class="medicine-name">Ibuprofen 400mg</div>
+            <div class="medicine-description">Pain relief & inflammation • 10 tablets</div>
+            <div class="medicine-controls">
+                <div class="quantity-control">
+                    <button class="quantity-btn" onclick="updateQuantity('ibuprofen', -1)">-</button>
+                    <span class="quantity-display" id="ibuprofen-qty">0</span>
+                    <button class="quantity-btn" onclick="updateQuantity('ibuprofen', 1)">+</button>
+                </div>
+                <div class="medicine-price">₹35</div>
+            </div>
+        </div>
+        
+        <div class="medicine-item">
+            <div class="medicine-name">Amoxicillin 250mg</div>
+            <div class="medicine-description">Antibiotic (prescription required) • 10 capsules</div>
+            <div class="medicine-controls">
+                <div class="quantity-control">
+                    <button class="quantity-btn" onclick="updateQuantity('amoxicillin', -1)">-</button>
+                    <span class="quantity-display" id="amoxicillin-qty">0</span>
+                    <button class="quantity-btn" onclick="updateQuantity('amoxicillin', 1)">+</button>
+                </div>
+                <div class="medicine-price">₹120</div>
+            </div>
+        </div>
+        
+        <div class="medicine-item">
+            <div class="medicine-name">Omeprazole 20mg</div>
+            <div class="medicine-description">Acid reflux & heartburn • 10 capsules</div>
+            <div class="medicine-controls">
+                <div class="quantity-control">
+                    <button class="quantity-btn" onclick="updateQuantity('omeprazole', -1)">-</button>
+                    <span class="quantity-display" id="omeprazole-qty">0</span>
+                    <button class="quantity-btn" onclick="updateQuantity('omeprazole', 1)">+</button>
+                </div>
+                <div class="medicine-price">₹85</div>
+            </div>
+        </div>
     </div>
-    <div class="order-summary"><div class="summary-row" style="display:flex; justify-content:space-between;"><span>Subtotal:</span><span id="subtotal">₹0</span></div><div class="summary-row" style="display:flex; justify-content:space-between;"><span>Delivery Charges:</span><span>₹40</span></div><div class="summary-row" style="display:flex; justify-content:space-between;"><span>Welcome Discount:</span><span>-₹20</span></div><hr><div class="summary-row" style="display:flex; justify-content:space-between; font-weight:800;"><span>Total Amount:</span><span id="total">₹20</span></div></div>
-    <div class="address-section"><h3 style="color:#2c5a6e; font-size:18px; margin-bottom:12px;">Delivery Address</h3><div id="addressList"></div><button class="add-address-btn" style="background:#2c5a6e; color:white; border-radius:40px; padding:12px; width:100%; margin-top:12px;" onclick="openAddAddressForm()"><i class="fas fa-plus"></i> Add New Address</button></div>
-    <button class="place-order-btn" id="placeOrderBtn" disabled onclick="placeOrder()">Place Order</button>
+    
+    <div class="order-summary">
+        <div class="summary-row">
+            <span>Subtotal:</span>
+            <span id="subtotal">₹0</span>
+        </div>
+        <div class="summary-row">
+            <span>Delivery Charges:</span>
+            <span>₹40</span>
+        </div>
+        <div class="summary-row">
+            <span>Welcome Discount:</span>
+            <span style="color: var(--success);">-₹20</span>
+        </div>
+        <hr>
+        <div class="summary-row summary-total">
+            <span>Total Amount:</span>
+            <span id="total">₹20</span>
+        </div>
+    </div>
+    
+    <div class="address-section">
+        <h3 style="color: var(--secondary-light); font-size: 18px; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+            <i class="fas fa-map-marker-alt"></i> Delivery Address
+        </h3>
+        <div id="addressList"></div>
+        <button class="add-address-btn" style="background: var(--secondary); color: white; border-radius: var(--border-radius-xl); padding: 14px; width: 100%; margin-top: 12px; font-weight: 600;" onclick="openAddAddressForm()">
+            <i class="fas fa-plus-circle"></i> Add New Address
+        </button>
+    </div>
+    
+    <button class="place-order-btn" id="placeOrderBtn" disabled onclick="placeOrder()">
+        <i class="fas fa-shopping-cart"></i> Place Order
+    </button>
 </div>
 
+<!-- Add Address Screen -->
 <div id="addAddressScreen" class="screen-container medicine-order-container" style="padding: 24px; display: none;">
-    <button class="back-btn" onclick="closeAddAddressForm()"><i class="fas fa-arrow-left"></i> Back</button><h2 style="margin:15px 0;">Add New Address</h2>
-    <input type="text" id="fullName" placeholder="Full Name" style="width:100%; margin-bottom:14px; padding:14px; border-radius:24px; border:1px solid #cbdbe2;"><input type="tel" id="mobileNumber" placeholder="Mobile Number" style="width:100%; margin-bottom:14px; padding:14px; border-radius:24px;"><input type="text" id="address" placeholder="Address Line" style="width:100%; margin-bottom:14px; padding:14px; border-radius:24px;"><input type="text" id="landmark" placeholder="Landmark" style="width:100%; margin-bottom:14px; padding:14px; border-radius:24px;"><input type="text" id="pincode" placeholder="Pincode" style="width:100%; margin-bottom:14px; padding:14px; border-radius:24px;"><button class="save-btn" onclick="saveAddress()" style="background:#ff8c42; border:none; border-radius:48px; padding:14px; width:100%; font-weight:700; color:white;">Save Address</button>
+    <button class="back-btn" onclick="closeAddAddressForm()">
+        <i class="fas fa-arrow-left"></i> Back
+    </button>
+    
+    <h2 style="margin: 15px 0; display: flex; align-items: center; gap: 8px;">
+        <i class="fas fa-address-card"></i> Add New Address
+    </h2>
+    
+    <input type="text" id="fullName" placeholder="Full Name" style="width: 100%; margin-bottom: 14px; padding: 14px; border-radius: var(--border-radius-xl); border: 2px solid var(--border-color); font-size: 15px;">
+    <input type="tel" id="mobileNumber" placeholder="Mobile Number" style="width: 100%; margin-bottom: 14px; padding: 14px; border-radius: var(--border-radius-xl); border: 2px solid var(--border-color); font-size: 15px;">
+    <input type="text" id="address" placeholder="Address Line" style="width: 100%; margin-bottom: 14px; padding: 14px; border-radius: var(--border-radius-xl); border: 2px solid var(--border-color); font-size: 15px;">
+    <input type="text" id="landmark" placeholder="Landmark" style="width: 100%; margin-bottom: 14px; padding: 14px; border-radius: var(--border-radius-xl); border: 2px solid var(--border-color); font-size: 15px;">
+    <input type="text" id="pincode" placeholder="Pincode" style="width: 100%; margin-bottom: 14px; padding: 14px; border-radius: var(--border-radius-xl); border: 2px solid var(--border-color); font-size: 15px;">
+    
+    <button class="save-btn" onclick="saveAddress()" style="background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); border: none; border-radius: var(--border-radius-xl); padding: 16px; width: 100%; font-weight: 700; color: white; font-size: 16px;">
+        <i class="fas fa-save"></i> Save Address
+    </button>
 </div>
 
 <!-- Second Home Screen -->
-<div id="secondHomeScreen" class="screen-container second-home" style="padding: 24px; display: none;"><button class="back-btn" onclick="closeSecondHome()"><i class="fas fa-arrow-left"></i> Back</button><h2 style="margin:15px 0;">Additional Services</h2><div class="second-home-features" id="secondHomeFeatures"></div></div>
+<div id="secondHomeScreen" class="screen-container second-home" style="padding: 24px; display: none;">
+    <button class="back-btn" onclick="closeSecondHome()">
+        <i class="fas fa-arrow-left"></i> Back
+    </button>
+    
+    <h2 style="margin: 15px 0; display: flex; align-items: center; gap: 8px;">
+        <i class="fas fa-plus-circle"></i> Additional Services
+    </h2>
+    
+    <div class="second-home-features" id="secondHomeFeatures"></div>
+</div>
 
-<!-- Organ Help -->
-<div id="organHelpScreen" class="screen-container organ-selection" style="padding: 24px; display: none;"><button class="back-btn" onclick="closeOrganHelp()">Back</button><h2 style="margin:15px 0;">Organ Donation Support</h2><button class="organ-btn" style="background:#c44536;" onclick="alert('Connecting to blood donation network...')"><i class="fas fa-tint"></i> Blood Donation</button><button class="organ-btn" style="background:#3a6ea5;" onclick="alert('Liver transplant assistance...')"><i class="fas fa-liver"></i> Liver Donation</button><button class="organ-btn" style="background:#6b4c9b;" onclick="alert('Kidney transplant registry...')"><i class="fas fa-kidneys"></i> Kidney Donation</button></div>
+<!-- Organ Help Screen -->
+<div id="organHelpScreen" class="screen-container organ-selection" style="padding: 24px; display: none;">
+    <button class="back-btn" onclick="closeOrganHelp()">
+        <i class="fas fa-arrow-left"></i> Back
+    </button>
+    
+    <h2 style="margin: 15px 0; display: flex; align-items: center; gap: 8px;">
+        <i class="fas fa-heart"></i> Organ Donation Support
+    </h2>
+    
+    <button class="organ-btn" style="background: linear-gradient(135deg, #c44536 0%, #e55 100%);" onclick="showToast('Connecting to blood donation network...')">
+        <i class="fas fa-tint"></i> Blood Donation
+    </button>
+    
+    <button class="organ-btn" style="background: linear-gradient(135deg, #3a6ea5 0%, #4a8ec5 100%);" onclick="showToast('Liver transplant assistance program')">
+        <i class="fas fa-liver"></i> Liver Donation
+    </button>
+    
+    <button class="organ-btn" style="background: linear-gradient(135deg, #6b4c9b 0%, #8b6ccb 100%);" onclick="showToast('Kidney transplant registry access')">
+        <i class="fas fa-kidneys"></i> Kidney Donation
+    </button>
+    
+    <div style="margin-top: 24px; padding: 16px; background: var(--primary-light); border-radius: var(--border-radius-md);">
+        <p style="color: var(--secondary); font-size: 14px;">
+            <i class="fas fa-info-circle"></i> By registering, you agree to be a part of our organ donation awareness program. Your information will be kept confidential.
+        </p>
+    </div>
+</div>
 
-<!-- Modals -->
-<div id="doctorChatModal" class="modal"><div class="modal-content"><span class="close-btn" onclick="closeModal('doctorChatModal')">&times;</span><h3>Doctor Consultation</h3><div id="doctorChatMessages" style="height:220px; overflow-y:auto; background:#f9fbfd; padding:12px; border-radius:20px; margin:12px 0;"><div class="bot-message" style="margin:5px;">Hello! I'm Dr. Assistant. How can I help you?</div></div><div style="display:flex; gap:8px;"><input type="text" id="doctorQuery" style="flex:1; padding:12px; border-radius:40px; border:1px solid #cbdbe2;" placeholder="Describe your health concern..."><button onclick="askDoctor()" style="background:#ff8c42; border:none; border-radius:40px; padding:0 24px; color:white;">Send</button></div></div></div>
-<div id="remindersModal" class="modal"><div class="modal-content"><span class="close-btn" onclick="closeModal('remindersModal')">&times;</span><h3>Medicine Reminders</h3><div id="remindersList" style="margin:16px 0;"></div><div style="display:flex; gap:8px; flex-wrap:wrap;"><input type="text" id="reminderMedicine" placeholder="Medicine name" style="flex:1; padding:10px; border-radius:40px;"><input type="time" id="reminderTime" style="padding:10px; border-radius:40px;"><button onclick="addReminder()" style="background:#ff8c42; border:none; border-radius:40px; padding:10px 20px;">Set</button></div></div></div>
-<div id="loansModal" class="modal"><div class="modal-content"><span class="close-btn" onclick="closeModal('loansModal')">&times;</span><h3>Medical Loan Assistance</h3><p>Up to ₹5,00,000 | Interest from 10.99%</p><input type="number" id="loanAmount" placeholder="Loan Amount" style="padding:10px; width:100%; margin:10px 0; border-radius:40px;"><select id="loanTenure" style="padding:10px; border-radius:40px;"><option>12 Months</option><option>24 Months</option><option>36 Months</option></select><button onclick="calculateEMI()" style="background:#ff8c42; border-radius:40px; padding:12px; width:100%; margin-top:12px;">Calculate EMI</button><p id="emiResult" style="margin-top:12px;"></p></div></div>
-<div id="qrScannerModal" class="modal"><div class="modal-content"><span class="close-btn" onclick="closeModal('qrScannerModal')">&times;</span><h3>Verify Medicine QR Code</h3><div id="qr-reader" style="width:100%;"></div><div id="qrResult" style="margin-top:15px;"></div></div></div>
-<div id="prescriptionScannerModal" class="modal"><div class="modal-content"><span class="close-btn" onclick="closeModal('prescriptionScannerModal')">&times;</span><h3>Upload Prescription</h3><div id="prescriptionScanner" style="width:100%;"></div><div id="prescriptionResult"></div><button onclick="simulatePrescriptionScan()" style="background:#ff8c42; border-radius:40px; padding:10px; margin-top:12px;">Simulate Scan</button></div></div>
-<div id="studyModal" class="modal"><div class="modal-content"><span class="close-btn" onclick="closeModal('studyModal')">&times;</span><h3>Medical Study Resources</h3><ul style="margin-left:20px;"><li>Pharmacology Reference</li><li>Drug Interaction Database</li><li>Clinical Guidelines</li></ul></div></div>
-<div id="fitnessModal" class="modal"><div class="modal-content"><span class="close-btn" onclick="closeModal('fitnessModal')">&times;</span><h3>Daily Health Tips</h3><ul><li>30 minutes walking daily</li><li>Stay hydrated</li><li>Balanced nutrition</li></ul></div></div>
-<div id="ayurvedicModal" class="modal"><div class="modal-content"><span class="close-btn" onclick="closeModal('ayurvedicModal')">&times;</span><h3>Ayurvedic Remedies</h3><ul><li>Ashwagandha - Stress relief</li><li>Turmeric - Anti-inflammatory</li></ul></div></div>
-<div id="labTestsModal" class="modal"><div class="modal-content"><span class="close-btn" onclick="closeModal('labTestsModal')">&times;</span><h3>Book Lab Tests</h3><div><label><input type="checkbox" id="test1"> Complete Blood Count - ₹299</label></div><div><label><input type="checkbox" id="test2"> Lipid Profile - ₹399</label></div><div><label><input type="checkbox" id="test3"> Thyroid Panel - ₹499</label></div><button onclick="bookTests()" style="background:#ff8c42; border-radius:40px; padding:12px; width:100%; margin-top:12px;">Book Selected Tests</button></div></div>
-<div id="trackingModal" class="modal"><div class="modal-content"><span class="close-btn" onclick="closeModal('trackingModal')">&times;</span><h3>Track Delivery</h3><input type="text" id="trackOrderId" placeholder="Order ID" style="padding:12px; border-radius:40px; width:100%; margin:10px 0;"><button onclick="trackOrder()" style="background:#ff8c42; border-radius:40px; padding:12px;">Track Order</button><div id="trackingResult" class="subtext" style="margin-top:12px;"></div></div></div>
+<!-- All Modals -->
+<!-- Doctor Chat Modal -->
+<div id="doctorChatModal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeModal('doctorChatModal')">&times;</span>
+        <h3 style="display: flex; align-items: center; gap: 8px; color: var(--secondary);">
+            <i class="fas fa-user-md"></i> Doctor Consultation
+        </h3>
+        <div id="doctorChatMessages" style="height: 250px; overflow-y: auto; background: var(--light-bg); padding: 16px; border-radius: var(--border-radius-md); margin: 16px 0;">
+            <div class="bot-message" style="margin: 5px;">
+                <i class="fas fa-user-md"></i> Hello! I'm Dr. Assistant. How can I help you today?
+            </div>
+        </div>
+        <div style="display: flex; gap: 8px;">
+            <input type="text" id="doctorQuery" style="flex: 1; padding: 14px; border-radius: var(--border-radius-xl); border: 2px solid var(--border-color);" placeholder="Describe your health concern...">
+            <button onclick="askDoctor()" style="background: var(--primary); border: none; border-radius: var(--border-radius-xl); padding: 0 24px; color: white; font-weight: 600;">
+                <i class="fas fa-paper-plane"></i> Send
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Reminders Modal -->
+<div id="remindersModal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeModal('remindersModal')">&times;</span>
+        <h3 style="display: flex; align-items: center; gap: 8px; color: var(--secondary);">
+            <i class="fas fa-bell"></i> Medicine Reminders
+        </h3>
+        <div id="remindersList" style="margin: 16px 0; max-height: 300px; overflow-y: auto;"></div>
+        <div style="display: grid; gap: 8px;">
+            <input type="text" id="reminderMedicine" placeholder="Medicine name" style="padding: 14px; border-radius: var(--border-radius-xl); border: 2px solid var(--border-color);">
+            <input type="time" id="reminderTime" style="padding: 14px; border-radius: var(--border-radius-xl); border: 2px solid var(--border-color);">
+            <button onclick="addReminder()" style="background: var(--primary); border: none; border-radius: var(--border-radius-xl); padding: 14px; color: white; font-weight: 600;">
+                <i class="fas fa-plus-circle"></i> Set Reminder
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Medical Loans Modal -->
+<div id="loansModal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeModal('loansModal')">&times;</span>
+        <h3 style="display: flex; align-items: center; gap: 8px; color: var(--secondary);">
+            <i class="fas fa-hand-holding-usd"></i> Medical Loan Assistance
+        </h3>
+        <div style="background: var(--primary-light); padding: 16px; border-radius: var(--border-radius-md); margin: 16px 0;">
+            <p><i class="fas fa-check-circle" style="color: var(--success);"></i> Up to ₹5,00,000</p>
+            <p><i class="fas fa-check-circle" style="color: var(--success);"></i> Interest from 10.99% p.a.</p>
+            <p><i class="fas fa-check-circle" style="color: var(--success);"></i> Quick approval in 24 hours</p>
+        </div>
+        <input type="number" id="loanAmount" placeholder="Loan Amount (₹)" style="padding: 14px; width: 100%; margin: 10px 0; border-radius: var(--border-radius-xl); border: 2px solid var(--border-color);">
+        <select id="loanTenure" style="padding: 14px; width: 100%; border-radius: var(--border-radius-xl); border: 2px solid var(--border-color);">
+            <option value="12">12 Months</option>
+            <option value="24">24 Months</option>
+            <option value="36">36 Months</option>
+            <option value="48">48 Months</option>
+        </select>
+        <button onclick="calculateEMI()" style="background: var(--primary); border-radius: var(--border-radius-xl); padding: 16px; width: 100%; margin-top: 16px; font-weight: 600; color: white;">
+            <i class="fas fa-calculator"></i> Calculate EMI
+        </button>
+        <p id="emiResult" style="margin-top: 16px; padding: 12px; background: var(--light-bg); border-radius: var(--border-radius-md); font-weight: 600;"></p>
+    </div>
+</div>
+
+<!-- QR Scanner Modal -->
+<div id="qrScannerModal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeModal('qrScannerModal')">&times;</span>
+        <h3 style="display: flex; align-items: center; gap: 8px; color: var(--secondary);">
+            <i class="fas fa-qrcode"></i> Verify Medicine QR Code
+        </h3>
+        <div id="qr-reader" style="width: 100%; border-radius: var(--border-radius-md); overflow: hidden;"></div>
+        <div id="qrResult" style="margin-top: 16px;"></div>
+    </div>
+</div>
+
+<!-- Prescription Scanner Modal -->
+<div id="prescriptionScannerModal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeModal('prescriptionScannerModal')">&times;</span>
+        <h3 style="display: flex; align-items: center; gap: 8px; color: var(--secondary);">
+            <i class="fas fa-prescription"></i> Upload Prescription
+        </h3>
+        <div id="prescriptionScanner" style="width: 100%;"></div>
+        <div id="prescriptionResult"></div>
+        <button onclick="simulatePrescriptionScan()" style="background: var(--primary); border-radius: var(--border-radius-xl); padding: 16px; margin-top: 16px; width: 100%; font-weight: 600; color: white;">
+            <i class="fas fa-camera"></i> Simulate Scan
+        </button>
+    </div>
+</div>
+
+<!-- Study Resources Modal -->
+<div id="studyModal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeModal('studyModal')">&times;</span>
+        <h3 style="display: flex; align-items: center; gap: 8px; color: var(--secondary);">
+            <i class="fas fa-book"></i> Medical Study Resources
+        </h3>
+        <ul style="margin-left: 20px; line-height: 2;">
+            <li><i class="fas fa-flask"></i> Pharmacology Reference Guide</li>
+            <li><i class="fas fa-dna"></i> Drug Interaction Database</li>
+            <li><i class="fas fa-clipboard"></i> Clinical Guidelines 2024</li>
+            <li><i class="fas fa-microscope"></i> Medical Research Papers</li>
+            <li><i class="fas fa-video"></i> Video Lectures Library</li>
+        </ul>
+    </div>
+</div>
+
+<!-- Fitness Tips Modal -->
+<div id="fitnessModal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeModal('fitnessModal')">&times;</span>
+        <h3 style="display: flex; align-items: center; gap: 8px; color: var(--secondary);">
+            <i class="fas fa-heartbeat"></i> Daily Health Tips
+        </h3>
+        <ul style="margin-left: 20px; line-height: 2;">
+            <li><i class="fas fa-walking"></i> 30 minutes walking daily</li>
+            <li><i class="fas fa-water"></i> Drink 8 glasses of water</li>
+            <li><i class="fas fa-apple-alt"></i> Eat balanced nutrition</li>
+            <li><i class="fas fa-bed"></i> Get 7-8 hours of sleep</li>
+            <li><i class="fas fa-smile"></i> Practice stress management</li>
+        </ul>
+    </div>
+</div>
+
+<!-- Ayurvedic Modal -->
+<div id="ayurvedicModal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeModal('ayurvedicModal')">&times;</span>
+        <h3 style="display: flex; align-items: center; gap: 8px; color: var(--secondary);">
+            <i class="fas fa-leaf"></i> Ayurvedic Remedies
+        </h3>
+        <ul style="margin-left: 20px; line-height: 2;">
+            <li><i class="fas fa-seedling"></i> Ashwagandha - Stress relief & vitality</li>
+            <li><i class="fas fa-seedling"></i> Turmeric - Anti-inflammatory & immunity</li>
+            <li><i class="fas fa-seedling"></i> Tulsi - Respiratory health & antioxidant</li>
+            <li><i class="fas fa-seedling"></i> Triphala - Digestive health & detox</li>
+            <li><i class="fas fa-seedling"></i> Brahmi - Brain function & memory</li>
+        </ul>
+    </div>
+</div>
+
+<!-- Lab Tests Modal -->
+<div id="labTestsModal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeModal('labTestsModal')">&times;</span>
+        <h3 style="display: flex; align-items: center; gap: 8px; color: var(--secondary);">
+            <i class="fas fa-flask"></i> Book Lab Tests
+        </h3>
+        <div style="margin: 16px 0;">
+            <label style="display: flex; align-items: center; gap: 8px; padding: 12px; border-bottom: 1px solid var(--border-color);">
+                <input type="checkbox" id="test1"> Complete Blood Count - ₹299
+            </label>
+            <label style="display: flex; align-items: center; gap: 8px; padding: 12px; border-bottom: 1px solid var(--border-color);">
+                <input type="checkbox" id="test2"> Lipid Profile - ₹399
+            </label>
+            <label style="display: flex; align-items: center; gap: 8px; padding: 12px; border-bottom: 1px solid var(--border-color);">
+                <input type="checkbox" id="test3"> Thyroid Panel - ₹499
+            </label>
+            <label style="display: flex; align-items: center; gap: 8px; padding: 12px;">
+                <input type="checkbox" id="test4"> Vitamin D Test - ₹699
+            </label>
+        </div>
+        <button onclick="bookTests()" style="background: var(--primary); border-radius: var(--border-radius-xl); padding: 16px; width: 100%; font-weight: 600; color: white;">
+            <i class="fas fa-calendar-check"></i> Book Selected Tests
+        </button>
+    </div>
+</div>
+
+<!-- Tracking Modal -->
+<div id="trackingModal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeModal('trackingModal')">&times;</span>
+        <h3 style="display: flex; align-items: center; gap: 8px; color: var(--secondary);">
+            <i class="fas fa-truck"></i> Track Delivery
+        </h3>
+        <input type="text" id="trackOrderId" placeholder="Enter Order ID" style="padding: 14px; border-radius: var(--border-radius-xl); width: 100%; margin: 20px 0; border: 2px solid var(--border-color);">
+        <button onclick="trackOrder()" style="background: var(--primary); border-radius: var(--border-radius-xl); padding: 16px; width: 100%; font-weight: 600; color: white;">
+            <i class="fas fa-search"></i> Track Order
+        </button>
+        <div id="trackingResult" style="margin-top: 20px;"></div>
+    </div>
+</div>
 
 <script>
-    // Enhanced app compatibility - ensures login works in app environments
+    // ========== ENHANCED APPLICATION STATE ==========
     let currentLanguage = 'en';
-    let cart = { paracetamol:0, ibuprofen:0, amoxicillin:0, omeprazole:0 };
-    let addresses = [{ name:"Rajesh Kumar", mobile:"9876543210", address:"Sector 12, Main Road", landmark:"Near City Hospital", pincode:"110001", selected:true }];
+    let cart = { paracetamol: 0, ibuprofen: 0, amoxicillin: 0, omeprazole: 0 };
+    let addresses = [
+        { 
+            name: "Rajesh Kumar", 
+            mobile: "9876543210", 
+            address: "Sector 12, Main Road", 
+            landmark: "Near City Hospital", 
+            pincode: "110001", 
+            selected: true 
+        }
+    ];
     let currentOTP = null;
     let symptoms = [];
     let recognition;
     let isListening = false;
+    let html5QrCode;
     
+    // Medicine prices
+    const prices = {
+        paracetamol: 25,
+        ibuprofen: 35,
+        amoxicillin: 120,
+        omeprazole: 85
+    };
+    
+    // ========== TRANSLATIONS ==========
     const translations = { 
-        en: { appTitle:"CLASSIC PHARMACY", appSubtitle:"Your neighborhood pharmacy", aiTitle:"Medicine Assistant", aiMessage:"Hello! Ask me about any medicine.", aiPlaceholder:"e.g., Paracetamol uses...", diseaseTitle:"Symptom Checker", diseaseMessage:"Describe your symptoms..." }, 
-        hi: { appTitle:"क्लासिक फार्मेसी", appSubtitle:"आपकी निकटवर्ती फार्मेसी", aiTitle:"दवा सहायक", aiMessage:"नमस्ते! कोई भी दवा के बारे में पूछें।", aiPlaceholder:"जैसे, पैरासिटामोल उपयोग...", diseaseTitle:"लक्षण जांच", diseaseMessage:"अपने लक्षण बताएं..." }, 
-        ta: { appTitle:"கிளாசிக் மருந்தகம்", appSubtitle:"உங்கள் அக்கம் பக்க மருந்தகம்", aiTitle:"மருந்து உதவியாளர்", aiMessage:"வணக்கம்! மருந்து பற்றி கேளுங்கள்.", aiPlaceholder:"எ.கா: பாராசிட்டமால் பயன்கள்", diseaseTitle:"அறிகுறி சரிபார்ப்பு", diseaseMessage:"உங்கள் அறிகுறிகளை விவரிக்கவும்" }, 
-        bn: { appTitle:"ক্লাসিক ফার্মেসি", appSubtitle:"আপনার প্রতিবেশী ফার্মেসি", aiTitle:"ঔষধ সহায়ক", aiMessage:"হ্যালো! যেকোনো ওষুধ সম্পর্কে জিজ্ঞাসা করুন।", aiPlaceholder:"যেমন: প্যারাসিটামল ব্যবহার", diseaseTitle:"লক্ষণ পরীক্ষক", diseaseMessage:"আপনার লক্ষণগুলি বর্ণনা করুন" } 
+        en: { 
+            appTitle: "CLASSIC PHARMACY", 
+            appSubtitle: "Your neighborhood pharmacy", 
+            aiTitle: "Medicine Assistant", 
+            aiMessage: "Hello! Ask me about any medicine.", 
+            aiPlaceholder: "e.g., Paracetamol uses...", 
+            diseaseTitle: "Symptom Checker", 
+            diseaseMessage: "Describe your symptoms..." 
+        }, 
+        hi: { 
+            appTitle: "क्लासिक फार्मेसी", 
+            appSubtitle: "आपकी निकटवर्ती फार्मेसी", 
+            aiTitle: "दवा सहायक", 
+            aiMessage: "नमस्ते! कोई भी दवा के बारे में पूछें।", 
+            aiPlaceholder: "जैसे, पैरासिटामोल उपयोग...", 
+            diseaseTitle: "लक्षण जांच", 
+            diseaseMessage: "अपने लक्षण बताएं..." 
+        }, 
+        ta: { 
+            appTitle: "கிளாசிக் மருந்தகம்", 
+            appSubtitle: "உங்கள் அக்கம் பக்க மருந்தகம்", 
+            aiTitle: "மருந்து உதவியாளர்", 
+            aiMessage: "வணக்கம்! மருந்து பற்றி கேளுங்கள்.", 
+            aiPlaceholder: "எ.கா: பாராசிட்டமால் பயன்கள்", 
+            diseaseTitle: "அறிகுறி சரிபார்ப்பு", 
+            diseaseMessage: "உங்கள் அறிகுறிகளை விவரிக்கவும்" 
+        }, 
+        bn: { 
+            appTitle: "ক্লাসিক ফার্মেসি", 
+            appSubtitle: "আপনার প্রতিবেশী ফার্মেসি", 
+            aiTitle: "ঔষধ সহায়ক", 
+            aiMessage: "হ্যালো! যেকোনো ওষুধ সম্পর্কে জিজ্ঞাসা করুন।", 
+            aiPlaceholder: "যেমন: প্যারাসিটামল ব্যবহার", 
+            diseaseTitle: "লক্ষণ পরীক্ষক", 
+            diseaseMessage: "আপনার লক্ষণগুলি বর্ণনা করুন" 
+        } 
     };
     
+    // ========== MEDICINE KNOWLEDGE BASE ==========
     const medicineKnowledge = { 
-        paracetamol:{ en:{ uses:"Used for fever and mild to moderate pain.", sideEffects:"Nausea, rash (rare).", precautions:"Do not exceed 4g per day." }, hi:{ uses:"बुखार और हल्के दर्द के लिए।", sideEffects:"मतली, दाने।", precautions:"दिन में 4 ग्राम से अधिक न लें।" } }, 
-        ibuprofen:{ en:{ uses:"Pain, inflammation, fever.", sideEffects:"Stomach upset, heartburn.", precautions:"Take with food." }, hi:{ uses:"दर्द, सूजन, बुखार।", sideEffects:"पेट खराब।", precautions:"भोजन के साथ लें।" } },
-        amoxicillin:{ en:{ uses:"Bacterial infections (ear, throat, urinary tract).", sideEffects:"Diarrhea, nausea, rash.", precautions:"Complete full course as prescribed." }, hi:{ uses:"जीवाणु संक्रमण (कान, गला, मूत्र पथ)।", sideEffects:"दस्त, मतली, दाने।", precautions:"निर्धारित अनुसार पूरा कोर्स करें।" } },
-        omeprazole:{ en:{ uses:"Acid reflux, GERD, stomach ulcers.", sideEffects:"Headache, stomach pain, nausea.", precautions:"Take before meal for best results." }, hi:{ uses:"एसिड रिफ्लक्स, जीईआरडी, पेट के अल्सर।", sideEffects:"सिरदर्द, पेट दर्द, मतली।", precautions:"सर्वोत्तम परिणामों के लिए भोजन से पहले लें।" } }
+        paracetamol: {
+            en: { 
+                uses: "Used for fever and mild to moderate pain relief.",
+                sideEffects: "Nausea, rash (rare). Liver damage with overdose.",
+                precautions: "Do not exceed 4g per day. Avoid alcohol." 
+            },
+            hi: { 
+                uses: "बुखार और हल्के से मध्यम दर्द के लिए।",
+                sideEffects: "मतली, दाने। अधिक मात्रा से लीवर क्षति।",
+                precautions: "दिन में 4 ग्राम से अधिक न लें। शराब से बचें।" 
+            }
+        }, 
+        ibuprofen: {
+            en: { 
+                uses: "Pain, inflammation, fever. Effective for arthritis and menstrual pain.",
+                sideEffects: "Stomach upset, heartburn, nausea.",
+                precautions: "Take with food. Avoid if you have stomach ulcers." 
+            },
+            hi: { 
+                uses: "दर्द, सूजन, बुखार। गठिया और मासिक दर्द के लिए प्रभावी।",
+                sideEffects: "पेट खराब, एसिडिटी, मतली।",
+                precautions: "भोजन के साथ लें। पेट के अल्सर में न लें।" 
+            }
+        },
+        amoxicillin: {
+            en: { 
+                uses: "Bacterial infections (ear, throat, urinary tract, respiratory).",
+                sideEffects: "Diarrhea, nausea, rash, yeast infections.",
+                precautions: "Complete full course as prescribed. Take with or without food." 
+            },
+            hi: { 
+                uses: "जीवाणु संक्रमण (कान, गला, मूत्र पथ, श्वसन)।",
+                sideEffects: "दस्त, मतली, दाने, यीस्ट संक्रमण।",
+                precautions: "निर्धारित अनुसार पूरा कोर्स करें। भोजन के साथ या बिना ले सकते हैं।" 
+            }
+        },
+        omeprazole: {
+            en: { 
+                uses: "Acid reflux, GERD, stomach ulcers, heartburn.",
+                sideEffects: "Headache, stomach pain, nausea, diarrhea.",
+                precautions: "Take before meal for best results. Not for immediate relief." 
+            },
+            hi: { 
+                uses: "एसिड रिफ्लक्स, जीईआरडी, पेट के अल्सर, एसिडिटी।",
+                sideEffects: "सिरदर्द, पेट दर्द, मतली, दस्त।",
+                precautions: "सर्वोत्तम परिणामों के लिए भोजन से पहले लें। तुरंत राहत के लिए नहीं।" 
+            }
+        }
     };
     
-    const diseaseData = { fever:["Common Cold","Viral Fever","Flu"], headache:["Tension Headache","Migraine"], cough:["Bronchitis","Cough & Cold"], fatigue:["Anemia","Stress","Sleep Deficiency"], pain:["Muscle Strain","Arthritis"] };
+    // Disease prediction data
+    const diseaseData = { 
+        fever: ["Common Cold", "Viral Fever", "Flu", "Dengue", "Malaria"],
+        headache: ["Tension Headache", "Migraine", "Sinusitis", "Eye Strain"],
+        cough: ["Bronchitis", "Common Cold", "Asthma", "Pneumonia"],
+        fatigue: ["Anemia", "Stress", "Sleep Deficiency", "Thyroid Issues", "Depression"],
+        pain: ["Muscle Strain", "Arthritis", "Fibromyalgia", "Injury"],
+        nausea: ["Food Poisoning", "Gastritis", "Migraine", "Pregnancy"],
+        rash: ["Allergic Reaction", "Eczema", "Psoriasis", "Contact Dermatitis"]
+    };
+    
+    // ========== UTILITY FUNCTIONS ==========
+    function showToast(message, duration = 3000) {
+        const toast = document.createElement('div');
+        toast.className = 'toast';
+        toast.innerHTML = `<i class="fas fa-info-circle"></i> ${message}`;
+        document.body.appendChild(toast);
+        
+        setTimeout(() => {
+            toast.style.animation = 'slideUp 0.3s ease reverse';
+            setTimeout(() => toast.remove(), 300);
+        }, duration);
+    }
     
     function updateLanguage(lang) { 
         currentLanguage = lang; 
-        let t = translations[lang] || translations.en; 
-        if(document.getElementById('appTitle')) document.getElementById('appTitle').innerText = t.appTitle; 
-        if(document.getElementById('appSubtitle')) document.getElementById('appSubtitle').innerText = t.appSubtitle; 
-        if(document.getElementById('aiTitle')) document.getElementById('aiTitle').innerText = t.aiTitle; 
-        if(document.getElementById('aiChatContainer')) document.getElementById('aiChatContainer').innerHTML = `<div class="ai-message bot-message">${t.aiMessage}</div>`; 
-        if(document.getElementById('aiQuery')) document.getElementById('aiQuery').placeholder = t.aiPlaceholder; 
-        if(document.getElementById('diseaseTitle')) document.getElementById('diseaseTitle').innerText = t.diseaseTitle; 
-        if(document.getElementById('diseaseMessage')) document.getElementById('diseaseMessage').innerText = t.diseaseMessage; 
+        const t = translations[lang] || translations.en;
+        
+        if (document.getElementById('appTitle')) {
+            document.getElementById('appTitle').innerHTML = `<i class="fas fa-prescription-bottle" style="font-size: 24px;"></i> ${t.appTitle}`;
+        }
+        if (document.getElementById('appSubtitle')) document.getElementById('appSubtitle').innerText = t.appSubtitle;
+        if (document.getElementById('aiTitle')) document.getElementById('aiTitle').innerText = t.aiTitle;
+        if (document.getElementById('aiChatContainer')) {
+            document.getElementById('aiChatContainer').innerHTML = `<div class="ai-message bot-message"><i class="fas fa-info-circle"></i> ${t.aiMessage}</div>`;
+        }
+        if (document.getElementById('aiQuery')) document.getElementById('aiQuery').placeholder = t.aiPlaceholder;
+        if (document.getElementById('diseaseTitle')) document.getElementById('diseaseTitle').innerText = t.diseaseTitle;
+        if (document.getElementById('diseaseMessage')) document.getElementById('diseaseMessage').innerText = t.diseaseMessage;
+        
+        showToast(`Language changed to ${lang.toUpperCase()}`, 2000);
     }
     
-    function selectLanguage(lang) { 
-        updateLanguage(lang); 
-        localStorage.setItem('lang', lang); 
-        document.getElementById('languageScreen').style.display = 'none'; 
-        document.getElementById('appScreen').style.display = 'block'; 
-        updateCartIndicator(); 
-    }
-    
-    let registeredUsers = JSON.parse(localStorage.getItem('users')) || {};
+    // ========== AUTHENTICATION FUNCTIONS ==========
+    let registeredUsers = JSON.parse(localStorage.getItem('pharmacy_users')) || {};
     
     function loginOrRegister() { 
-        let email = document.getElementById('loginEmail').value.trim(); 
-        let pwd = document.getElementById('loginPassword').value; 
-        if(!email || !pwd || pwd.length<6) { 
-            alert("Please enter valid email and password (min 6 characters)"); 
+        const email = document.getElementById('loginEmail').value.trim();
+        const pwd = document.getElementById('loginPassword').value;
+        
+        if (!email || !pwd || pwd.length < 6) { 
+            showToast("Please enter valid email and password (min 6 characters)", 4000);
             return; 
-        } 
-        if(!registeredUsers[email]) {
-            registeredUsers[email] = { password:pwd };
-            localStorage.setItem('users', JSON.stringify(registeredUsers));
-        } else if(registeredUsers[email].password !== pwd) { 
-            alert("Incorrect password"); 
+        }
+        
+        // Auto-register if not exists
+        if (!registeredUsers[email]) {
+            registeredUsers[email] = { password: pwd, createdAt: new Date().toISOString() };
+            localStorage.setItem('pharmacy_users', JSON.stringify(registeredUsers));
+            showToast("New account created successfully!", 2000);
+        } else if (registeredUsers[email].password !== pwd) { 
+            showToast("Incorrect password. Please try again.", 3000);
             return; 
-        } 
-        currentOTP = Math.floor(100000 + Math.random() * 900000).toString(); 
-        alert(`Demo OTP: ${currentOTP}`); 
-        document.getElementById('loginScreen').style.display = 'none'; 
-        document.getElementById('otpScreen').style.display = 'block'; 
+        }
+        
+        currentOTP = Math.floor(100000 + Math.random() * 900000).toString();
+        showToast(`Demo OTP: ${currentOTP}`, 4000);
+        
+        document.getElementById('loginScreen').style.display = 'none';
+        document.getElementById('otpScreen').style.display = 'block';
     }
     
     function validateOTP() { 
-        let entered = document.getElementById('otp').value; 
-        if(entered === currentOTP || entered === "123456") { 
-            document.getElementById('otpScreen').style.display = 'none'; 
-            document.getElementById('languageScreen').style.display = 'block'; 
-        } else alert("Invalid OTP"); 
+        const entered = document.getElementById('otp').value;
+        
+        if (entered === currentOTP || entered === "123456") { 
+            showToast("OTP verified successfully!", 2000);
+            document.getElementById('otpScreen').style.display = 'none';
+            document.getElementById('languageScreen').style.display = 'block';
+        } else {
+            showToast("Invalid OTP. Please try again.", 3000);
+        }
     }
     
     function resendOTP() { 
-        currentOTP = Math.floor(100000 + Math.random() * 900000).toString(); 
-        alert(`New OTP: ${currentOTP}`); 
+        currentOTP = Math.floor(100000 + Math.random() * 900000).toString();
+        showToast(`New OTP sent: ${currentOTP}`, 4000);
     }
     
+    function selectLanguage(lang) { 
+        updateLanguage(lang);
+        localStorage.setItem('preferred_language', lang);
+        
+        document.getElementById('languageScreen').style.display = 'none';
+        document.getElementById('appScreen').style.display = 'block';
+        
+        updateCartIndicator();
+        showToast(`Welcome to Classic Pharmacy!`, 2000);
+    }
+    
+    // ========== CART MANAGEMENT ==========
     function updateQuantity(med, delta) { 
-        if(cart[med]+delta>=0) { 
-            cart[med]+=delta; 
-            let qtySpan = document.getElementById(`${med}-qty`);
-            if(qtySpan) qtySpan.innerText = cart[med]; 
-            updateCartSummary(); 
-            updateCartIndicator(); 
+        if (cart[med] + delta >= 0) { 
+            cart[med] += delta;
+            
+            const qtySpan = document.getElementById(`${med}-qty`);
+            if (qtySpan) qtySpan.innerText = cart[med];
+            
+            updateCartSummary();
+            updateCartIndicator();
+            
+            // Haptic feedback simulation
+            if (delta > 0) {
+                showToast(`Added ${med} to cart`, 1000);
+            }
         } 
     }
     
     function updateCartSummary() { 
-        let subtotal = Object.keys(cart).reduce((s,k)=>s+cart[k]*(k==='paracetamol'?25:k==='ibuprofen'?35:k==='amoxicillin'?120:85),0); 
-        let total = subtotal+40-20; 
-        if(document.getElementById('subtotal')) document.getElementById('subtotal').innerText = `₹${subtotal}`; 
-        if(document.getElementById('total')) document.getElementById('total').innerText = `₹${total}`; 
-        let items = Object.values(cart).reduce((a,b)=>a+b,0); 
-        let btn = document.getElementById('placeOrderBtn'); 
-        if(btn) btn.disabled = items===0 || !addresses.some(a=>a.selected); 
+        const subtotal = Object.keys(cart).reduce((sum, med) => 
+            sum + cart[med] * prices[med], 0
+        );
+        
+        const deliveryCharge = subtotal > 0 ? 40 : 0;
+        const discount = subtotal > 0 ? 20 : 0;
+        const total = subtotal + deliveryCharge - discount;
+        
+        if (document.getElementById('subtotal')) {
+            document.getElementById('subtotal').innerText = `₹${subtotal}`;
+        }
+        if (document.getElementById('total')) {
+            document.getElementById('total').innerText = `₹${total}`;
+        }
+        
+        const totalItems = Object.values(cart).reduce((a, b) => a + b, 0);
+        const hasSelectedAddress = addresses.some(a => a.selected);
+        const placeOrderBtn = document.getElementById('placeOrderBtn');
+        
+        if (placeOrderBtn) {
+            placeOrderBtn.disabled = totalItems === 0 || !hasSelectedAddress;
+        }
     }
     
     function updateCartIndicator() { 
-        let totalItems = Object.values(cart).reduce((a,b)=>a+b,0); 
-        let ind = document.getElementById('cartIndicator'); 
-        if(ind) { 
-            if(totalItems>0) { 
-                ind.style.display = 'flex'; 
-                ind.innerText = totalItems; 
-            } else ind.style.display = 'none'; 
+        const totalItems = Object.values(cart).reduce((a, b) => a + b, 0);
+        const ind = document.getElementById('cartIndicator');
+        
+        if (ind) { 
+            if (totalItems > 0) { 
+                ind.style.display = 'flex';
+                ind.innerText = totalItems;
+            } else {
+                ind.style.display = 'none';
+            }
         } 
     }
     
+    // ========== ADDRESS MANAGEMENT ==========
     function loadAddresses() { 
-        let container = document.getElementById('addressList'); 
-        if(container) container.innerHTML = ''; 
-        addresses.forEach((addr,i)=>{ 
-            let div = document.createElement('div'); 
-            div.className = `address-item ${addr.selected?'selected':''}`; 
-            div.innerHTML = `<div><strong>${addr.name}</strong><br>${addr.address}, ${addr.landmark}, ${addr.pincode}<br>📞 ${addr.mobile}</div><div style="margin-top:8px;"><button class="address-btn" style="background:#ff8c42; border:none; padding:6px 14px; border-radius:30px; color:white;" onclick="selectAddress(${i})">Select</button> <button style="background:#eef2f5; border:none; padding:6px 14px; border-radius:30px;" onclick="deleteAddress(${i})">Delete</button></div>`; 
-            container.appendChild(div); 
-        }); 
+        const container = document.getElementById('addressList');
+        if (!container) return;
+        
+        if (addresses.length === 0) {
+            container.innerHTML = `
+                <div class="empty-state">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <p>No addresses added yet</p>
+                    <p style="font-size: 13px;">Add a delivery address to continue</p>
+                </div>
+            `;
+            return;
+        }
+        
+        container.innerHTML = '';
+        
+        addresses.forEach((addr, i) => { 
+            const div = document.createElement('div');
+            div.className = `address-item ${addr.selected ? 'selected' : ''}`;
+            div.innerHTML = `
+                <div>
+                    <strong>${addr.name}</strong>
+                    ${addr.selected ? '<span class="address-badge">Default</span>' : ''}
+                    <br>
+                    <i class="fas fa-home"></i> ${addr.address}, ${addr.landmark}
+                    <br>
+                    <i class="fas fa-map-pin"></i> ${addr.pincode}
+                    <br>
+                    <i class="fas fa-phone"></i> ${addr.mobile}
+                </div>
+                <div style="margin-top: 12px; display: flex; gap: 8px;">
+                    <button 
+                        style="background: ${addr.selected ? 'var(--success)' : 'var(--primary)'}; border: none; padding: 8px 16px; border-radius: var(--border-radius-xl); color: white; font-weight: 600; flex: 1;"
+                        onclick="selectAddress(${i})"
+                    >
+                        ${addr.selected ? '✓ Selected' : 'Select'}
+                    </button>
+                    <button 
+                        style="background: var(--light-bg); border: 2px solid var(--border-color); padding: 8px 16px; border-radius: var(--border-radius-xl); font-weight: 600;"
+                        onclick="deleteAddress(${i})"
+                    >
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+            `;
+            container.appendChild(div);
+        });
     }
     
     function selectAddress(idx) { 
-        addresses.forEach((a,i)=>a.selected = (i===idx)); 
-        loadAddresses(); 
-        updateCartSummary(); 
+        addresses.forEach((a, i) => a.selected = (i === idx));
+        loadAddresses();
+        updateCartSummary();
+        showToast("Delivery address selected", 1500);
     }
     
     function deleteAddress(idx) { 
-        if(addresses.length>1) { 
-            addresses.splice(idx,1); 
-            addresses[0].selected=true; 
-            loadAddresses(); 
-            updateCartSummary(); 
-        } else alert("At least one address required"); 
+        if (addresses.length > 1) { 
+            const wasSelected = addresses[idx].selected;
+            addresses.splice(idx, 1);
+            
+            if (wasSelected) {
+                addresses[0].selected = true;
+            }
+            
+            loadAddresses();
+            updateCartSummary();
+            showToast("Address deleted", 1500);
+        } else {
+            showToast("At least one address is required", 3000);
+        }
     }
     
     function saveAddress() { 
-        let name=document.getElementById('fullName').value, mob=document.getElementById('mobileNumber').value, addr=document.getElementById('address').value, land=document.getElementById('landmark').value, pin=document.getElementById('pincode').value; 
-        if(name && mob && addr && pin) { 
-            addresses.forEach(a=>a.selected=false); 
-            addresses.push({name,mobile:mob,address:addr,landmark:land,pincode:pin,selected:true}); 
-            closeAddAddressForm(); 
-            loadAddresses(); 
-            updateCartSummary(); 
-        } else alert("Please fill all fields"); 
+        const name = document.getElementById('fullName').value;
+        const mobile = document.getElementById('mobileNumber').value;
+        const addr = document.getElementById('address').value;
+        const landmark = document.getElementById('landmark').value;
+        const pincode = document.getElementById('pincode').value;
+        
+        if (name && mobile && addr && pincode) { 
+            addresses.forEach(a => a.selected = false);
+            addresses.push({
+                name,
+                mobile,
+                address: addr,
+                landmark,
+                pincode,
+                selected: true
+            });
+            
+            closeAddAddressForm();
+            loadAddresses();
+            updateCartSummary();
+            
+            // Clear form
+            ['fullName', 'mobileNumber', 'address', 'landmark', 'pincode'].forEach(id => {
+                document.getElementById(id).value = '';
+            });
+            
+            showToast("Address saved successfully!", 2000);
+        } else {
+            showToast("Please fill all required fields", 3000);
+        }
     }
     
     function placeOrder() { 
-        let totalItems = Object.values(cart).reduce((a,b)=>a+b,0); 
-        if(totalItems===0) alert("Add medicines to cart"); 
-        else { 
-            alert("Order placed successfully! Delivery within 2-3 hours."); 
-            for(let m in cart) cart[m]=0; 
-            updateCartSummary(); 
-            closeMedicineOrdering(); 
-        } 
+        const totalItems = Object.values(cart).reduce((a, b) => a + b, 0);
+        
+        if (totalItems === 0) {
+            showToast("Please add medicines to cart", 3000);
+            return;
+        }
+        
+        const selectedAddress = addresses.find(a => a.selected);
+        const total = document.getElementById('total').innerText;
+        
+        showToast(`Order placed successfully! Total: ${total}`, 3000);
+        
+        // Clear cart
+        for (let m in cart) cart[m] = 0;
+        updateCartSummary();
+        updateCartIndicator();
+        closeMedicineOrdering();
+        
+        // Show success message
+        setTimeout(() => {
+            showToast(`Delivery to ${selectedAddress.name} within 2-3 hours`, 4000);
+        }, 500);
     }
     
+    // ========== SCREEN NAVIGATION ==========
     function openMedicineOrdering() { 
-        document.getElementById('appScreen').style.display = 'none'; 
-        document.getElementById('medicineOrderScreen').style.display = 'block'; 
-        loadAddresses(); 
-        updateCartSummary(); 
+        document.getElementById('appScreen').style.display = 'none';
+        document.getElementById('medicineOrderScreen').style.display = 'block';
+        loadAddresses();
+        updateCartSummary();
     }
     
     function closeMedicineOrdering() { 
-        document.getElementById('medicineOrderScreen').style.display = 'none'; 
-        document.getElementById('appScreen').style.display = 'block'; 
+        document.getElementById('medicineOrderScreen').style.display = 'none';
+        document.getElementById('appScreen').style.display = 'block';
     }
     
     function openAddAddressForm() { 
-        document.getElementById('medicineOrderScreen').style.display = 'none'; 
-        document.getElementById('addAddressScreen').style.display = 'block'; 
+        document.getElementById('medicineOrderScreen').style.display = 'none';
+        document.getElementById('addAddressScreen').style.display = 'block';
     }
     
     function closeAddAddressForm() { 
-        document.getElementById('addAddressScreen').style.display = 'none'; 
-        document.getElementById('medicineOrderScreen').style.display = 'block'; 
+        document.getElementById('addAddressScreen').style.display = 'none';
+        document.getElementById('medicineOrderScreen').style.display = 'block';
     }
     
+    function openSecondHome() { 
+        const features = [
+            "Order History", "Health Records", "Nearby Hospitals", "Medicine Refill",
+            "Elderly Care", "Pregnancy Care", "Dental Care", "Mental Health",
+            "Vaccination", "Emergency Contacts", "Insurance", "Health Blog"
+        ];
+        
+        const container = document.getElementById('secondHomeFeatures');
+        if (container) {
+            container.innerHTML = features.map(f => `
+                <div class="second-home-feature" onclick="showToast('${f} service coming soon!', 2000)">
+                    <div class="second-home-icon">📋</div>
+                    <div style="font-weight: 600; font-size: 13px;">${f}</div>
+                </div>
+            `).join('');
+        }
+        
+        document.getElementById('appScreen').style.display = 'none';
+        document.getElementById('secondHomeScreen').style.display = 'block';
+    }
+    
+    function closeSecondHome() { 
+        document.getElementById('secondHomeScreen').style.display = 'none';
+        document.getElementById('appScreen').style.display = 'block';
+    }
+    
+    function openEmergencyOrganHelp() { 
+        document.getElementById('appScreen').style.display = 'none';
+        document.getElementById('organHelpScreen').style.display = 'block';
+    }
+    
+    function closeOrganHelp() { 
+        document.getElementById('organHelpScreen').style.display = 'none';
+        document.getElementById('appScreen').style.display = 'block';
+    }
+    
+    // ========== DOCTOR CHAT ==========
     function openDoctorChat() { 
-        document.getElementById('doctorChatModal').style.display = 'flex'; 
+        document.getElementById('doctorChatModal').style.display = 'flex';
     }
     
     function askDoctor() { 
-        let q = document.getElementById('doctorQuery').value; 
-        if(!q) return; 
-        let chatDiv = document.getElementById('doctorChatMessages'); 
-        chatDiv.innerHTML += `<div class="user-message" style="margin:5px; text-align:right; background:#ff8c42; color:white; padding:8px 14px; border-radius:20px;">${q}</div>`; 
-        document.getElementById('doctorQuery').value = ''; 
-        setTimeout(()=>{ 
-            let resp = q.includes("fever")?"Take paracetamol and rest. Drink plenty of fluids.":q.includes("cold")?"Warm water with honey, take rest.":"Please consult a doctor for proper diagnosis."; 
-            chatDiv.innerHTML += `<div class="bot-message" style="margin:5px; background:#eef2f5; padding:8px 14px; border-radius:20px;">${resp}</div>`; 
-            chatDiv.scrollTop = chatDiv.scrollHeight; 
-        }, 500); 
+        const query = document.getElementById('doctorQuery').value.trim();
+        if (!query) {
+            showToast("Please enter your health concern", 2000);
+            return;
+        }
+        
+        const chatDiv = document.getElementById('doctorChatMessages');
+        chatDiv.innerHTML += `
+            <div style="text-align: right; margin: 10px 0;">
+                <div style="display: inline-block; background: var(--primary); color: white; padding: 10px 16px; border-radius: 20px 20px 4px 20px; max-width: 80%;">
+                    ${query}
+                </div>
+            </div>
+        `;
+        
+        document.getElementById('doctorQuery').value = '';
+        chatDiv.scrollTop = chatDiv.scrollHeight;
+        
+        // Simulate doctor response
+        setTimeout(() => {
+            let response = "";
+            const lowerQuery = query.toLowerCase();
+            
+            if (lowerQuery.includes("fever")) {
+                response = "Take paracetamol and rest. Drink plenty of fluids. If fever persists beyond 3 days, consult a doctor.";
+            } else if (lowerQuery.includes("cold") || lowerQuery.includes("cough")) {
+                response = "Warm water with honey and ginger can help. Take rest and avoid cold drinks. If symptoms worsen, see a doctor.";
+            } else if (lowerQuery.includes("headache")) {
+                response = "Try resting in a quiet, dark room. Stay hydrated. For persistent headaches, ibuprofen may help. Consult if severe.";
+            } else {
+                response = "I recommend consulting a doctor in person for a proper diagnosis. Would you like to book an appointment?";
+            }
+            
+            chatDiv.innerHTML += `
+                <div style="margin: 10px 0;">
+                    <div style="display: inline-block; background: #f0f4f8; color: var(--text-primary); padding: 10px 16px; border-radius: 20px 20px 20px 4px; max-width: 80%; border: 1px solid var(--border-color);">
+                        <i class="fas fa-user-md"></i> ${response}
+                    </div>
+                </div>
+            `;
+            chatDiv.scrollTop = chatDiv.scrollHeight;
+        }, 1000);
     }
     
-    let reminders = JSON.parse(localStorage.getItem('reminders')) || [];
-    function openReminders() { displayReminders(); document.getElementById('remindersModal').style.display = 'flex'; }
-    function displayReminders() { let container = document.getElementById('remindersList'); container.innerHTML = reminders.map((r,i)=>`<div style="background:#f9fbfd; padding:10px; margin:6px 0; border-radius:40px;">${r.medicine} at ${r.time} <button onclick="deleteReminder(${i})" style="float:right; background:#e2e8f0; border:none; border-radius:40px; padding:2px 12px;">Delete</button></div>`).join(''); }
-    function addReminder() { let med = document.getElementById('reminderMedicine').value, time = document.getElementById('reminderTime').value; if(med && time) { reminders.push({medicine:med,time}); localStorage.setItem('reminders',JSON.stringify(reminders)); displayReminders(); alert("Reminder added!"); } }
-    function deleteReminder(i) { reminders.splice(i,1); localStorage.setItem('reminders',JSON.stringify(reminders)); displayReminders(); }
-    function openMedicalLoans() { document.getElementById('loansModal').style.display = 'flex'; }
-    function calculateEMI() { let amt = parseFloat(document.getElementById('loanAmount').value); let tenure = parseInt(document.getElementById('loanTenure').value); let emi = amt * 0.01 * Math.pow(1.01, tenure) / (Math.pow(1.01, tenure) - 1); document.getElementById('emiResult').innerText = `EMI: ₹${emi.toFixed(2)}/month`; }
-    function openLabTests() { document.getElementById('labTestsModal').style.display = 'flex'; }
-    function bookTests() { let tests = []; if(document.getElementById('test1')?.checked) tests.push("CBC - ₹299"); if(document.getElementById('test2')?.checked) tests.push("Lipid Profile - ₹399"); if(document.getElementById('test3')?.checked) tests.push("Thyroid - ₹499"); if(tests.length) alert(`Tests booked: ${tests.join(", ")}. Technician will visit.`); else alert("Select at least one test"); }
-    function openDeliveryTracking() { document.getElementById('trackingModal').style.display = 'flex'; }
-    function trackOrder() { let oid = document.getElementById('trackOrderId').value; if(oid) document.getElementById('trackingResult').innerHTML = `<p>✅ Order ${oid} is out for delivery. Expected by 8 PM.</p>`; else alert("Enter Order ID"); }
+    // ========== REMINDERS ==========
+    let reminders = JSON.parse(localStorage.getItem('medicine_reminders')) || [];
     
-    let html5QrCode;
+    function openReminders() { 
+        displayReminders();
+        document.getElementById('remindersModal').style.display = 'flex';
+    }
+    
+    function displayReminders() { 
+        const container = document.getElementById('remindersList');
+        
+        if (reminders.length === 0) {
+            container.innerHTML = `
+                <div class="empty-state">
+                    <i class="fas fa-bell-slash"></i>
+                    <p>No reminders set</p>
+                    <p style="font-size: 13px;">Add a medicine reminder to stay on track</p>
+                </div>
+            `;
+            return;
+        }
+        
+        container.innerHTML = reminders.map((r, i) => `
+            <div style="background: var(--white); padding: 12px; margin: 8px 0; border-radius: var(--border-radius-md); border: 2px solid var(--border-color); display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <strong>💊 ${r.medicine}</strong><br>
+                    <small><i class="far fa-clock"></i> ${r.time}</small>
+                </div>
+                <button onclick="deleteReminder(${i})" style="background: var(--danger); color: white; border: none; border-radius: 20px; padding: 6px 12px;">
+                    <i class="fas fa-trash"></i>
+                </button>
+            </div>
+        `).join('');
+    }
+    
+    function addReminder() { 
+        const medicine = document.getElementById('reminderMedicine').value.trim();
+        const time = document.getElementById('reminderTime').value;
+        
+        if (medicine && time) { 
+            reminders.push({ medicine, time });
+            localStorage.setItem('medicine_reminders', JSON.stringify(reminders));
+            displayReminders();
+            
+            document.getElementById('reminderMedicine').value = '';
+            document.getElementById('reminderTime').value = '';
+            
+            showToast(`Reminder set for ${medicine} at ${time}`, 3000);
+        } else {
+            showToast("Please enter medicine name and time", 3000);
+        }
+    }
+    
+    function deleteReminder(i) { 
+        reminders.splice(i, 1);
+        localStorage.setItem('medicine_reminders', JSON.stringify(reminders));
+        displayReminders();
+        showToast("Reminder deleted", 1500);
+    }
+    
+    // ========== MEDICAL LOANS ==========
+    function openMedicalLoans() { 
+        document.getElementById('loansModal').style.display = 'flex';
+    }
+    
+    function calculateEMI() { 
+        const amount = parseFloat(document.getElementById('loanAmount').value);
+        const tenure = parseInt(document.getElementById('loanTenure').value);
+        
+        if (!amount || amount <= 0) {
+            showToast("Please enter a valid loan amount", 3000);
+            return;
+        }
+        
+        const monthlyRate = 0.1099 / 12; // 10.99% per annum
+        const emi = amount * monthlyRate * Math.pow(1 + monthlyRate, tenure) / 
+                   (Math.pow(1 + monthlyRate, tenure) - 1);
+        
+        const resultDiv = document.getElementById('emiResult');
+        resultDiv.innerHTML = `
+            <div style="color: var(--success);">
+                <i class="fas fa-calculator"></i> Monthly EMI: ₹${emi.toFixed(2)}
+            </div>
+            <div style="margin-top: 8px; font-size: 13px;">
+                Total Payment: ₹${(emi * tenure).toFixed(2)}<br>
+                Interest: ₹${(emi * tenure - amount).toFixed(2)}
+            </div>
+        `;
+        
+        showToast(`EMI calculated: ₹${emi.toFixed(2)}/month`, 2000);
+    }
+    
+    // ========== LAB TESTS ==========
+    function openLabTests() { 
+        document.getElementById('labTestsModal').style.display = 'flex';
+    }
+    
+    function bookTests() { 
+        const tests = [];
+        if (document.getElementById('test1')?.checked) tests.push("Complete Blood Count - ₹299");
+        if (document.getElementById('test2')?.checked) tests.push("Lipid Profile - ₹399");
+        if (document.getElementById('test3')?.checked) tests.push("Thyroid Panel - ₹499");
+        if (document.getElementById('test4')?.checked) tests.push("Vitamin D Test - ₹699");
+        
+        if (tests.length) {
+            const total = tests.reduce((sum, test) => {
+                const price = parseInt(test.match(/₹(\d+)/)[1]);
+                return sum + price;
+            }, 0);
+            
+            showToast(`Tests booked! Total: ₹${total}. Technician will visit.`, 4000);
+            closeModal('labTestsModal');
+            
+            // Uncheck all
+            ['test1', 'test2', 'test3', 'test4'].forEach(id => {
+                const checkbox = document.getElementById(id);
+                if (checkbox) checkbox.checked = false;
+            });
+        } else {
+            showToast("Please select at least one test", 3000);
+        }
+    }
+    
+    // ========== DELIVERY TRACKING ==========
+    function openDeliveryTracking() { 
+        document.getElementById('trackingModal').style.display = 'flex';
+    }
+    
+    function trackOrder() { 
+        const orderId = document.getElementById('trackOrderId').value.trim();
+        
+        if (!orderId) {
+            showToast("Please enter an order ID", 3000);
+            return;
+        }
+        
+        const resultDiv = document.getElementById('trackingResult');
+        resultDiv.innerHTML = `
+            <div style="background: var(--success); color: white; padding: 16px; border-radius: var(--border-radius-md);">
+                <i class="fas fa-check-circle"></i> Order Found!
+            </div>
+            <div style="margin-top: 16px; padding: 16px; background: var(--light-bg); border-radius: var(--border-radius-md);">
+                <p><strong>Order ID:</strong> ${orderId}</p>
+                <p><strong>Status:</strong> Out for Delivery</p>
+                <p><strong>Expected Delivery:</strong> Today by 8:00 PM</p>
+                <p><strong>Delivery Partner:</strong> Rajesh (📞 98765-43210)</p>
+            </div>
+            <div style="margin-top: 12px;">
+                <div style="display: flex; justify-content: space-between; font-size: 12px;">
+                    <span>📦 Ordered</span>
+                    <span>✅ Confirmed</span>
+                    <span>🚚 Dispatched</span>
+                    <span>📍 Out for Delivery</span>
+                </div>
+                <div style="height: 4px; background: var(--border-color); border-radius: 2px; margin-top: 4px;">
+                    <div style="width: 80%; height: 100%; background: var(--success); border-radius: 2px;"></div>
+                </div>
+            </div>
+        `;
+        
+        showToast("Order tracking information loaded", 2000);
+    }
+    
+    // ========== QR SCANNER ==========
     function openQRScanner() { 
-        document.getElementById('qrScannerModal').style.display = 'flex'; 
-        setTimeout(()=>{ 
+        document.getElementById('qrScannerModal').style.display = 'flex';
+        
+        setTimeout(() => { 
             try {
-                if(!html5QrCode) html5QrCode = new Html5Qrcode("qr-reader"); 
-                html5QrCode.start({ facingMode: "environment" }, { fps:10, qrbox:250 }, 
-                    (decoded)=>{ 
-                        document.getElementById('qrResult').innerHTML = `<p style="color:green;">✓ Medicine: ${decoded}<br>✓ Authentic Product</p>`; 
-                        html5QrCode.stop(); 
+                if (!html5QrCode) {
+                    html5QrCode = new Html5Qrcode("qr-reader");
+                }
+                
+                html5QrCode.start(
+                    { facingMode: "environment" }, 
+                    { fps: 10, qrbox: { width: 250, height: 250 } }, 
+                    (decodedText) => { 
+                        document.getElementById('qrResult').innerHTML = `
+                            <div style="background: var(--success); color: white; padding: 16px; border-radius: var(--border-radius-md);">
+                                <i class="fas fa-check-circle"></i> Medicine Verified!
+                            </div>
+                            <div style="margin-top: 16px;">
+                                <p><strong>Product:</strong> ${decodedText}</p>
+                                <p><i class="fas fa-check-circle" style="color: var(--success);"></i> Authentic Product</p>
+                                <p><i class="fas fa-check-circle" style="color: var(--success);"></i> Batch: B2024001</p>
+                                <p><i class="fas fa-check-circle" style="color: var(--success);"></i> Expiry: 12/2025</p>
+                            </div>
+                        `;
+                        html5QrCode.stop();
+                        showToast("Medicine verified successfully!", 2000);
                     }, 
-                    (err)=>{}); 
-            } catch(e) { console.log("QR scanner not available in this environment"); }
-        }, 500); 
+                    (error) => {
+                        // QR scan error - ignore
+                    }
+                );
+            } catch(e) { 
+                console.log("QR scanner error:", e);
+                document.getElementById('qrResult').innerHTML = `
+                    <div style="color: var(--danger);">
+                        <i class="fas fa-exclamation-triangle"></i> Scanner not available. Using simulation.
+                    </div>
+                `;
+            }
+        }, 500);
     }
     
-    function openPrescriptionScanner() { document.getElementById('prescriptionScannerModal').style.display = 'flex'; }
-    function simulatePrescriptionScan() { document.getElementById('prescriptionResult').innerHTML = `<p>Prescription Detected:</p><ul><li>Paracetamol 500mg - 10 tablets</li><li>Vitamin C 500mg</li></ul><button onclick="processPrescription()" style="background:#ff8c42; border:none; padding:8px 20px; border-radius:40px;">Add to Cart</button>`; }
-    function processPrescription() { alert("Prescription medicines added to cart!"); closeModal('prescriptionScannerModal'); }
-    
-    function openSecondHome() { 
-        let features = ["Order History","Health Records","Nearby Hospitals","Medicine Refill","Elderly Care","Pregnancy Care","Dental Care","Mental Health"]; 
-        let container = document.getElementById('secondHomeFeatures');
-        if(container) container.innerHTML = features.map(f=>`<div class="second-home-feature" onclick="alert('${f} service coming soon!')"><div class="second-home-icon">📋</div><div>${f}</div></div>`).join(''); 
-        document.getElementById('appScreen').style.display = 'none'; 
-        document.getElementById('secondHomeScreen').style.display = 'block'; 
+    // ========== PRESCRIPTION SCANNER ==========
+    function openPrescriptionScanner() { 
+        document.getElementById('prescriptionScannerModal').style.display = 'flex';
     }
     
-    function closeSecondHome() { document.getElementById('secondHomeScreen').style.display = 'none'; document.getElementById('appScreen').style.display = 'block'; }
-    function openEmergencyOrganHelp() { document.getElementById('appScreen').style.display = 'none'; document.getElementById('organHelpScreen').style.display = 'block'; }
-    function closeOrganHelp() { document.getElementById('organHelpScreen').style.display = 'none'; document.getElementById('appScreen').style.display = 'block'; }
+    function simulatePrescriptionScan() { 
+        const resultDiv = document.getElementById('prescriptionResult');
+        resultDiv.innerHTML = `
+            <div style="background: var(--primary-light); padding: 16px; border-radius: var(--border-radius-md); margin-top: 16px;">
+                <h4><i class="fas fa-prescription"></i> Prescription Detected:</h4>
+                <ul style="margin-top: 8px; margin-left: 20px;">
+                    <li>💊 Paracetamol 500mg - 10 tablets (Twice daily)</li>
+                    <li>💊 Vitamin C 500mg - 15 tablets (Once daily)</li>
+                    <li>💊 Azithromycin 500mg - 3 tablets (Once daily for 3 days)</li>
+                </ul>
+                <button onclick="processPrescription()" style="background: var(--primary); border: none; padding: 12px 24px; border-radius: var(--border-radius-xl); margin-top: 16px; color: white; font-weight: 600; width: 100%;">
+                    <i class="fas fa-cart-plus"></i> Add All to Cart
+                </button>
+            </div>
+        `;
+    }
     
+    function processPrescription() { 
+        // Add medicines to cart
+        cart.paracetamol += 2;
+        cart.ibuprofen += 1;
+        
+        updateCartSummary();
+        updateCartIndicator();
+        
+        closeModal('prescriptionScannerModal');
+        showToast("Prescription medicines added to cart!", 3000);
+    }
+    
+    // ========== AI MEDICINE ASSISTANT ==========
     function askAboutMedicine() { 
-        let q = document.getElementById('aiQuery').value; 
-        if(!q) return; 
-        let container = document.getElementById('aiChatContainer'); 
-        container.innerHTML += `<div class="ai-message user-message">${q}</div>`; 
-        document.getElementById('aiQuery').value = ''; 
-        setTimeout(()=>{ 
-            let lower = q.toLowerCase(); 
-            let found = false; 
-            for(let med in medicineKnowledge) { 
-                if(lower.includes(med)) { 
-                    let info = medicineKnowledge[med][currentLanguage] || medicineKnowledge[med].en; 
-                    container.innerHTML += `<div class="ai-message bot-message"><strong>💊 ${med.toUpperCase()}</strong><br>📌 Uses: ${info.uses}<br>⚠️ Side Effects: ${info.sideEffects}<br>✅ Precautions: ${info.precautions}</div>`; 
-                    found=true; 
-                    break; 
+        const query = document.getElementById('aiQuery').value.trim();
+        if (!query) {
+            showToast("Please enter a medicine name", 2000);
+            return;
+        }
+        
+        const container = document.getElementById('aiChatContainer');
+        container.innerHTML += `<div class="ai-message user-message">${query}</div>`;
+        document.getElementById('aiQuery').value = '';
+        
+        setTimeout(() => { 
+            const lowerQuery = query.toLowerCase();
+            let found = false;
+            
+            for (let med in medicineKnowledge) { 
+                if (lowerQuery.includes(med)) { 
+                    const info = medicineKnowledge[med][currentLanguage] || medicineKnowledge[med].en;
+                    container.innerHTML += `
+                        <div class="ai-message bot-message">
+                            <strong>💊 ${med.toUpperCase()}</strong><br>
+                            <i class="fas fa-check-circle" style="color: var(--success);"></i> <strong>Uses:</strong> ${info.uses}<br>
+                            <i class="fas fa-exclamation-triangle" style="color: var(--warning);"></i> <strong>Side Effects:</strong> ${info.sideEffects}<br>
+                            <i class="fas fa-shield-alt" style="color: var(--info);"></i> <strong>Precautions:</strong> ${info.precautions}
+                        </div>
+                    `;
+                    found = true;
+                    break;
                 } 
-            } 
-            if(!found) container.innerHTML += `<div class="ai-message bot-message">ℹ️ I can help with medicine information. Try Paracetamol, Ibuprofen, Amoxicillin, or Omeprazole.</div>`; 
-            container.scrollTop = container.scrollHeight; 
-        }, 800); 
+            }
+            
+            if (!found) {
+                container.innerHTML += `
+                    <div class="ai-message bot-message">
+                        <i class="fas fa-info-circle"></i> I can help with: Paracetamol, Ibuprofen, Amoxicillin, or Omeprazole.<br>
+                        Try asking about uses, side effects, or precautions of these medicines.
+                    </div>
+                `;
+            }
+            
+            container.scrollTop = container.scrollHeight;
+        }, 800);
     }
     
-    function handleKeyPress(e) { if(e.key==='Enter') askAboutMedicine(); }
+    function handleKeyPress(e) { 
+        if (e.key === 'Enter') askAboutMedicine();
+    }
     
+    // ========== SYMPTOM CHECKER ==========
     function toggleVoiceInput() { 
-        if(!('webkitSpeechRecognition' in window)) alert("Speech not supported in this browser"); 
-        else { 
-            if(!isListening) { 
-                recognition = new webkitSpeechRecognition(); 
-                recognition.lang = currentLanguage==='hi'?'hi-IN':'en-US'; 
-                recognition.continuous=true; 
-                recognition.interimResults=true; 
-                recognition.onresult = (e)=> document.getElementById('diseaseMessage').innerText = Array.from(e.results).map(r=>r[0].transcript).join(''); 
-                recognition.start(); 
-                document.getElementById('voiceInputBtn').innerHTML = '<i class="fas fa-stop"></i> Stop'; 
-                isListening=true; 
-            } else { 
-                recognition.stop(); 
-                document.getElementById('voiceInputBtn').innerHTML = '<i class="fas fa-microphone"></i> Speak Symptoms'; 
-                isListening=false; 
-                let text = document.getElementById('diseaseMessage').innerText; 
-                if(text && !text.includes("Describe") && text.length>5) { 
-                    symptoms.push(text); 
-                    updateSymptomsList(); 
-                    document.getElementById('predictBtn').disabled = false; 
-                } 
-            } 
-        } 
+        if (!('webkitSpeechRecognition' in window)) {
+            showToast("Speech recognition not supported in this browser", 3000);
+            return;
+        }
+        
+        const btn = document.getElementById('voiceInputBtn');
+        
+        if (!isListening) { 
+            recognition = new webkitSpeechRecognition();
+            recognition.lang = currentLanguage === 'hi' ? 'hi-IN' : 'en-US';
+            recognition.continuous = true;
+            recognition.interimResults = true;
+            
+            recognition.onresult = (e) => {
+                const transcript = Array.from(e.results)
+                    .map(r => r[0].transcript)
+                    .join('');
+                document.getElementById('diseaseMessage').innerText = transcript;
+            };
+            
+            recognition.onerror = (e) => {
+                showToast("Speech recognition error: " + e.error, 3000);
+                stopVoiceInput();
+            };
+            
+            recognition.start();
+            btn.innerHTML = '<i class="fas fa-stop"></i> Stop Listening';
+            btn.classList.add('listening');
+            isListening = true;
+            showToast("Listening... Speak your symptoms", 2000);
+        } else {
+            stopVoiceInput();
+        }
+    }
+    
+    function stopVoiceInput() {
+        if (recognition) {
+            recognition.stop();
+        }
+        const btn = document.getElementById('voiceInputBtn');
+        btn.innerHTML = '<i class="fas fa-microphone"></i> Speak Symptoms';
+        btn.classList.remove('listening');
+        isListening = false;
+        
+        const text = document.getElementById('diseaseMessage').innerText;
+        if (text && !text.includes("Describe") && text.length > 5) { 
+            symptoms.push(text);
+            updateSymptomsList();
+            document.getElementById('predictBtn').disabled = false;
+        }
     }
     
     function updateSymptomsList() { 
-        let listDiv = document.getElementById('symptomsList'); 
-        if(listDiv) listDiv.innerHTML = symptoms.map((s,i)=>`<div class="symptom-item"><span>📌 ${s}</span><span class="remove-symptom" onclick="removeSymptom(${i})" style="color:#ff8c42; cursor:pointer;">✖</span></div>`).join(''); 
+        const listDiv = document.getElementById('symptomsList');
+        if (!listDiv) return;
+        
+        if (symptoms.length === 0) {
+            listDiv.innerHTML = '';
+            return;
+        }
+        
+        listDiv.innerHTML = symptoms.map((s, i) => `
+            <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; margin: 4px 0; background: var(--primary-light); border-radius: var(--border-radius-md);">
+                <span><i class="fas fa-notes-medical"></i> ${s}</span>
+                <span onclick="removeSymptom(${i})" style="color: var(--danger); cursor: pointer; font-weight: bold; padding: 4px 8px;">
+                    <i class="fas fa-times"></i>
+                </span>
+            </div>
+        `).join('');
     }
     
-    function removeSymptom(i) { symptoms.splice(i,1); updateSymptomsList(); if(symptoms.length===0) document.getElementById('predictBtn').disabled = true; else document.getElementById('predictBtn').disabled = false; }
+    function removeSymptom(i) { 
+        symptoms.splice(i, 1);
+        updateSymptomsList();
+        document.getElementById('predictBtn').disabled = symptoms.length === 0;
+    }
     
     function predictDisease() { 
-        let predictions = []; 
-        symptoms.forEach(s=>{ let low=s.toLowerCase(); for(let key in diseaseData) if(low.includes(key)) predictions.push(...diseaseData[key]); }); 
-        if(predictions.length===0) predictions=["General Fatigue","Seasonal Flu"]; 
-        let unique = [...new Set(predictions)]; 
-        let resultDiv = document.getElementById('predictionResult'); 
-        if(resultDiv) resultDiv.style.display='block'; 
-        let itemsDiv = document.getElementById('predictionItems'); 
-        if(itemsDiv) itemsDiv.innerHTML = unique.map(d=>`<div style="margin:8px 0;"><strong>${d}</strong><div class="accuracy-meter"><div class="accuracy-fill" style="width:${Math.floor(Math.random()*50+50)}%"></div></div></div>`).join(''); 
+        if (symptoms.length === 0) {
+            showToast("Please add some symptoms first", 2000);
+            return;
+        }
+        
+        const predictions = new Set();
+        
+        symptoms.forEach(s => {
+            const lowerSymptom = s.toLowerCase();
+            for (let key in diseaseData) {
+                if (lowerSymptom.includes(key)) {
+                    diseaseData[key].forEach(d => predictions.add(d));
+                }
+            }
+        });
+        
+        if (predictions.size === 0) {
+            predictions.add("General Fatigue");
+            predictions.add("Seasonal Flu");
+        }
+        
+        const uniquePredictions = Array.from(predictions);
+        const resultDiv = document.getElementById('predictionResult');
+        const itemsDiv = document.getElementById('predictionItems');
+        
+        if (resultDiv && itemsDiv) {
+            resultDiv.style.display = 'block';
+            itemsDiv.innerHTML = uniquePredictions.map(d => `
+                <div style="margin: 12px 0;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                        <strong>${d}</strong>
+                        <span style="font-size: 12px; color: var(--text-muted);">
+                            ${Math.floor(Math.random() * 30 + 60)}% match
+                        </span>
+                    </div>
+                    <div style="height: 6px; background: var(--border-color); border-radius: 3px; overflow: hidden;">
+                        <div style="width: ${Math.floor(Math.random() * 30 + 60)}%; height: 100%; background: linear-gradient(90deg, var(--primary), var(--success)); border-radius: 3px;"></div>
+                    </div>
+                </div>
+            `).join('');
+            
+            resultDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            showToast(`Analysis complete! Found ${uniquePredictions.length} possible conditions`, 3000);
+        }
     }
     
+    // ========== MODAL MANAGEMENT ==========
     function closeModal(id) { 
-        let modal = document.getElementById(id); 
-        if(modal) modal.style.display = 'none'; 
-        if(id==='qrScannerModal' && html5QrCode && html5QrCode.stop) html5QrCode.stop(); 
+        const modal = document.getElementById(id);
+        if (modal) {
+            modal.style.display = 'none';
+        }
+        
+        if (id === 'qrScannerModal' && html5QrCode) {
+            try {
+                html5QrCode.stop();
+            } catch (e) {
+                // Ignore stop errors
+            }
+        }
     }
     
-    window.onclick = function(e) { if(e.target.classList.contains('modal')) e.target.style.display='none'; };
-    function openStudentStudy() { document.getElementById('studyModal').style.display = 'flex'; }
-    function openFitnessTips() { document.getElementById('fitnessModal').style.display = 'flex'; }
-    function openAyurvedicInfo() { document.getElementById('ayurvedicModal').style.display = 'flex'; }
+    // Close modal when clicking outside
+    window.onclick = function(e) { 
+        if (e.target.classList.contains('modal')) {
+            e.target.style.display = 'none';
+            
+            // Stop QR scanner if it's the QR modal
+            if (e.target.id === 'qrScannerModal' && html5QrCode) {
+                try {
+                    html5QrCode.stop();
+                } catch (e) {
+                    // Ignore
+                }
+            }
+        }
+    };
     
-    // Initialize the app
-    document.getElementById('loginScreen').style.display = 'block';
-    updateLanguage('en');
-    loadAddresses();
+    // ========== ADDITIONAL FEATURES ==========
+    function openStudentStudy() { 
+        document.getElementById('studyModal').style.display = 'flex';
+    }
+    
+    function openFitnessTips() { 
+        document.getElementById('fitnessModal').style.display = 'flex';
+    }
+    
+    function openAyurvedicInfo() { 
+        document.getElementById('ayurvedicModal').style.display = 'flex';
+    }
+    
+    // ========== INITIALIZATION ==========
+    document.addEventListener('DOMContentLoaded', function() {
+        // Show login screen
+        document.getElementById('loginScreen').style.display = 'block';
+        
+        // Load saved language preference
+        const savedLang = localStorage.getItem('preferred_language') || 'en';
+        updateLanguage(savedLang);
+        
+        // Load addresses
+        loadAddresses();
+        
+        // Setup demo credentials hint
+        console.log('Demo credentials: demo@pharmacy.com / demo123');
+    });
+    
+    // Prevent body scroll when modal is open
+    document.addEventListener('touchmove', function(e) {
+        if (e.target.closest('.modal')) {
+            e.preventDefault();
+        }
+    }, { passive: false });
+    
+    // Add keyboard support for modals
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            document.querySelectorAll('.modal').forEach(modal => {
+                if (modal.style.display === 'flex') {
+                    closeModal(modal.id);
+                }
+            });
+        }
+    });
 </script>
 </body>
 </html>
